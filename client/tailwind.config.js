@@ -34,7 +34,9 @@ module.exports = {
   theme: {
     extend: {
       width: {
+        111: "111px",
         379: "379px",
+        350: "350px",
         282: "282px",
         320: "320px",
         493: "493px",
