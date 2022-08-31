@@ -345,7 +345,7 @@
               </p>
 
               <p v-if="longText" class="">
-                {{ longMentorText }}
+                {{ mentorText }}
               </p>
               <button
                 @click="readMoreButton()"
@@ -353,25 +353,6 @@
               >
                 {{ readMoreButtonText }}
               </button>
-
-              <!-- <p v-if="jaja == false" class="">
-                I am leading everything related to digital marketing from SEO to
-                performance marketing
-              </p>
-              <p v-if="jaja" class="">
-                I am leading everything related to digital marketing from SEO to
-                performance marketing, from email marketing to influencer
-                marketing at a global scale as well as marketing products
-                development (i.e. working with IT engineers) at HalalBooking - a
-                he immigration process to the UK if you are a qualified expert
-                in IT & technology
-              </p>
-              <button
-                @click="readMoreButton"
-                class="bg-red-500 px-2 py-1.5 rounded-2xl"
-              >
-                {{ readMoreButtonText }}
-              </button> -->
             </div>
             <div>
               <p class="text-xl font-bold pb-3.5">My vertical</p>
@@ -465,71 +446,14 @@ export default {
   methods: {
     readMoreButton() {
       this.shortText = !this.shortText;
-      if (this.shortText == false) {
-        this.longText = true;
-      } else {
-        this.longText = false;
-      }
+      this.longText = !this.longText;
+
       if (this.shortText) {
-        this.shortMentorText = this.mentorText;
-        console.log(this.shortMentorText);
-        this.shortMentorText = this.mentorText.substring(0, 120);
-        console.log(this.shortMentorText);
         this.readMoreButtonText = "Read more";
       } else if (this.longText) {
-        this.longMentorText = this.mentorText;
-        console.log(this.longMentorText);
         this.readMoreButtonText = "Read less";
       }
-      // this.longText = !this.longText;
-      // if (this.readMoreButtonText == "Read more") {
-      //   this.readMoreButtonText = "Read less";
-      // } else {
-      //   this.readMoreButtonText = "Read more";
-      // }
-
-      // if (this.mentorText.length > 120) {
-      //   this.shortText = !this.shortText;
-      //   this.readMoreButtonText = this.readMoreButtonText
-      //     ? "Read more"
-      //     : "Read less";
-      // } else {
-      //   this.longText = !this.longText;
-      //   this.readMoreButtonText = this.readMoreButtonText
-      //     ? "Read more"
-      //     : "Read less";
-      // }
     },
-
-    // readMoreButton() {
-    //   if (this.mentorText > 120) {
-    //     this.mentorText.substring(0, 120);
-    //     this.readMoreButtonText = "Read more";
-    //     this.readMore = !this.readMore;
-    //   } else {
-    //     this.readMoreButtonText = "Read less";
-    //     this.readMore = !this.readMore;
-    //   }
-
-    // this.readMore = !this.readMore;
-    //this.jaja = !this.jaja;
-
-    // if (this.mentorText.length < 120) {
-    //   this.mentorText.substring(0, 120);
-    //   this.jaja == true;
-    //   this.readMoreButtonText = "Read more";
-    // } else if (this.mentorText.length > 121) {
-    //   this.mentorText;
-    //   this.jaja == false;
-    //   this.readMoreButtonText = "Read less";
-    // }
-
-    // if (this.readMore) {
-    //   this.readMoreButtonText = "Read less";
-    // } else {
-    //   this.readMoreButtonText = "Read more";
-    // }
-    // },
 
     searchTag(searchtag) {
       this.$router.push("/search/" + searchtag);
