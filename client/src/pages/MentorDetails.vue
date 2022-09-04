@@ -1,5 +1,13 @@
 <template>
   <body class="px-6 lg:px-32">
+    <div class="container mx-auto">
+      <div
+        v-if="showModal"
+        class="z-50 absolute inset-0 flex items-center justify-center bg-opacity-90 bg-gray-800 backdrop-blur-md overflow-y-hidden"
+      >
+        <PopupMentorDetails />
+      </div>
+    </div>
     <div class="pb-44">
       <div class="flex flex-col lg:flex-row gap-x-9">
         <!-- <div
@@ -69,7 +77,7 @@
               <div class="flex flex-col lg:items-center">
                 <!-- Image emplacement -->
                 <div
-                  class="bg-card-blue flex w-96 2xl:w-493 h-399 rounded-xl rounded-bl-none pt-8"
+                  class="bg-card-blue flex w-96 lg:w-400 2xl:w-493 h-399 rounded-xl rounded-bl-none pt-8"
                 >
                   <div class="h-44 w-44 rounded-full relative -mb-24 px-3">
                     <button class="z-50">
@@ -94,7 +102,7 @@
                 </div>
                 <!-- Content Card emplacement -->
                 <div
-                  class="shadow-2xl rounded-xl w-96 2xl:w-493 h-399 pb-8 px-8 relative pt-5"
+                  class="shadow-2xl rounded-xl w-96 lg:w-400 2xl:w-493 h-399 pb-8 px-8 relative pt-5"
                 >
                   <div>
                     <div
@@ -165,16 +173,12 @@
                         ${{ mentorData.price }}
                       </p>
                       <p class="text-2xl font-extralight">&nbsp;Per session</p>
-
-                      <!-- <p>
-                  {{ mentorData.firstName }} {{ mentorData.lastName }} is a
-                  {{ mentorData.position }} at {{ mentorData.currentCompany }}.
-                </p> -->
                     </div>
 
                     <div class="flex justify-center">
                       <button
-                        class="h-11 w-10/12 rounded-full text-gray-50 bg-custom-blue hover:bg-blue-500 duration-300 text-xl font-bold px-2"
+                        @click="showModal = true"
+                        class="h-11 w-10/12 rounded-full text-gray-50 bg-custom-blue hover:bg-price-green duration-300 text-xl font-bold px-2"
                       >
                         Book now
                       </button>
@@ -353,9 +357,6 @@
                 <p class="text-xl font-bold">My education</p>
               </div>
 
-              <!-- <p v-if="mentorText > 120" class="">
-                {{ mentorText.substring(0, 120) }}
-              </p> -->
               <p v-if="shortText" class="visible lg:hidden">
                 {{ mentorData.education.substring(0, 120) }}...
               </p>
@@ -363,6 +364,7 @@
               <p v-if="longText" class="visible lg:hidden">
                 {{ mentorData.education }}
               </p>
+
               <p class="hidden lg:flex">
                 {{ mentorData.education }}
               </p>
@@ -401,6 +403,7 @@
 <script>
 import { useToast } from "vue-toastification";
 import Footer from "../components/Footer.vue";
+import PopupMentorDetails from "../components/PopupMentorDetails.vue";
 //import LoadingDetails from "../components/LoadingDetails.vue";
 import "../assets/main.css";
 import axios from "axios";
@@ -433,14 +436,14 @@ export default {
       readMoreButtonText: "Read more",
       shortText: true,
       longText: false,
-      mentorText:
-        " I am leading everything related to digital marketing from SEO to performance marketing, from email marketing to influencer marketing at a global scale as well as marketing products development (i.e. working with IT engineers) at HalalBooking - a he immigration process to the UK if you are a qualified expert in IT & technology",
+      showModal: false,
     };
   },
   components: {
     Footer,
     //LoadingDetails,
     // DatePicker
+    PopupMentorDetails,
   },
   setup() {
     const toast = useToast();
@@ -451,6 +454,7 @@ export default {
 
   beforeMount() {
     this.getMentorData();
+    this.readMoreButton();
   },
   computed: {
     dates() {
