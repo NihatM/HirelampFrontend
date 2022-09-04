@@ -69,7 +69,7 @@
               <div class="flex flex-col lg:items-center">
                 <!-- Image emplacement -->
                 <div
-                  class="bg-card-blue flex w-493 h-399 rounded-xl rounded-bl-none pt-8"
+                  class="bg-card-blue flex w-96 2xl:w-493 h-399 rounded-xl rounded-bl-none pt-8"
                 >
                   <div class="h-44 w-44 rounded-full relative -mb-24 px-3">
                     <button class="z-50">
@@ -94,7 +94,7 @@
                 </div>
                 <!-- Content Card emplacement -->
                 <div
-                  class="shadow-2xl rounded-xl w-493 h-399 pb-8 px-8 relative pt-5"
+                  class="shadow-2xl rounded-xl w-96 2xl:w-493 h-399 pb-8 px-8 relative pt-5"
                 >
                   <div>
                     <div
@@ -305,28 +305,45 @@
                 <p class="text-xl font-bold">I worked for</p>
               </div>
 
-              <p class="">
-                I am leading everything related to digital marketing from SEO to
-                performance marketing, from email marketing to influencer
-                marketing at a global scale as well as marketing products
-                development (i.e. working with IT engineers) at HalalBooking - a
-                he immigration process to the UK if you are a qualified expert
-                in IT & technology
+              <p v-if="shortText" class="visible lg:hidden">
+                {{ mentorData.experience.substring(0, 120) }}...
               </p>
+
+              <p v-if="longText" class="visible lg:hidden">
+                {{ mentorData.experience }}
+              </p>
+              <p class="hidden lg:flex">
+                {{ mentorData.experience }}
+              </p>
+              <button
+                @click="readMoreButton()"
+                class="text-custom-blue py-1.5 rounded-2xl visible lg:hidden"
+              >
+                {{ readMoreButtonText }}
+              </button>
             </div>
+
             <div>
               <div class="flex items-start gap-x-3.5 pb-3.5">
                 <img src="../assets/myexpertice.svg" alt="" />
                 <p class="text-xl font-bold">My experience</p>
               </div>
-              <p class="">
-                I am leading everything related to digital marketing from SEO to
-                performance marketing, from email marketing to influencer
-                marketing at a global scale as well as marketing products
-                development (i.e. working with IT engineers) at HalalBooking - a
-                he immigration process to the UK if you are a qualified expert
-                in IT & technology
+              <p v-if="shortText" class="visible lg:hidden">
+                {{ mentorData.expertise.substring(0, 120) }}...
               </p>
+
+              <p v-if="longText" class="visible lg:hidden">
+                {{ mentorData.expertise }}
+              </p>
+              <p class="hidden lg:flex">
+                {{ mentorData.expertise }}
+              </p>
+              <button
+                @click="readMoreButton()"
+                class="text-custom-blue py-1.5 rounded-2xl visible lg:hidden"
+              >
+                {{ readMoreButtonText }}
+              </button>
             </div>
 
             <div>
@@ -339,21 +356,24 @@
               <!-- <p v-if="mentorText > 120" class="">
                 {{ mentorText.substring(0, 120) }}
               </p> -->
-
-              <p v-if="shortText" class="">
-                {{ mentorText.substring(0, 120) }}
+              <p v-if="shortText" class="visible lg:hidden">
+                {{ mentorData.education.substring(0, 120) }}...
               </p>
 
-              <p v-if="longText" class="">
-                {{ mentorText }}
+              <p v-if="longText" class="visible lg:hidden">
+                {{ mentorData.education }}
+              </p>
+              <p class="hidden lg:flex">
+                {{ mentorData.education }}
               </p>
               <button
                 @click="readMoreButton()"
-                class="bg-red-500 px-2 py-1.5 rounded-2xl"
+                class="text-custom-blue py-1.5 rounded-2xl visible lg:hidden"
               >
                 {{ readMoreButtonText }}
               </button>
             </div>
+
             <div>
               <p class="text-xl font-bold pb-3.5">My vertical</p>
               <ul

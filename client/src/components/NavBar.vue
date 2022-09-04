@@ -1,11 +1,11 @@
 <template>
   <body class="pt-2">
-    <div class="md:px-32">
-      <nav class="pb-3 pt-8 mx-auto md:flex md:justify-between md:items-center">
-        <div class="flex items-center justify-between px-6 md:px-0">
+    <div class="px-6 md:px-32">
+      <nav class="py-3 md:flex md:justify-between md:items-center">
+        <div class="flex items-center justify-between">
           <router-link to="/" class="text-blue-600 font-bold">
             <img
-              class="relative w-auto h-8 md:h-10"
+              class="relative w-1/4 h-1/4 md:w-4/6 md:h-4/6 lg:w-3/6 lg:h-3/6 xl:w-3/12 xl:h-3/12"
               src="../../public/hirelamp_logo_navbar.png"
           /></router-link>
           <!-- Mobile menu button -->
@@ -27,7 +27,7 @@
         <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
         <ul
           :class="showMenu ? 'flex' : 'hidden'"
-          class="flex-col mt-8 space-y-2 md:flex md:space-y-0 md:flex-row md:items-center md:space-x-2 md:mt-0 text-lg px-2 md:px-0"
+          class="flex-col mt-8 space-y-2 md:flex md:space-y-0 md:flex-row md:items-center md:mt-0 md:px-0 text-sm lg:text-lg 2xl:text-lg"
         >
           <li class="nav-item text-left">
             <a class="nav-link" href="#"
@@ -40,7 +40,7 @@
             </a>
           </li>
 
-          <li class="nav-item text-left text-lg">
+          <li class="nav-item text-left">
             <a class="nav-link" href="#"
               ><router-link
                 to="/mentorpage"
@@ -51,7 +51,7 @@
             </a>
           </li>
 
-          <li class="nav-item text-left lg:text-lg">
+          <li class="nav-item text-left">
             <a class="nav-link" href="#"
               ><router-link
                 to="/about"
@@ -67,25 +67,25 @@
               ><router-link
                 to="/signup"
                 @click="showMenu = !showMenu"
-                class="text-custom-blue hover:text-white hover:bg-custom-blue duration-300 border-2 border-custom-blue px-4 py-2 rounded-full"
+                class="text-custom-blue hover:text-white hover:bg-custom-blue duration-300 border-2 border-custom-blue px-4 py-1.5 rounded-full"
                 >Register</router-link
               >
             </a>
           </li>
 
           <li class="nav-item text-left" v-if="isLoggedIn == false">
-            <a class="nav-link" href="#"
+            <a class="nav-link pr-0" href="#"
               ><router-link
                 to="/login"
                 @click="showMenu = !showMenu"
-                class="hover:bg-transparent hover:text-custom-blue text-gray-50 duration-300 border-2 border-custom-blue bg-custom-blue px-4 py-2 rounded-full"
+                class="hover:bg-transparent hover:text-custom-blue text-gray-50 duration-300 border-2 border-custom-blue bg-custom-blue px-4 py-1.5 rounded-full"
                 >Login</router-link
               >
             </a>
           </li>
 
           <li class="nav-item text-left" v-if="isLoggedIn">
-            <a class="nav-link" href="#"
+            <a class="nav-link pr-0" href="#"
               ><router-link
                 v-if="isLoggedIn"
                 @click="handleSignOut"
