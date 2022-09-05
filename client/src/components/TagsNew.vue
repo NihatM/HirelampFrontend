@@ -13,7 +13,10 @@
       </li>
     </ul>
 
-    <button class="text-custom-blue underline underline-offset-2 inline-flex">
+    <button
+      @click="mentorPage()"
+      class="text-custom-blue underline underline-offset-2 inline-flex"
+    >
       See More
       <img src="../assets/ArrowSmall.svg" alt="" class="px-4" />
     </button>

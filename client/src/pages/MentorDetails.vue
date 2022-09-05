@@ -3,9 +3,9 @@
     <div class="container mx-auto">
       <div
         v-if="showModal"
-        class="z-50 absolute inset-0 flex items-center justify-center bg-opacity-90 bg-gray-800 backdrop-blur-md overflow-y-hidden"
+        class="overflow-hidden z-50 absolute inset-0 flex items-center justify-center bg-opacity-90 bg-gray-800 backdrop-blur-md"
       >
-        <PopupMentorDetails />
+        <PopupMentorDetails @close="closeModal" />
       </div>
     </div>
     <div class="pb-44">
@@ -66,6 +66,19 @@
                 <p class="text-center bt-smalltext pb-6">
                   {{ mentorData.bio }}
                 </p>
+                <div class="flex justify-center items-center pt-2 pb-4">
+                  <p class="text-price-green bt-md">${{ mentorData.price }}</p>
+                  <p class="text-2xl font-extralight">&nbsp;Per session</p>
+                </div>
+
+                <div class="flex justify-center pb-4">
+                  <button
+                    @click="showModal = true"
+                    class="h-11 w-10/12 rounded-full text-gray-50 bg-custom-blue hover:bg-price-green duration-300 text-xl font-bold px-2"
+                  >
+                    Book now
+                  </button>
+                </div>
               </div>
             </div>
             <!-- Content Card emplacement -->
@@ -190,163 +203,52 @@
           </div>
         </div>
 
-        <!-- <div class="visible lg:hidden">
-          <div class="flex flex-col lg:items-center">
-            <div
-              class="lg:bg-card-blue flex flex-col lg:flex-row items-center lg:items-start w-350 h-111 lg:w-493 h-399 rounded-br-none lg:rounded-xl rounded-bl-none pt-8"
-            >
-              <div class="bg-card-blue">
-                <div class="h-44 w-44 rounded-full relative -mb-24 px-3">
-                  <button class="z-50">
-                    <img
-                      v-bind:src="mentorData.profileImg"
-                      alt=""
-                      class="border-white hover:border-custom-blue duration-300 border-2 rounded-full h-50 w-40 content-center flex justify-center md:h-40 md:w-100 xl:w-50 lg:w-50"
-                    />
-                  </button>
-                </div>
-              </div>
-              <div class="flex flex-col text-left mt-12">
-                <h1
-                  class="text-xl md:text-2xl xl:text-3xl font-bold leading-10 text-black md:mt-0 mt-4 my-2 sm:mt-0"
-                >
-                  {{ mentorData.firstName }} {{ mentorData.lastName }}
-                </h1>
-                <p class="font-extralight">
-                  {{ mentorData.position }}
-                </p>
-                <p>* * * * * (252 reviews)</p>
-              </div>
-            </div>
-            <div
-              class="shadow-2xl rounded-xl w-350 lg:w-493 h-399 pb-8 px-8 relative pt-5"
-            >
-              <div>
-                <div
-                  class="flex flex-row pb-3 items-start justify-start space-x-9"
-                >
-                  <div class="flex flex-row items-start">
-                    <img src="../assets/jobicon.svg" alt="" class="pr-2" />
-
-                    <p class="bt-book">{{ mentorData.currentCompany }}</p>
-                  </div>
-                  <div class="flex flex-row items-start">
-                    <img src="../assets/locationicon.svg" alt="" class="pr-2" />
-
-                    <p class="bt-book">{{ mentorData.location }}</p>
-                  </div>
-                </div>
-                <p class="text-left bt-smalltext pb-6">
-                  {{ mentorData.bio }}
-                </p>
-
-                <div>
-                  <p class="text-left bt-md">Services</p>
-                  <div class="flex md:flex-nowrap flex-wrap">
-                    <ul
-                      class="py-2 pr-8 text-sm sm:text-sm md:text-base lg:text-md xl:text-md text-left inline-flex content-start justify-start"
-                      v-for="category in mentorData.category"
-                      :key="category"
-                    >
-                      <li
-                        class="cursor-pointer bt-book px-4 py-2.5 border-1 rounded-xl w-max sm:text-sm md:text-base lg:text-md text-left xl:text-md hover:bg-black hover:text-white hover:border-black duration-300"
-                      >
-                        <div
-                          class="flex flex-row items-center justify-between gap-x-2"
-                        >
-                          <img
-                            v-show="category == 'Interview preparation'"
-                            src="../assets/mockinterview.svg"
-                            class="w-7 h-6"
-                            alt=""
-                          />
-                          <img
-                            v-show="category == 'Job search consultation'"
-                            src="../assets/jobsearch.svg"
-                            class="w-7 h-6"
-                            alt=""
-                          />
-
-                          <img
-                            v-show="category == 'Career Coaching'"
-                            src="../assets/careercoaching.svg"
-                            class="w-7 h-6"
-                            alt=""
-                          />
-
-                          {{ category }}
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="flex justify-center items-center pt-12 pb-4">
-                  <p class="text-price-green bt-md">${{ mentorData.price }}</p>
-                  <p class="text-2xl font-extralight">&nbsp;Per session</p>
-
-              
-                </div>
-
-                <div class="flex justify-center">
-                  <button
-                    class="h-11 w-10/12 rounded-full text-gray-50 bg-custom-blue hover:bg-blue-500 duration-300 text-xl font-bold px-2"
-                  >
-                    Book now
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
         <div class="flex flex-col">
           <p class="text-3xl font-bold text-left pb-8 pt-12">About me</p>
           <div class="text-left flex flex-col gap-y-9">
             <div>
               <div class="flex items-start gap-x-3.5 pb-3.5">
-                <img src="../assets/workedfor.svg" alt="" />
-                <p class="text-xl font-bold">I worked for</p>
-              </div>
-
-              <p v-if="shortText" class="visible lg:hidden">
-                {{ mentorData.experience.substring(0, 120) }}...
-              </p>
-
-              <p v-if="longText" class="visible lg:hidden">
-                {{ mentorData.experience }}
-              </p>
-              <p class="hidden lg:flex">
-                {{ mentorData.experience }}
-              </p>
-              <button
-                @click="readMoreButton()"
-                class="text-custom-blue py-1.5 rounded-2xl visible lg:hidden"
-              >
-                {{ readMoreButtonText }}
-              </button>
-            </div>
-
-            <div>
-              <div class="flex items-start gap-x-3.5 pb-3.5">
                 <img src="../assets/myexpertice.svg" alt="" />
-                <p class="text-xl font-bold">My experience</p>
+                <p class="text-xl font-bold">Expertise</p>
               </div>
-              <p v-if="shortText" class="visible lg:hidden">
+              <p v-if="!longTextExpertise" class="visible lg:hidden">
                 {{ mentorData.expertise.substring(0, 120) }}...
               </p>
 
-              <p v-if="longText" class="visible lg:hidden">
+              <p v-if="longTextExpertise" class="visible lg:hidden">
                 {{ mentorData.expertise }}
               </p>
               <p class="hidden lg:flex">
                 {{ mentorData.expertise }}
               </p>
               <button
-                @click="readMoreButton()"
+                @click="readMoreButton('expertise')"
                 class="text-custom-blue py-1.5 rounded-2xl visible lg:hidden"
               >
-                {{ readMoreButtonText }}
+                {{ readMoreButtonExpertise }}
+              </button>
+            </div>
+            <div>
+              <div class="flex items-start gap-x-3.5 pb-3.5">
+                <img src="../assets/workedfor.svg" alt="" />
+                <p class="text-xl font-bold">Work experience</p>
+              </div>
+
+              <p v-if="!longTextExperience" class="visible lg:hidden">
+                {{ mentorData.experience.substring(0, 120) }}...
+              </p>
+
+              <p v-if="longTextExperience" class="visible lg:hidden">
+                {{ mentorData.experience }}
+              </p>
+              <p class="hidden lg:flex">
+                {{ mentorData.experience }}
+              </p>
+              <button
+                @click="readMoreButton('experience')"
+                class="text-custom-blue py-1.5 rounded-2xl visible lg:hidden"
+              >
+                {{ readMoreButtonExperience }}
               </button>
             </div>
 
@@ -354,14 +256,14 @@
               <div class="flex items-start gap-x-3.5 pb-3.5">
                 <img src="../assets/myeducation.svg" alt="" />
 
-                <p class="text-xl font-bold">My education</p>
+                <p class="text-xl font-bold">Education</p>
               </div>
 
-              <p v-if="shortText" class="visible lg:hidden">
+              <p v-if="!longTextEducation" class="visible lg:hidden">
                 {{ mentorData.education.substring(0, 120) }}...
               </p>
 
-              <p v-if="longText" class="visible lg:hidden">
+              <p v-if="longTextEducation" class="visible lg:hidden">
                 {{ mentorData.education }}
               </p>
 
@@ -369,15 +271,15 @@
                 {{ mentorData.education }}
               </p>
               <button
-                @click="readMoreButton()"
+                @click="readMoreButton('education')"
                 class="text-custom-blue py-1.5 rounded-2xl visible lg:hidden"
               >
-                {{ readMoreButtonText }}
+                {{ readMoreButtonEducation }}
               </button>
             </div>
 
             <div>
-              <p class="text-xl font-bold pb-3.5">My vertical</p>
+              <p class="text-xl font-bold pb-3.5">My verticals</p>
               <ul
                 class="py-2 pr-8 text-sm sm:text-sm md:text-base lg:text-md xl:text-md text-left inline-flex content-start justify-start"
                 v-for="tag in mentorData.tags"
@@ -434,9 +336,27 @@ export default {
       jaja: false,
       textLength: 0,
       readMoreButtonText: "Read more",
+      readMoreButtonExpertise: "Read more",
+      readMoreButtonExperience: "Read more",
+      readMoreButtonEducation: "Read more",
+
       shortText: true,
       longText: false,
+      checkExpertise: false,
+      checkEducation: false,
+      checkExperience: false,
+      shortTextExpertise: true,
+      longTextExpertise: false,
+      shortTextEducation: true,
+      longTextEducation: false,
+      shortTextExperience: true,
+      longTextExperience: false,
+
       showModal: false,
+
+      open: false,
+
+      isModalVisible: false,
     };
   },
   components: {
@@ -454,8 +374,8 @@ export default {
 
   beforeMount() {
     this.getMentorData();
-    this.readMoreButton();
   },
+
   computed: {
     dates() {
       return this.days.map((day) => day.date);
@@ -468,14 +388,45 @@ export default {
     },
   },
   methods: {
-    readMoreButton() {
-      this.shortText = !this.shortText;
-      this.longText = !this.longText;
+    // showModal() {
+    //   this.isModalVisible = true;
+    // },
+    closeModal() {
+      this.showModal = false;
+    },
+    readMoreButton(cat) {
+      console.log(cat);
+      if (cat == "expertise") {
+        // this.shortTextExpertise = !this.shortTextExpertise;
+        this.longTextExpertise = !this.longTextExpertise;
+        if (!this.longTextExpertise) {
+          this.readMoreButtonExpertise = "Read more";
+        } else {
+          this.readMoreButtonExpertise = "Read less";
+        }
+      } else if (cat == "education") {
+        // this.shortTextEducation = !this.shortTextEducation;
+        this.longTextEducation = !this.longTextEducation;
 
-      if (this.shortText) {
-        this.readMoreButtonText = "Read more";
-      } else if (this.longText) {
-        this.readMoreButtonText = "Read less";
+        if (!this.longTextEducation) {
+          this.readMoreButtonEducation = "Read more";
+        } else {
+          this.readMoreButtonEducation = "Read less";
+        }
+      } else if (cat == "experience") {
+        // this.shortTextExperience = !this.shortTextExperience;
+        this.longTextExperience = !this.longTextExperience;
+        if (!this.longTextExperience) {
+          this.readMoreButtonExperience = "Read more";
+        } else {
+          this.readMoreButtonExperience = "Read less";
+        }
+      }
+    },
+
+    showModalFalse() {
+      if (this.modalFalse == true) {
+        this.showModal = false;
       }
     },
 

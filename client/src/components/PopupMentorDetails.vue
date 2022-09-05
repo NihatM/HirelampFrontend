@@ -1,15 +1,17 @@
 <template>
-  <div class="bg-white w-671 p-9 rounded-xl">
-    <div>
-      <p class="font-black pb-9">Choose the date and time</p>
+  <div class="overflow-y-hidden bg-white w-671 p-9 pt-4 rounded-xl">
+    <div class="">
+      <div class="flex justify-end items-end content-end">
+        <button type="button" class="close font-bold" @click="$emit('close')">
+          <img src="../assets/closeButton.svg" alt="" />
+        </button>
+      </div>
+      <p class="font-black text-2xl flex justify-center pb-9">
+        Choose the date and time
+      </p>
     </div>
-    <div class="w:full md:w-full flex flex-col lg:flex-row">
-      <div>
-        <!-- <h1
-          class="text-xl md:text-2xl xl:text-3xl font-bold leading-10 text-left md:mt-0 mb-4 mt-1 sm:mt-0"
-        >
-          Available slots
-        </h1> -->
+    <div class="w:full md:w-full flex flex-col lg:flex-row justify-center">
+      <div v-if="!showContact">
         <v-date-picker
           is-expanded
           :attributes="attributes"
@@ -28,26 +30,29 @@
         <h1 class="py-2"></h1>
 
         <!-- <button
-          :disabled="this.wrongTime === true"
-          @click="sendCalendarData"
-          class="cursor-not-allowed disabled inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-custom-blue rounded-2xl hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Next
-          <svg
-            class="ml-2 -mr-1 w-4 h-4"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+            :disabled="this.wrongTime === true"
+            @click="sendCalendarData"
+            class="cursor-not-allowed disabled inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-custom-blue rounded-2xl hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            <path
-              fill-rule="evenodd"
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        </button> -->
+            Next
+            <svg
+              class="ml-2 -mr-1 w-4 h-4"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button> -->
       </div>
-      <div class="flex flex-col justify-center align-middle items-center">
+      <div
+        v-if="!showContact"
+        class="flex flex-col justify-center align-middle items-center"
+      >
         <p class="font-extralight text-md">Chosen time</p>
         <p class="pt-3 pb-4 font-bold">{{ date }}</p>
         <button
@@ -58,6 +63,96 @@
           Continue
         </button>
       </div>
+
+      <div
+        class="flex align-middle justify-center items-center content-center"
+        v-show="showContact"
+      >
+        <form @submit.prevent="sendContactData">
+          <div class="flex flex-col align-center justify-center">
+            <h1
+              class="text-xl md:text-2xl xl:text-3xl font-bold leading-10 text-gray-800 text-left md:mt-0 mb-4 mt-1 sm:mt-0"
+            >
+              Information for the mentor
+            </h1>
+          </div>
+          <div class="flex flex-col align-center justify-center">
+            <input
+              type="text"
+              class="border border-gray-400 rounded-2xl p-2"
+              placeholder="Full name"
+              v-model="fullName"
+              required
+            />
+            <span class="py-1" />
+
+            <input
+              type="text"
+              class="border border-gray-400 rounded-2xl p-2"
+              placeholder="Email"
+              v-model="email"
+              required
+            />
+            <span class="py-1" />
+
+            <input
+              required
+              type="number"
+              class="border border-gray-400 rounded-2xl p-2"
+              placeholder="Phone number"
+              v-model="phone"
+            />
+            <span class="py-1" />
+
+            <input
+              type="text"
+              class="border border-gray-400 rounded-2xl p-2"
+              placeholder="Subject"
+              v-model="industry"
+            />
+            <span class="py-1" />
+            <textarea
+              class="border border-gray-400 rounded-2xl p-2"
+              placeholder="What do you want to talk about?"
+              v-model="message"
+            ></textarea>
+            <span class="py-1" />
+            <input
+              type="file"
+              accept="application/pdf"
+              class="border border-gray-400 bg-white text-gray-400 rounded-2xl p-2"
+              placeholder="Upload CV"
+              required
+              @change="onFileSelected"
+            />
+            <span class="text-gray-400 text-xs italic text-left"
+              >Upload CV (pdf)</span
+            >
+
+            <span class="py-1" />
+          </div>
+          <div class="w-full bottom-0 pt-2 flex justify-end">
+            <button
+              submit
+              class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-custom-blue rounded-2xl hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Send
+              <svg
+                class="ml-2 -mr-1 w-4 h-4"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -66,7 +161,15 @@
 import { useToast } from "vue-toastification";
 import axios from "axios";
 export default {
+  name: "PopupMentorDetails",
+  props: {
+    modalFalse: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
+    // console.log(this.mentorData);
     return {
       wrongTime: false,
       chosenDate: "",
@@ -89,12 +192,25 @@ export default {
       todayDate: new Date(),
     };
   },
-
+  components: {
+    // Footer,
+    // LoadingDetails,
+    // DatePicker
+  },
   setup() {
     const toast = useToast();
     return {
       toast,
     };
+  },
+  // validations() {
+  //   return {
+  //     email: { email, required },
+  //     fullName: { required },
+  //   };
+  // },
+  beforeMount() {
+    this.getMentorData();
   },
   computed: {
     dates() {
@@ -107,24 +223,19 @@ export default {
       }));
     },
   },
-
   methods: {
-    sendCalendarData() {
-      this.showContact = true;
+    searchTag(searchtag) {
+      this.$router.push("/search/" + searchtag);
     },
-
-    showToast() {
-      this.toast.success("Message sent successfully!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+    validateEmail() {
+      const email = this.email;
+      const re =
+        //eslint-disable-next-line
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!re.test(email)) {
+        this.toast.error("Please enter a valid email address");
+      }
     },
-
     showErrorToast(message) {
       this.toast.error(message, {
         position: "top-right",
@@ -137,7 +248,20 @@ export default {
         },
       });
     },
-
+    sendCalendarData() {
+      this.showContact = true;
+    },
+    showToast() {
+      this.toast.success("Message sent successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    },
     getMentorData() {
       const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
       this.currentURL = window.location.href;
@@ -229,7 +353,9 @@ export default {
       // console.log(this.avDates);
       return this.avDates[day];
     },
-
+    onFileSelected(event) {
+      this.file = event.target.files[0];
+    },
     async sendContactData() {
       this.validateEmail();
       //eslint-disable-next-line
@@ -277,5 +403,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

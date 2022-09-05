@@ -218,14 +218,26 @@
       <div class="px-6 lg:px-32">
         <div class="pb-16">
           <img src="../assets/line.svg" alt="" class="pb-2" />
-
-          <p class="text-4xl text-left bt-medium pb-3">
-            Mentors from the top companies.
-          </p>
-          <p class="text-4xl text-left bt-book">
-            Pick the right mentor for you to prepare company and role specific
-            challenges.
-          </p>
+          <div class="flex justify-between">
+            <div class="flex flex-col">
+              <p class="text-4xl text-left bt-medium pb-3">
+                Mentors from the top companies.
+              </p>
+              <p class="text-4xl text-left bt-book">
+                Pick the right mentor for you to prepare company and role
+                specific challenges.
+              </p>
+            </div>
+            <div class="text-custom-blue">
+              <button
+                @click="mentorPage()"
+                class="text-custom-blue underline underline-offset-2 inline-flex"
+              >
+                See More
+                <img src="../assets/ArrowSmall.svg" alt="" class="px-4" />
+              </button>
+            </div>
+          </div>
         </div>
         <div
           class="flex flex-col lg:flex-row items-center align-middle content-center justify-between"
@@ -262,12 +274,16 @@
             </div>
           </div> -->
 
-          <div class="">
+          <div class=" ">
             <div class="flex flex-col items-center lg:gap-x-8">
               <!-- Image emplacement -->
               <div class="bg-white h-32 w-32 rounded-full relative -mb-24">
                 <button class="z-50">
-                  <img src="../assets/person.svg" alt="" />
+                  <img
+                    src="../assets/Gurban_Abbasov.jpeg"
+                    class="rounded-full"
+                    alt=""
+                  />
                 </button>
               </div>
               <!-- Content Card emplacement -->
@@ -276,14 +292,14 @@
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
-                    Gul Aliyeva
+                    Gurban Abbasov
                   </p>
 
                   <div class="flex items-center justify-center pb-4">
                     <button
                       class="bg-black text-white hover:bg-white rounded-2xl text-center bt-book px-6 py-1.5"
                     >
-                      40$ Per session
+                      35$ Per session
                     </button>
                   </div>
 
@@ -293,7 +309,7 @@
                     <div class="flex flex-row items-start">
                       <img src="../assets/jobicon.svg" alt="" class="pr-2" />
 
-                      <p class="bt-book">SABAH.lab</p>
+                      <p class="bt-book">Accenture</p>
                     </div>
                     <div class="flex flex-row items-start">
                       <img
@@ -302,16 +318,17 @@
                         class="pr-2"
                       />
 
-                      <p class="bt-book">Azerbaijan</p>
+                      <p class="bt-book">Netherlands</p>
                     </div>
                   </div>
 
                   <p class="text-center bt-smalltext pb-6">
-                    Interview preparation for UX/UI design roles, Coaching for
-                    careers in design, Portfolio review and mentoring
+                    Career choice, Advice on top uni. in Netherlands, Relocation
+                    to Netherlands, Guidance in various stages of interview
                   </p>
                   <div class="flex justify-center pb-12">
                     <button
+                      @click="mentorPageGurban()"
                       class="h-11 w-32 border-2 rounded-full border-custom-blue text-custom-blue hover:bg-custom-blue hover:text-white duration-300 bt-book px-2 py-1.5"
                     >
                       See More
@@ -323,11 +340,15 @@
           </div>
 
           <div class="py-8 lg:py-0">
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center h-399">
               <!-- Image emplacement -->
               <div class="bg-white h-32 w-32 rounded-full relative -mb-24">
                 <button class="z-50">
-                  <img src="../assets/person.svg" alt="" />
+                  <img
+                    src="../assets/Etibar_Huseynli.jpeg"
+                    class="rounded-full"
+                    alt=""
+                  />
                 </button>
               </div>
               <!-- Content Card emplacement -->
@@ -336,14 +357,14 @@
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
-                    Gul Aliyeva
+                    Etibar Huseynli
                   </p>
 
                   <div class="flex items-center justify-center pb-4">
                     <button
                       class="bg-black text-white hover:bg-white rounded-2xl text-center bt-book px-6 py-1.5"
                     >
-                      40$ Per session
+                      30$ Per session
                     </button>
                   </div>
 
@@ -353,7 +374,7 @@
                     <div class="flex flex-row items-start">
                       <img src="../assets/jobicon.svg" alt="" class="pr-2" />
 
-                      <p class="bt-book">SABAH.lab</p>
+                      <p class="bt-book">QSS Analytics LLC</p>
                     </div>
                     <div class="flex flex-row items-start">
                       <img
@@ -367,11 +388,13 @@
                   </div>
 
                   <p class="text-center bt-smalltext pb-6">
-                    Interview preparation for UX/UI design roles, Coaching for
-                    careers in design, Portfolio review and mentoring
+                    Data strategy consultation for companies, BI and Analytics,
+                    Interview preparation for Data Science roles, Guidance on
+                    starting Data Science & ML career
                   </p>
                   <div class="flex justify-center pb-12">
                     <button
+                      @click="mentorPageEtibar()"
                       class="h-11 w-32 border-2 rounded-full border-custom-blue text-custom-blue hover:bg-custom-blue hover:text-white duration-300 bt-book px-2 py-1.5"
                     >
                       See More
@@ -387,7 +410,11 @@
               <!-- Image emplacement -->
               <div class="bg-white h-32 w-32 rounded-full relative -mb-24">
                 <button class="z-50">
-                  <img src="../assets/person.svg" alt="" />
+                  <img
+                    src="../assets/Emin_Guluyev.jpg"
+                    class="rounded-full"
+                    alt=""
+                  />
                 </button>
               </div>
               <!-- Content Card emplacement -->
@@ -396,7 +423,7 @@
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
-                    Gul Aliyeva
+                    Emin Guluyev
                   </p>
 
                   <div class="flex items-center justify-center pb-4">
@@ -413,7 +440,7 @@
                     <div class="flex flex-row items-start">
                       <img src="../assets/jobicon.svg" alt="" class="pr-2" />
 
-                      <p class="bt-book">SABAH.lab</p>
+                      <p class="bt-book">Vodafone</p>
                     </div>
                     <div class="flex flex-row items-start">
                       <img
@@ -422,16 +449,17 @@
                         class="pr-2"
                       />
 
-                      <p class="bt-book">Azerbaijan</p>
+                      <p class="bt-book">Luxembourg</p>
                     </div>
                   </div>
 
                   <p class="text-center bt-smalltext pb-6">
-                    Interview preparation for UX/UI design roles, Coaching for
-                    careers in design, Portfolio review and mentoring
+                    Interview preparation for supply chain roles, Coaching for
+                    procurement careers
                   </p>
                   <div class="flex justify-center pb-12">
                     <button
+                      @click="mentorPageEmin()"
                       class="h-11 w-32 border-2 rounded-full border-custom-blue text-custom-blue hover:bg-custom-blue hover:text-white duration-300 bt-book px-2 py-1.5"
                     >
                       See More
@@ -606,6 +634,22 @@ export default {
     Footer,
     Search,
   },
+
+  methods: {
+    mentorPage() {
+      this.$router.push("/mentorpage");
+    },
+    mentorPageGurban() {
+      this.$router.push("/mentordetails/3e2fed52-17bc-4e90-a6af-78c74ee7a650");
+    },
+    mentorPageEtibar() {
+      this.$router.push("/mentordetails/bd37b061-8e19-4641-ab3c-3ec9d12fbac0");
+    },
+    mentorPageEmin() {
+      this.$router.push("/mentordetails/ce852337-1385-4401-b46b-b1c782fbad92");
+    },
+  },
+
   // mounted() {
   //   this.getMentorDatas();
   // },
