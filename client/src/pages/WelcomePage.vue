@@ -17,10 +17,12 @@
           </p>
         </div>
 
-        <div class="flex md:flex-nowrap flex-wrap justify-center gap-x-4">
-          <div class="flex flex-col items-center pb-8 lg:pb-0 max-w-sm">
+        <div
+          class="flex md:flex-nowrap flex-wrap justify-center xl:justify-between gap-4"
+        >
+          <div class="flex flex-col items-center pb-8 lg:pb-0">
             <div
-              class="border-1 border-border-gray rounded-xl md:shadow-2xl xl:w-96 h-72 px-8 pt-8 pb-24"
+              class="border-1 border-border-gray rounded-xl md:shadow-2xl xl:w-80 2xl:w-96 h-72 px-8 pt-8 pb-24"
             >
               <img class="w-12 h-12 mb-6" src="../assets/howdowehelp1.png" />
 
@@ -43,9 +45,9 @@
             </div>
           </div>
 
-          <div class="flex flex-col items-center pb-8 lg:pb-0 max-w-sm">
+          <div class="flex flex-col items-center pb-8 lg:pb-0">
             <div
-              class="border-1 border-border-gray rounded-xl md:shadow-2xl w-96 h-72 border-1 px-8 pt-8 pb-24"
+              class="border-1 border-border-gray rounded-xl md:shadow-2xl xl:w-80 2xl:w-96 h-72 border-1 px-8 pt-8 pb-24"
             >
               <img class="w-12 h-12 mb-6" src="../assets/howdowehelp2.png" />
 
@@ -69,9 +71,9 @@
           </div>
           <!-- <div class="w-72 h-80 flex flex-col items-center"> -->
 
-          <div class="flex flex-col items-center pb-8 lg:pb-0 max-w-sm">
+          <div class="flex flex-col items-center pb-8 lg:pb-0">
             <div
-              class="border-1 border-border-gray rounded-xl md:shadow-2xl w-96 h-72 border-1 px-8 pt-8 pb-24"
+              class="border-1 border-border-gray rounded-xl md:shadow-2xl xl:w-80 2xl:w-96 h-72 border-1 px-8 pt-8 pb-24"
             >
               <img class="w-12 h-12 mb-6" src="../assets/howdowehelp3.png" />
 
