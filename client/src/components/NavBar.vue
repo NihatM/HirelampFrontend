@@ -51,7 +51,7 @@
             </a>
           </li>
 
-          <li class="nav-item text-left">
+          <!-- <li class="nav-item text-left">
             <a class="nav-link" href="#"
               ><router-link
                 to="/about"
@@ -60,7 +60,7 @@
                 >About us</router-link
               >
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item text-left" v-if="isLoggedIn == false">
             <a class="nav-link" href="#"

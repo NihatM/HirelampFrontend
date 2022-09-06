@@ -233,7 +233,7 @@
                 @click="mentorPage()"
                 class="text-custom-blue underline underline-offset-2 inline-flex"
               >
-                See More
+                See all
                 <img src="../assets/ArrowSmall.svg" alt="" class="px-4" />
               </button>
             </div>
@@ -274,7 +274,7 @@
             </div>
           </div> -->
 
-          <div class=" ">
+          <div class="">
             <div class="flex flex-col items-center lg:gap-x-8">
               <!-- Image emplacement -->
               <div class="bg-white h-32 w-32 rounded-full relative -mb-24">

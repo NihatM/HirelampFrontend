@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-top p-6 md:w-auto mx-auto flex items-stretch justify-between flex-col md:flex-row col-end-1 md:pl-32"
+    class="p-6 md:w-auto mx-auto flex items-stretch justify-between flex-col md:flex-row col-end-1 md:pl-32"
   >
     <div
       class="w-full lg:w-8/12 align-middle flex flex-col justify-center content-center"

@@ -86,6 +86,7 @@
             </div>
 
             <button
+              @click="googleSignIn()"
               class="flex justify-center items-center h-11 w-full rounded-full text-gray-700 bg-gray-200 hover:bg-gray-300 duration-300 bt-book px-2 py-1.5"
             >
               <img src="../assets/Google.svg" alt="" class="px-2.5" />
@@ -326,6 +327,26 @@ export default {
         draggable: true,
         progress: undefined,
       });
+    },
+
+    googleSignIn() {
+      let provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+          let token = result.credential.accessToken;
+          let user = result.user;
+          console.log(token); // Token
+          console.log(user); // User that was authenticated
+          this.register = true;
+          this.createUser();
+          this.$root.uid = user.uid;
+          this.$router.push("/mentorpage");
+        })
+        .catch((error) => {
+          this.showErrorToast(error.message);
+        });
     },
 
     register() {

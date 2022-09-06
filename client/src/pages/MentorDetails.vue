@@ -46,7 +46,7 @@
                 <p class="font-extralight">
                   {{ mentorData.position }}
                 </p>
-                <p>* * * * * (252 reviews)</p>
+                <p>{{ showRating }}</p>
               </div>
               <div class="shadow-2xl rounded-xl px-6">
                 <div
@@ -110,7 +110,46 @@
                     <p class="font-extralight">
                       {{ mentorData.position }}
                     </p>
-                    <p>* * * * * (252 reviews)</p>
+                    <div class="py-2 flex">
+                      <img
+                        src="../assets/0stars.svg"
+                        v-if="this.rating == 0"
+                        alt=""
+                        class="pr-2 w-50"
+                      />
+                      <img
+                        src="../assets/1star.svg"
+                        v-if="this.rating == 1"
+                        alt=""
+                        class="pr-2 w-50"
+                      />
+                      <img
+                        src="../assets/2stars.svg"
+                        v-if="this.rating == 2"
+                        alt=""
+                        class="pr-2 w-50"
+                      />
+                      <img
+                        src="../assets/3stars.svg"
+                        v-if="this.rating == 3"
+                        alt=""
+                        class="pr-2 w-50"
+                      />
+                      <img
+                        src="../assets/4stars.svg"
+                        v-if="this.rating == 4"
+                        alt=""
+                        class="pr-2 w-50"
+                      />
+                      <img
+                        src="../assets/5stars.svg"
+                        v-if="this.rating == 5"
+                        alt=""
+                        class="pr-2 w-50"
+                      />
+                      ( {{ mentorData.ratings.length }} reviews)
+                    </div>
+                    <!-- <p>* * * * * (252 reviews)</p> -->
                   </div>
                 </div>
                 <!-- Content Card emplacement -->
@@ -211,11 +250,17 @@
                 <img src="../assets/myexpertice.svg" alt="" />
                 <p class="text-xl font-bold">Expertise</p>
               </div>
-              <p v-if="!longTextExpertise" class="visible lg:hidden">
+              <p
+                v-if="!longTextExpertise && mentorData"
+                class="visible lg:hidden"
+              >
                 {{ mentorData.expertise.substring(0, 120) }}...
               </p>
 
-              <p v-if="longTextExpertise" class="visible lg:hidden">
+              <p
+                v-if="longTextExpertise && mentorData"
+                class="visible lg:hidden"
+              >
                 {{ mentorData.expertise }}
               </p>
               <p class="hidden lg:flex">
@@ -234,11 +279,17 @@
                 <p class="text-xl font-bold">Work experience</p>
               </div>
 
-              <p v-if="!longTextExperience" class="visible lg:hidden">
+              <p
+                v-if="!longTextExperience && mentorData"
+                class="visible lg:hidden"
+              >
                 {{ mentorData.experience.substring(0, 120) }}...
               </p>
 
-              <p v-if="longTextExperience" class="visible lg:hidden">
+              <p
+                v-if="longTextExperience && mentorData"
+                class="visible lg:hidden"
+              >
                 {{ mentorData.experience }}
               </p>
               <p class="hidden lg:flex">
@@ -259,11 +310,17 @@
                 <p class="text-xl font-bold">Education</p>
               </div>
 
-              <p v-if="!longTextEducation" class="visible lg:hidden">
+              <p
+                v-if="!longTextEducation && mentorData"
+                class="visible lg:hidden"
+              >
                 {{ mentorData.education.substring(0, 120) }}...
               </p>
 
-              <p v-if="longTextEducation" class="visible lg:hidden">
+              <p
+                v-if="longTextEducation && mentorData"
+                class="visible lg:hidden"
+              >
                 {{ mentorData.education }}
               </p>
 
@@ -357,6 +414,8 @@ export default {
       open: false,
 
       isModalVisible: false,
+      showRating: "",
+      rating: 0,
     };
   },
   components: {
@@ -427,6 +486,7 @@ export default {
     showModalFalse() {
       if (this.modalFalse == true) {
         this.showModal = false;
+        //make page not scrollable
       }
     },
 
@@ -490,6 +550,32 @@ export default {
         )
         .then((response) => {
           this.mentorData = response.data;
+          // this.mentorData.rating = response.data.rating;
+          //      this.mentorData.rating = Math.round(this.response.data.rating);
+          // console.log(this.mentorData.rating);
+          this.rating = this.mentorData.average_rating;
+          console.log(this.rating);
+          if (this.rating == 0) {
+            this.rating = 0;
+            this.showRating = "⭐";
+          } else if (this.rating > 0 && this.rating < 2) {
+            this.rating = 1;
+            this.showRating = "⭐⭐";
+          } else if (this.rating > 1 && this.rating < 3) {
+            this.rating = 2;
+            this.showRating = "⭐⭐⭐";
+          } else if (this.rating > 2 && this.rating < 4) {
+            this.rating = 3;
+            this.showRating = "⭐⭐⭐⭐";
+          } else if (this.rating > 3 && this.rating < 5) {
+            this.rating = 5;
+            this.showRating = "⭐⭐⭐⭐⭐";
+          } else if (this.rating == 5) {
+            this.rating = 5;
+            this.showRating = "⭐⭐⭐⭐⭐";
+          }
+          // console.log(this.mentorData.ratings.length);
+
           this.newMentorTags = this.mentorData.tags.split(",");
           for (let i = 0; i < this.newMentorTags.length; i++) {
             this.newMentorTags[i] = this.newMentorTags[i].trim();

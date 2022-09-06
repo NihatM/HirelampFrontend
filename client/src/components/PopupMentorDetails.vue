@@ -1,8 +1,12 @@
 <template>
-  <div class="overflow-y-hidden bg-white w-671 p-9 pt-4 rounded-xl">
+  <div class="overflow-hidden bg-white w-671 p-9 pt-4 rounded-xl">
     <div class="">
       <div class="flex justify-end items-end content-end">
-        <button type="button" class="close font-bold" @click="$emit('close')">
+        <button
+          type="button"
+          class="close font-bold"
+          @click="$emit('close') && scrollTrue()"
+        >
           <img src="../assets/closeButton.svg" alt="" />
         </button>
       </div>
@@ -190,6 +194,7 @@ export default {
       showContact: false,
       bookedDate: new Date(),
       todayDate: new Date(),
+      scrollVisible: false,
     };
   },
   components: {
@@ -212,6 +217,11 @@ export default {
   beforeMount() {
     this.getMentorData();
   },
+
+  // created() {
+  //   this.showModalFalse();
+  // },
+
   computed: {
     dates() {
       return this.days.map((day) => day.date);
@@ -223,6 +233,7 @@ export default {
       }));
     },
   },
+
   methods: {
     searchTag(searchtag) {
       this.$router.push("/search/" + searchtag);
@@ -248,6 +259,20 @@ export default {
         },
       });
     },
+    // scrollTrue() {
+    //   this.scrollVisible == true;
+    //   document.body.style.overflow = "visible";
+    // },
+
+    // showModalFalse() {
+    //   //make page not scrollable
+    //   if (this.scrollVisible == true) {
+    //     document.body.style.overflow = "visible";
+    //   }
+    //   window.onscroll = function () {
+    //     window.scrollTo(0, 0);
+    //   };
+    // },
     sendCalendarData() {
       this.showContact = true;
     },
