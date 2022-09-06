@@ -5,7 +5,7 @@
         <div class="flex items-center justify-between">
           <router-link to="/" class="text-blue-600 font-bold">
             <img
-              class="relative w-1/4 h-1/4 md:w-4/6 md:h-4/6 lg:w-3/6 lg:h-3/6 xl:w-3/12 xl:h-3/12"
+              class="relative w-1/4 h-1/4 md:w-3/6 md:h-3/6 lg:w-3/6 lg:h-3/6 xl:w-3/12 xl:h-3/12"
               src="../../public/hirelamp_logo_navbar.png"
           /></router-link>
           <!-- Mobile menu button -->

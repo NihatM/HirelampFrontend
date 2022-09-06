@@ -3,7 +3,7 @@
     <div class="">
       <Search />
 
-      <div class="px-6 lg:px-32 pt-16 lg:pt-44">
+      <div class="px-6 lg:px-32 pt-16 lg:pt-32">
         <div class="pb-16">
           <img src="../assets/line.svg" alt="" class="pb-2" />
           <p class="text-4xl text-left bt-fontonly font-medium pb-3">
@@ -39,7 +39,7 @@
             <div
               class="bg-custom-gray hover:bg-custom-blue duration-300 h-9 w-11 relative rounded-xl -mt-6"
             >
-              <button class="z-50">
+              <button class="z-50" @click="to_categories(int_prep)">
                 <img src="../assets/Arrow.svg" alt="" class="px-2 py-1.5" />
               </button>
             </div>
@@ -64,7 +64,7 @@
             <div
               class="bg-custom-gray hover:bg-custom-blue duration-300 h-9 w-11 relative rounded-xl -mt-6"
             >
-              <button class="z-50">
+              <button class="z-50" @click="to_categories(car_coaching)">
                 <img src="../assets/Arrow.svg" alt="" class="px-2 py-1.5" />
               </button>
             </div>
@@ -90,7 +90,7 @@
             <div
               class="bg-custom-gray hover:bg-custom-blue duration-300 h-9 w-11 relative rounded-xl -mt-6"
             >
-              <button class="z-50">
+              <button class="z-50" @click="to_categories(job_search)">
                 <img src="../assets/Arrow.svg" alt="" class="px-2 py-1.5" />
               </button>
             </div>
@@ -171,7 +171,7 @@
       </div>
 
       <div
-        class="p-6 pt-20 pb-36 lg:px-32 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-col md:flex-row col-end-1"
+        class="p-6 pt-20 pb-36 md:px-32 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-col md:flex-row col-end-1"
       >
         <div
           class="w-0 md:w-full lg:w-full xl:w-1/2 md:mb-14 xl:mb-0 relative flex items-center justify-center"
@@ -217,10 +217,10 @@
         <!-- hidden md:visible lg:visible xl:visible -->
       </div>
 
-      <div class="px-6 lg:px-32">
-        <div class="pb-16">
+      <div class="px-6">
+        <div class="pb-16 md:px-32">
           <img src="../assets/line.svg" alt="" class="pb-2" />
-          <div class="flex justify-between">
+          <div class="flex md:flex-row flex-col justify-between">
             <div class="flex flex-col">
               <p class="text-4xl text-left bt-medium pb-3">
                 Mentors from the top companies.
@@ -230,53 +230,21 @@
                 specific challenges.
               </p>
             </div>
-            <div class="text-custom-blue">
+            <div class="text-custom-blue py-2 md:py-0">
               <button
                 @click="mentorPage()"
-                class="text-custom-blue underline underline-offset-2 inline-flex"
+                class="text-custom-blue text-xl underline underline-offset-2 inline-flex"
               >
                 See all
-                <img src="../assets/ArrowSmall.svg" alt="" class="px-4" />
+                <img src="../assets/ArrowSmall.svg" alt="" class="px-2" />
               </button>
             </div>
           </div>
         </div>
-        <div
-          class="flex flex-col lg:flex-row items-center align-middle content-center justify-between"
-        >
-          <!-- <div class="flex flex-col">
-            <div class="shadow-2xl rounded-xl w-96 h-96 pb-8 px-8 relative">
-              <div>
-                <button class="z-50 mb-10">
-                  <img src="../assets/person.svg" alt="" />
-                </button>
-                <p class="text-center bt-smalltitle font-bold pb-4">
-                  Name Surname
-                </p>
-
-                <div class="flex items-center justify-center pb-4">
-                  <button
-                    class="bg-black rounded-2xl text-center text-white bt-book px-2 py-1.5"
-                  >
-                    40$ Per session
-                  </button>
-                </div>
-
-                <div class="flex flex-row items-stretch justify-between pb-5">
-                  <p>Example</p>
-
-                  <p>Example</p>
-                </div>
-
-                <p class="text-center bt-smalltext">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-                  placeat aperiam tempora.
-                </p>
-              </div>
-            </div>
-          </div> -->
-
-          <div class="">
+        <div class="flex flex-col xl:flex-row justify-center gap-4">
+          <div
+            class="flex md:flex-nowrap flex-wrap justify-center xl:justify-between gap-4"
+          >
             <div class="flex flex-col items-center lg:gap-x-8">
               <!-- Image emplacement -->
               <div class="bg-white h-32 w-32 rounded-full relative -mb-24">
@@ -289,8 +257,9 @@
                 </button>
               </div>
               <!-- Content Card emplacement -->
+
               <div
-                class="shadow-2xl rounded-xl w-379 h-399 pb-8 px-8 relative pt-24"
+                class="shadow-2xl rounded-2xl w-full md:w-379 xl:w-379 h-399 pb-8 px-8 relative pt-24"
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
@@ -306,12 +275,12 @@
                   </div>
 
                   <div
-                    class="flex flex-row pb-3 items-center justify-center px-8 space-x-9"
+                    class="flex flex-row pb-3 items-center justify-center space-x-9"
                   >
                     <div class="flex flex-row items-start">
                       <img src="../assets/jobicon.svg" alt="" class="pr-2" />
 
-                      <p class="bt-book">Accenture</p>
+                      <p class="bt-book truncate">Accenture</p>
                     </div>
                     <div class="flex flex-row items-start">
                       <img
@@ -320,15 +289,15 @@
                         class="pr-2"
                       />
 
-                      <p class="bt-book">Netherlands</p>
+                      <p class="bt-book truncate">Netherlands</p>
                     </div>
                   </div>
 
-                  <p class="text-center bt-smalltext pb-6">
+                  <p class="text-center bt-smalltext h-24 pb-6">
                     Career choice, Advice on top uni. in Netherlands, Relocation
                     to Netherlands, Guidance in various stages of interview
                   </p>
-                  <div class="flex justify-center pb-12">
+                  <div class="flex justify-center">
                     <button
                       @click="mentorPageGurban()"
                       class="h-11 w-32 border-2 rounded-full border-custom-blue text-custom-blue hover:bg-custom-blue hover:text-white duration-300 bt-book px-2 py-1.5"
@@ -355,7 +324,7 @@
               </div>
               <!-- Content Card emplacement -->
               <div
-                class="shadow-2xl rounded-xl w-379 h-399 pb-8 px-8 relative pt-24"
+                class="shadow-2xl rounded-2xl w-full md:w-379 xl:w-379 h-399 pb-8 px-8 relative pt-24"
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
@@ -371,12 +340,12 @@
                   </div>
 
                   <div
-                    class="flex flex-row pb-3 items-center justify-center px-8 space-x-9"
+                    class="flex flex-row pb-3 items-center justify-center space-x-9"
                   >
                     <div class="flex flex-row items-start">
                       <img src="../assets/jobicon.svg" alt="" class="pr-2" />
 
-                      <p class="bt-book">QSS Analytics LLC</p>
+                      <p class="bt-book truncate">QSS Analytics LLC</p>
                     </div>
                     <div class="flex flex-row items-start">
                       <img
@@ -385,16 +354,16 @@
                         class="pr-2"
                       />
 
-                      <p class="bt-book">Azerbaijan</p>
+                      <p class="bt-book truncate">Azerbaijan</p>
                     </div>
                   </div>
 
-                  <p class="text-center bt-smalltext pb-6">
+                  <p class="text-center bt-smalltext h-24 pb-6">
                     Data strategy consultation for companies, BI and Analytics,
                     Interview preparation for Data Science roles, Guidance on
                     starting Data Science & ML career
                   </p>
-                  <div class="flex justify-center pb-12">
+                  <div class="flex justify-center">
                     <button
                       @click="mentorPageEtibar()"
                       class="h-11 w-32 border-2 rounded-full border-custom-blue text-custom-blue hover:bg-custom-blue hover:text-white duration-300 bt-book px-2 py-1.5"
@@ -421,7 +390,7 @@
               </div>
               <!-- Content Card emplacement -->
               <div
-                class="shadow-2xl rounded-xl w-379 h-399 pb-8 px-8 relative pt-24"
+                class="shadow-2xl rounded-2xl w-full md:w-379 xl:w-379 h-399 pb-8 px-8 relative pt-24"
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
@@ -437,12 +406,12 @@
                   </div>
 
                   <div
-                    class="flex flex-row pb-3 items-center justify-center px-8 space-x-9"
+                    class="flex flex-row pb-3 items-center justify-center space-x-9"
                   >
                     <div class="flex flex-row items-start">
                       <img src="../assets/jobicon.svg" alt="" class="pr-2" />
 
-                      <p class="bt-book">Vodafone</p>
+                      <p class="bt-book truncate">Vodafone</p>
                     </div>
                     <div class="flex flex-row items-start">
                       <img
@@ -451,15 +420,15 @@
                         class="pr-2"
                       />
 
-                      <p class="bt-book">Luxembourg</p>
+                      <p class="bt-book truncate">Luxembourg</p>
                     </div>
                   </div>
 
-                  <p class="text-center bt-smalltext pb-6">
+                  <p class="text-center bt-smalltext h-24 pb-6">
                     Interview preparation for supply chain roles, Coaching for
                     procurement careers
                   </p>
-                  <div class="flex justify-center pb-12">
+                  <div class="flex justify-center">
                     <button
                       @click="mentorPageEmin()"
                       class="h-11 w-32 border-2 rounded-full border-custom-blue text-custom-blue hover:bg-custom-blue hover:text-white duration-300 bt-book px-2 py-1.5"
@@ -626,6 +595,9 @@ export default {
       maxChar: 50,
       mentorDatas: this.mentorDatas,
       getMentorDetails: false,
+      int_prep: "Interview Preparation",
+      job_search: "Job Search consultation",
+      car_coaching: "Career Coaching",
     };
   },
   components: {
@@ -638,9 +610,13 @@ export default {
   },
 
   methods: {
+    to_categories(str) {
+      this.$router.push("/mentors/categories/" + str);
+    },
     mentorPage() {
       this.$router.push("/mentorpage");
     },
+
     mentorPageGurban() {
       this.$router.push("/mentordetails/3e2fed52-17bc-4e90-a6af-78c74ee7a650");
     },

@@ -85,65 +85,6 @@
       </li>
     </ul>
 
-    <!-- <ul
-      class="flex flex-row md:flex-nowrap lg:flex-nowrap xl:flex-nowrap flex-wrap justify-center pb-14 px-1 pt-4"
-    >
-      <li
-        v-for="mentorData in mentorDatas"
-        :key="mentorData.userID"
-        :currentMentorId="mentorData.userID"
-        class="flex flex-col items-center w-379 h-399 pb-8 px-8"
-      >
-        <div class="bg-white h-32 w-32 rounded-full relative -mb-24">
-          <button class="z-50">
-            <img
-              v-bind:src="mentorData.profileImg"
-              alt=""
-              class="rounded-full"
-            />
-          </button>
-        </div>
-        <div class="shadow-2xl rounded-xl w-379 h-399 pb-8 px-8 relative pt-24">
-          <div>
-            <div class="flex flex-col">
-              <h1
-                class="text-md md:text-lg lg:text-xl xl:text-2xl py-2 font-bold"
-              >
-                {{ mentorData.firstName }} {{ mentorData.lastName }}
-              </h1>
-              <div class="h-20 flex justify-center align-middle">
-                <h5
-                  class="text-sm sm:text-sm md:text-base lg:text-md xl:text-md pb-3 mb-2 tracking-tight"
-                >
-                  {{ mentorData.services }}
-                </h5>
-              </div>
-              <div class="">
-                <button
-                  @click="mentorDetails(mentorData.userID)"
-                  class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-custom-blue rounded-2xl hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  More
-                  <svg
-                    class="ml-2 -mr-1 w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul> -->
-
     <div
       class="p-6 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-row col-end-1 md:px-32 md:pt-40"
     >

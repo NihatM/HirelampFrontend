@@ -14,6 +14,7 @@ import SignUpMentor2 from "../pages/SignUpMentor2.vue";
 import Login from "../pages/Login.vue";
 import Search from "../pages/SearchMentor.vue";
 import Dashboard from "../pages/CandidateDashboard.vue";
+import MentorCategories from "../pages/MentorCategories.vue";
 import { getAuth } from "firebase/auth";
 
 const routes = [
@@ -88,6 +89,14 @@ const routes = [
     path: "/mentorpage",
     name: "Mentor Page",
     component: MentorPage,
+  },
+  {
+    path: "/mentors/categories/:category",
+    name: "Mentor Categories",
+    component: MentorCategories,
+    // meta: {
+    //   requiresAuth: true,
+    // },
   },
   {
     path: "/mentordetails/:id",

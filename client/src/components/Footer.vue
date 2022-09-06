@@ -139,7 +139,7 @@
       </div>
 
       <div
-        class="py-10 px-2 md:px-0 w-full md:w-1/2 lg:w-[200px] xl:w-[200px] md:ml-24"
+        class="py-10 px-10 md:px-0 w-full md:w-1/2 lg:w-[200px] xl:w-[200px] md:ml-24"
       >
         <div class="flex flex-col items-start justify-start">
           <p

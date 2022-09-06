@@ -19,7 +19,7 @@
           <div class="relative w-full md:w-10/12">
             <input
               type="search"
-              placeholder="Search a mentor, industry, country or company"
+              placeholder="Type to see something helpful happen"
               ref="search"
               :maxlength="maxChar"
               :minlength="minChar"

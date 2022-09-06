@@ -3,7 +3,17 @@
     <div class="container mx-auto">
       <div
         v-if="showModal"
-        class="overflow-hidden z-50 absolute inset-0 flex items-center justify-center bg-opacity-90 bg-gray-800 backdrop-blur-md"
+        style="
+          overflow: hidden;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 9999;
+        "
+        class="z-50 absolute inset-0 flex items-center justify-center bg-opacity-90 bg-gray-800 backdrop-blur-md"
       >
         <PopupMentorDetails @close="closeModal" />
       </div>
@@ -46,7 +56,47 @@
                 <p class="font-extralight">
                   {{ mentorData.position }}
                 </p>
-                <p>{{ showRating }}</p>
+                <div class="py-2 flex">
+                  <img
+                    src="../assets/0stars.svg"
+                    v-if="this.rating == 0"
+                    alt=""
+                    class="pr-2 w-50"
+                  />
+                  <img
+                    src="../assets/1star.svg"
+                    v-if="this.rating == 1"
+                    alt=""
+                    class="pr-2 w-50"
+                  />
+                  <img
+                    src="../assets/2stars.svg"
+                    v-if="this.rating == 2"
+                    alt=""
+                    class="pr-2 w-50"
+                  />
+                  <img
+                    src="../assets/3stars.svg"
+                    v-if="this.rating == 3"
+                    alt=""
+                    class="pr-2 w-50"
+                  />
+                  <img
+                    src="../assets/4stars.svg"
+                    v-if="this.rating == 4"
+                    alt=""
+                    class="pr-2 w-50"
+                  />
+                  <img
+                    src="../assets/5stars.svg"
+                    v-if="this.rating == 5"
+                    alt=""
+                    class="pr-2 w-50"
+                  />
+                  <p v-if="mentorData">
+                    ( {{ mentorData.ratings.length }} reviews)
+                  </p>
+                </div>
               </div>
               <div class="shadow-2xl rounded-xl px-6">
                 <div
@@ -147,7 +197,9 @@
                         alt=""
                         class="pr-2 w-50"
                       />
-                      ( {{ mentorData.ratings.length }} reviews)
+                      <p v-if="mentorData">
+                        ( {{ mentorData.ratings.length }} reviews)
+                      </p>
                     </div>
                     <!-- <p>* * * * * (252 reviews)</p> -->
                   </div>
@@ -550,6 +602,7 @@ export default {
         )
         .then((response) => {
           this.mentorData = response.data;
+          console.log(this.mentorData.ratings.length);
           // this.mentorData.rating = response.data.rating;
           //      this.mentorData.rating = Math.round(this.response.data.rating);
           // console.log(this.mentorData.rating);
@@ -557,24 +610,17 @@ export default {
           console.log(this.rating);
           if (this.rating == 0) {
             this.rating = 0;
-            this.showRating = "⭐";
           } else if (this.rating > 0 && this.rating < 2) {
             this.rating = 1;
-            this.showRating = "⭐⭐";
           } else if (this.rating > 1 && this.rating < 3) {
             this.rating = 2;
-            this.showRating = "⭐⭐⭐";
           } else if (this.rating > 2 && this.rating < 4) {
             this.rating = 3;
-            this.showRating = "⭐⭐⭐⭐";
           } else if (this.rating > 3 && this.rating < 5) {
+            this.rating = 4;
+          } else if (this.rating == 5 || this.rating > 4) {
             this.rating = 5;
-            this.showRating = "⭐⭐⭐⭐⭐";
-          } else if (this.rating == 5) {
-            this.rating = 5;
-            this.showRating = "⭐⭐⭐⭐⭐";
           }
-          // console.log(this.mentorData.ratings.length);
 
           this.newMentorTags = this.mentorData.tags.split(",");
           for (let i = 0; i < this.newMentorTags.length; i++) {
