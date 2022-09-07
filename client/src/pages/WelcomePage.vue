@@ -199,6 +199,7 @@
               someone who'd already gone through the same road.
             </p>
             <button
+              @click="mentorPage()"
               class="border-2 rounded-2xl border-custom-blue flex items-start text-custom-blue hover:bg-custom-blue hover:text-white duration-300 bt-book px-2 py-1.5"
             >
               Read more
@@ -461,11 +462,12 @@
           <!-- <button v-on:click="test">TEST v-on</button> -->
           <div class="pb-9">
             <p class="text-4xl text-left bt-medium pb-3.5">
-              Which mentor do you want see?
+              Cannot find the mentor you want to talk to?
             </p>
             <p class="text-4xl text-left bt-book max-w-xl">
-              Just send us Linkdein link and we will add for you this mentor and
-              you can get appointment easly the your mentor in order to help you
+              Just share the link to his/her LinkedIn profile. We will be in
+              touch to bring the mentor you search for to our platform or
+              suggest others that can be helpful.
             </p>
           </div>
 

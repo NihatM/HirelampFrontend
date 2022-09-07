@@ -73,5 +73,5 @@ module.exports = {
   //   display: ["responsive", "hover", "focus", "group-hover"],
 
   // },
-  plugins: [],
+  plugins: [require("autoprefixer")],
 };

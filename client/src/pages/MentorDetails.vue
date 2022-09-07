@@ -1,5 +1,5 @@
 <template>
-  <body class="px-6 lg:px-32">
+  <body class="px-6 lg:px-32 py-4">
     <div class="container mx-auto">
       <div
         v-if="showModal"
@@ -32,10 +32,10 @@
           <div class="visible lg:hidden flex flex-col items-center">
             <!-- Image emplacement -->
             <div
-              class="bg-gray-50 flex flex-col lg:flex-row items-center lg:items-start w-350 h-111 rounded-br-none lg:rounded-xl rounded-bl-none"
+              class="bg-gray-50 flex flex-col lg:flex-row items-center lg:items-start w-350 md:w-493 lg:w-350 h-111 rounded-br-none lg:rounded-xl rounded-bl-none"
             >
               <div
-                class="bg-card-blue w-350 h-111 flex justify-center rounded-t-xl pt-8"
+                class="bg-card-blue w-350 md:w-493 lg:w-350 h-111 flex justify-center rounded-t-xl pt-8"
               >
                 <div class="h-44 w-44 rounded-full relative -mb-24 px-3">
                   <button class="z-50">
@@ -56,7 +56,7 @@
                 <p class="font-extralight">
                   {{ mentorData.position }}
                 </p>
-                <div class="py-2 flex">
+                <div class="py-3 flex justify-center">
                   <img
                     src="../assets/0stars.svg"
                     v-if="this.rating == 0"

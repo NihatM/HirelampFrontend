@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "./assets/tailwind.css";
+import "./assets/main.css";
 import router from "./router";
 import { createApp } from "vue";
 import App from "./App.vue";
@@ -7,22 +8,24 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import Vuelidate from "vuelidate";
 import Vuex from "vuex";
+
 import firebase from "firebase/compat/app";
-import VCalendar from 'v-calendar';
-import 'v-calendar/dist/style.css';
-import { SetupCalendar, Calendar, DatePicker } from 'v-calendar';
+import VCalendar from "v-calendar";
+import "v-calendar/dist/style.css";
+import { SetupCalendar, Calendar, DatePicker } from "v-calendar";
 let app = "";
 
 firebase.auth().onAuthStateChanged(() => {
   if (!app) {
     app = createApp(App);
     app.use(Toast);
+
     app.use(VCalendar, {});
     app.use(Vuelidate);
-    app.use(SetupCalendar, {})
-// Use the components
-app.component('Calendar', Calendar)
-app.component('DatePicker', DatePicker)
+    app.use(SetupCalendar, {});
+    // Use the components
+    app.component("Calendar", Calendar);
+    app.component("DatePicker", DatePicker);
     app.use(Vuex);
     app.use(router);
     app.mount("#app");

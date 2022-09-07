@@ -1,5 +1,5 @@
 <template>
-  <div class="align-start justify-start">
+  <div class="">
     <ul
       class="py-2 pr-8 text-sm sm:text-sm md:text-base lg:text-md xl:text-md text-left inline-flex content-start justify-start"
       v-for="tag in tags"
@@ -7,7 +7,7 @@
     >
       <li
         @click="searchTag(tag)"
-        class="cursor-pointer bt-book px-4 py-1.5 bg-gray-200 rounded-full w-max sm:text-sm md:text-base lg:text-md text-left xl:text-md hover:bg-black hover:text-white hover:border-black duration-300"
+        class="cursor-pointer px-4 py-1.5 bg-gray-200 rounded-full w-max sm:text-sm md:text-base lg:text-md text-left xl:text-md hover:bg-black hover:text-white hover:border-black duration-300"
       >
         {{ tag }}
       </li>
@@ -39,6 +39,9 @@ export default {
   methods: {
     searchTag(searchtag) {
       this.$router.push("/search/" + searchtag);
+    },
+    mentorPage() {
+      this.$router.push("/mentorpage");
     },
   },
 };

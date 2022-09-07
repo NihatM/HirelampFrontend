@@ -58,7 +58,8 @@
 
             <div class="relative pb-10">
               <input
-                type="password"
+                :type="passwordFieldType"
+                v-model="password"
                 id="floating_outlined"
                 class="block border-1 p-2.5 px-6 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-2xl"
                 placeholder="Password"
@@ -66,7 +67,7 @@
 
               <button
                 @click="showPassword"
-                type="submit"
+                type="password"
                 class="absolute top-0 right-0 py-2.5 px-4 h-12 duration-300 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
               >
                 <img src="../assets/Show.svg" alt="" />
@@ -74,7 +75,7 @@
             </div>
 
             <button
-              class="h-11 w-full rounded-full text-gray-50 bg-black hover:bg-gray-50 hover:text-black duration-300 bt-book px-2 py-1.5"
+              class="h-11 w-full rounded-full text-gray-50 bg-black hover:shadow-lg duration-300 bt-book px-2 py-1.5"
             >
               Register
             </button>
@@ -275,13 +276,15 @@ export default {
       toastColor: "",
       firstName: "",
       lastName: "",
+      password: "",
+      passwordFieldType: "password",
     };
   },
   setup() {
     const toast = useToast();
     const router = useRouter();
     const email = ref("");
-    const password = ref("");
+    //  const password = ref("");
     const role = ref("");
     const confirmPassword = ref("");
 
@@ -290,7 +293,7 @@ export default {
       toast,
       router,
       email,
-      password,
+      //  password,
       confirmPassword,
     };
   },
@@ -390,7 +393,10 @@ export default {
         });
     },
 
-    showPassword() {},
+    showPassword() {
+      this.passwordFieldType =
+        this.passwordFieldType === "password" ? "text" : "password";
+    },
   },
 };
 // get a reference to our vue router

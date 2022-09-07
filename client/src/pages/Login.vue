@@ -66,12 +66,16 @@
             >
 
             <button
-              class="h-11 w-full rounded-full text-gray-50 bg-black hover:bg-gray-50 hover:text-black duration-300 bt-book px-2 py-1.5"
+              class="h-11 w-full rounded-full text-gray-50 bg-black hover:shadow-lg duration-300 bt-book px-2 py-1.5"
             >
               Login
             </button>
 
-            <p class="py-3">or</p>
+            <div class="relative flex py-2.5 items-center px-20">
+              <div class="flex-grow border-t border-gray-200"></div>
+              <span class="flex-shrink mx-2 text-gray-400">Or</span>
+              <div class="flex-grow border-t border-gray-200"></div>
+            </div>
 
             <button
               @click="googleSignIn()"

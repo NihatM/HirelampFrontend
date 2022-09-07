@@ -1,6 +1,12 @@
+@font-face {
+  font-family: "Biotif";
+  src: url("../assets/fonts/Biotif-Book.ttf") format("truetype"),
+    url("../assets/fonts/Biotif-Medium.ttf") format("truetype"),
+    url("../assets/fonts/Biotif-Regular.ttf") format("truetype");
+}
+
 .bt-book {
   font-family: "Biotif";
-  src: url("../assets/fonts/Biotif-Book.ttf") format("ttf");
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -9,7 +15,6 @@
 
 .bt-smalltitle {
   font-family: "Biotif";
-  src: url("../assets/fonts/Biotif-Book.ttf") format("ttf");
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
@@ -18,7 +23,6 @@
 
 .bt-smalltext {
   font-family: "Biotif";
-  src: url("../assets/fonts/Biotif-Book.ttf") format("ttf");
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -28,7 +32,6 @@
 
 .bt-medium {
   font-family: "Biotif";
-  src: url("../assets/fonts/Biotif-Medium.ttf") format("ttf");
   font-style: normal;
   font-weight: 500;
   font-size: 36px;
@@ -37,7 +40,6 @@
 
 .bt-regular {
   font-family: "Biotif";
-  src: url("../assets/fonts/Biotif-Regular.ttf") format("ttf");
   font-style: normal;
   font-weight: 500;
   font-size: 56px;
@@ -49,7 +51,6 @@
 
 .bt-footer {
   font-family: "Biotif";
-  src: url("../assets/fonts/Biotif-Regular.ttf") format("ttf");
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -58,7 +59,6 @@
 
 .bt-placeholder {
   font-family: "Biotif";
-  src: url("../assets/fonts/Biotif-Regular.ttf") format("ttf");
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -67,7 +67,6 @@
 }
 .bt-md {
   font-family: "Biotif";
-  src: url("../assets/fonts/Biotif-Regular.ttf") format("ttf");
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -76,7 +75,6 @@
 
 .bt-fontonly {
   font-family: "Biotif";
-  src: url("../assets/fonts/Biotif-Regular.ttf") format("ttf");
 }
 
 .bg-bottom {
