@@ -7,7 +7,7 @@
     <div class="pb-7 px-6 md:px-0">
       <SearchBar />
     </div>
-    <TagsNew />
+    <TagsNew :searchTags="this.searchTags" />
     <div v-if="this.isLoading" class="flex align-center justify-center p-8">
       <Loading />
     </div>
@@ -169,6 +169,8 @@ export default {
       mentorDatas: [],
       getMentorDetails: false,
       isLoading: true,
+      searchTags: ["Azerbaijan", "Big4", "Software", "Finance"],
+      // searchTags: mentorData.tags,
     };
   },
   components: {

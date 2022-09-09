@@ -230,47 +230,8 @@
                     <p class="text-left bt-smalltext pb-6">
                       {{ mentorData.bio }}
                     </p>
-
-                    <div>
-                      <p class="text-left bt-md">Services</p>
-                      <div class="flex md:flex-nowrap flex-wrap">
-                        <ul
-                          class="py-2 pr-8 text-sm sm:text-sm md:text-base lg:text-md xl:text-md text-left inline-flex content-start justify-start"
-                          v-for="category in mentorData.category"
-                          :key="category"
-                        >
-                          <li
-                            class="cursor-pointer bt-book px-4 py-2.5 border-1 rounded-xl w-max sm:text-sm md:text-base lg:text-md text-left xl:text-md hover:bg-black hover:text-white hover:border-black duration-300"
-                          >
-                            <div
-                              class="flex flex-row items-center justify-between gap-x-2"
-                            >
-                              <img
-                                v-show="category == 'Interview Preparation'"
-                                src="../assets/mockinterview.svg"
-                                class="w-7 h-6"
-                                alt=""
-                              />
-                              <img
-                                v-show="category == 'Job Search Consultation'"
-                                src="../assets/jobsearch.svg"
-                                class="w-7 h-6"
-                                alt=""
-                              />
-
-                              <img
-                                v-show="category == 'Career Coaching'"
-                                src="../assets/careercoaching.svg"
-                                class="w-7 h-6"
-                                alt=""
-                              />
-
-                              {{ category }}
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+                    <!-- {{ mentorData.category }} -->
+                    <Services :searchCategories="mentorData.category" />
 
                     <div class="flex justify-center items-center pt-12 pb-4">
                       <p class="text-price-green bt-md">
@@ -389,7 +350,7 @@
 
             <div>
               <p class="text-xl font-bold pb-3.5">My verticals</p>
-              <ul
+              <!-- <ul
                 class="py-2 pr-8 text-sm sm:text-sm md:text-base lg:text-md xl:text-md text-left inline-flex content-start justify-start"
                 v-for="tag in mentorData.tags"
                 :key="tag"
@@ -399,10 +360,10 @@
                 >
                   {{ tag }}
                 </li>
-              </ul>
+              </ul> -->
+              <TagsNew :searchTags="mentorData.tags" />
             </div>
           </div>
-          <div></div>
         </div>
       </div>
     </div>
@@ -413,6 +374,8 @@
 
 <script>
 import { useToast } from "vue-toastification";
+import Services from "../components/Services.vue";
+import TagsNew from "../components/TagsNew.vue";
 import Footer from "../components/Footer.vue";
 import PopupMentorDetails from "../components/PopupMentorDetails.vue";
 //import LoadingDetails from "../components/LoadingDetails.vue";
@@ -472,6 +435,8 @@ export default {
   },
   components: {
     Footer,
+    Services,
+    TagsNew,
     //LoadingDetails,
     // DatePicker
     PopupMentorDetails,

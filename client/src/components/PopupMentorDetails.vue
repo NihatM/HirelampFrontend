@@ -2,11 +2,7 @@
   <div class="overflow-hidden bg-white w-671 p-9 pt-4 rounded-xl">
     <div class="">
       <div class="flex justify-end items-end content-end">
-        <button
-          type="button"
-          class="close font-bold"
-          @click="$emit('close') && scrollTrue()"
-        >
+        <button type="button" class="close font-bold" @click="$emit('close')">
           <img src="../assets/closeButton.svg" alt="" />
         </button>
       </div>
@@ -32,26 +28,6 @@
         />
 
         <h1 class="py-2"></h1>
-
-        <!-- <button
-            :disabled="this.wrongTime === true"
-            @click="sendCalendarData"
-            class="cursor-not-allowed disabled inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-custom-blue rounded-2xl hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Next
-            <svg
-              class="ml-2 -mr-1 w-4 h-4"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </button> -->
       </div>
       <div
         v-if="!showContact"
@@ -214,13 +190,12 @@ export default {
   //     fullName: { required },
   //   };
   // },
+  mounted() {
+    this.autoFillUserData();
+  },
   beforeMount() {
     this.getMentorData();
   },
-
-  // created() {
-  //   this.showModalFalse();
-  // },
 
   computed: {
     dates() {
@@ -259,25 +234,22 @@ export default {
         },
       });
     },
-    // scrollTrue() {
-    //   this.scrollVisible == true;
-    //   document.body.style.overflow = "visible";
-    // },
 
-    // showModalFalse() {
-    //   //make page not scrollable
-    //   if (this.scrollVisible == true) {
-    //     document.body.style.overflow = "visible";
-    //   }
-    //   window.onscroll = function () {
-    //     window.scrollTo(0, 0);
-    //   };
-    // },
+    autoFillUserData() {
+      localStorage.getItem("userEmail")
+        ? (this.email = localStorage.getItem("userEmail"))
+        : null;
+      console.log(this.email);
+      localStorage.getItem("userFullname")
+        ? (this.fullName = localStorage.getItem("userFullname"))
+        : null;
+    },
+
     sendCalendarData() {
       this.showContact = true;
     },
     showToast() {
-      this.toast.success("Message sent successfully!", {
+      this.toast.success("Message sent successfully! Please check your email", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -286,6 +258,8 @@ export default {
         draggable: true,
         progress: undefined,
       });
+      //close modal
+      this.$emit("close");
     },
     getMentorData() {
       const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

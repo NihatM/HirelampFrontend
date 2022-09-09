@@ -3,7 +3,7 @@
     <div class="">
       <Search />
 
-      <div class="px-6 lg:px-32 pt-16 lg:pt-32">
+      <div class="px-6 lg:px-32 pt-16 lg:pt-16">
         <div class="pb-16">
           <img src="../assets/line.svg" alt="" class="pb-2" />
           <p class="text-4xl text-left bt-fontonly font-medium pb-3">
@@ -22,7 +22,7 @@
         >
           <div class="flex flex-col items-center pb-8 lg:pb-0">
             <div
-              class="border-1 border-border-gray rounded-xl md:shadow-2xl xl:w-80 2xl:w-96 h-72 px-8 pt-8 pb-24"
+              class="border-1 border-border-gray rounded-xl md:shadow-xl hover:shadow-2xl duration-300 xl:w-80 2xl:w-96 h-72 px-8 pt-8 pb-24"
             >
               <img class="w-12 h-12 mb-6" src="../assets/howdowehelp1.png" />
 
@@ -47,7 +47,7 @@
 
           <div class="flex flex-col items-center pb-8 lg:pb-0">
             <div
-              class="border-1 border-border-gray rounded-xl md:shadow-2xl xl:w-80 2xl:w-96 h-72 border-1 px-8 pt-8 pb-24"
+              class="border-1 border-border-gray rounded-xl md:shadow-xl hover:shadow-2xl duration-300 xl:w-80 2xl:w-96 h-72 border-1 px-8 pt-8 pb-24"
             >
               <img class="w-12 h-12 mb-6" src="../assets/howdowehelp2.png" />
 
@@ -73,7 +73,7 @@
 
           <div class="flex flex-col items-center pb-8 lg:pb-0">
             <div
-              class="border-1 border-border-gray rounded-xl md:shadow-2xl xl:w-80 2xl:w-96 h-72 border-1 px-8 pt-8 pb-24"
+              class="border-1 border-border-gray rounded-xl md:shadow-xl hover:shadow-2xl duration-300 xl:w-80 2xl:w-96 h-72 border-1 px-8 pt-8 pb-24"
             >
               <img class="w-12 h-12 mb-6" src="../assets/howdowehelp3.png" />
 
@@ -260,7 +260,7 @@
               <!-- Content Card emplacement -->
 
               <div
-                class="shadow-2xl rounded-2xl w-full md:w-379 xl:w-379 h-399 pb-8 px-8 relative pt-24"
+                class="shadow-xl hover:shadow-2xl duration-300 rounded-2xl w-full md:w-379 xl:w-379 h-399 pb-8 px-8 relative pt-24"
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
@@ -269,7 +269,7 @@
 
                   <div class="flex items-center justify-center pb-4">
                     <button
-                      class="bg-black text-white hover:bg-white rounded-2xl text-center bt-book px-6 py-1.5"
+                      class="bg-custom-orange text-black rounded-2xl text-center bt-book px-6 py-1.5"
                     >
                       35$ Per session
                     </button>
@@ -325,7 +325,7 @@
               </div>
               <!-- Content Card emplacement -->
               <div
-                class="shadow-2xl rounded-2xl w-full md:w-379 xl:w-379 h-399 pb-8 px-8 relative pt-24"
+                class="shadow-xl hover:shadow-2xl duration-300 rounded-2xl w-full md:w-379 xl:w-379 h-399 pb-8 px-8 relative pt-24"
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
@@ -334,7 +334,7 @@
 
                   <div class="flex items-center justify-center pb-4">
                     <button
-                      class="bg-black text-white hover:bg-white rounded-2xl text-center bt-book px-6 py-1.5"
+                      class="bg-custom-orange text-black rounded-2xl text-center bt-book px-6 py-1.5"
                     >
                       30$ Per session
                     </button>
@@ -391,7 +391,7 @@
               </div>
               <!-- Content Card emplacement -->
               <div
-                class="shadow-2xl rounded-2xl w-full md:w-379 xl:w-379 h-399 pb-8 px-8 relative pt-24"
+                class="shadow-xl hover:shadow-2xl duration-300 rounded-2xl w-full md:w-379 xl:w-379 h-399 pb-8 px-8 relative pt-24"
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
@@ -400,7 +400,7 @@
 
                   <div class="flex items-center justify-center pb-4">
                     <button
-                      class="bg-black text-white hover:bg-white rounded-2xl text-center bt-book px-6 py-1.5"
+                      class="bg-custom-orange text-black rounded-2xl text-center bt-book px-6 py-1.5"
                     >
                       40$ Per session
                     </button>
@@ -471,48 +471,6 @@
             </p>
           </div>
 
-          <!-- <form>
-            <label
-              for="default-search"
-              class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
-              >Search</label
-            >
-            <div class="relative">
-              <div
-                class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  ></path>
-                </svg>
-              </div>
-              <input
-                type="search"
-                id="default-search"
-                class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search Mockups, Logos..."
-                required
-              />
-              <button
-                type="submit"
-                class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                Search
-              </button>
-            </div>
-          </form> -->
-
           <form @submit.prevent="searchMentor">
             <div class="flex justify-left">
               <div class="relative md:w-10/12 w-full">
@@ -524,7 +482,7 @@
                   :minlength="minChar"
                   v-model="search"
                   id='location-search"'
-                  class="shadow-2xl block p-2.5 px-8 w-full h-14 z-20 text-sm text-gray-900 bg-white rounded-full"
+                  class="shadow-xl focus:shadow-2xl duration-300 block p-2.5 px-8 w-full h-14 z-20 text-sm text-gray-900 bg-white rounded-full"
                   required=""
                 />
 
@@ -534,27 +492,6 @@
                 >
                   <p class="text-white text-center bt-book">SEND</p>
                 </button>
-
-                <!-- <button
-                  type="submit"
-                  class="absolute top-0 right-0 py-2.5 px-4 h-12 text-sm font-medium text-white rounded-full hover:bg-gray-200 bg-custom-blue focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    ></path>
-                  </svg>
-                </button> -->
               </div>
             </div>
           </form>

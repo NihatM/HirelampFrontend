@@ -53,6 +53,7 @@ module.exports = {
         "footer-blue": "#02375C",
         "card-blue": "#d4edff",
         "price-green": "#25D797",
+        "custom-orange": "#FFB23B",
       },
       boxShadow: {
         "3xl": "0 0px 20px -15px rgba(0, 0, 0, 0.3)",

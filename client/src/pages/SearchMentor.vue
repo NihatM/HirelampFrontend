@@ -3,8 +3,10 @@
     <h1 class="flex justify-center md:text-3xl p-4 font-bold">
       Search results
     </h1>
-    <SearchBar />
-
+    <div class="pb-7 px-6 md:px-0">
+      <SearchBar />
+    </div>
+    <TagsNew :searchTags="this.searchTags" />
     <ul
       class="flex md:flex-nowrap lg:flex-nowrap xl:flex-nowrap flex-wrap justify-center items-center pb-14 pt-4"
     >
@@ -162,6 +164,7 @@ export default {
       mentorDatas: [],
       getMentorDetails: false,
       search: "",
+      searchTags: ["Azerbaijan", "Big4", "Software", "Finance"],
     };
   },
   mounted() {

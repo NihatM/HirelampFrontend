@@ -3,7 +3,7 @@
     class="pt-11 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-row col-end-1 md:px-32"
   >
     <div
-      class="hidden md:visible w-full md:w-full lg:w-full xl:w-1/2 md:mb-14 xl:mb-0 relative md:flex flex-col items-center justify-center"
+      class="hidden md:visible w-full md:w-1/2 lg:w-1/2 xl:w-1/2 md:mb-14 xl:mb-0 relative md:flex flex-col items-center justify-center"
     >
       <img src="../assets/login.svg" alt="" class="w-10/12 pb-8" />
       <p class="bt-md">Welcome aboard my friend</p>
@@ -17,14 +17,9 @@
           <p class="bt-medium pb-11 pt-8">Register</p>
 
           <div class="">
-            <!-- <div class="relative mb-6">
-  <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-  </div>
-  <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com">
-</div> -->
             <div class="relative">
               <input
+                v-model="fullName"
                 type="text"
                 class="block border-1 p-2.5 px-6 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-2xl"
                 placeholder="Name & Surname"
@@ -41,6 +36,7 @@
             <div class="py-2"></div>
             <div class="relative">
               <input
+                v-model="email"
                 type="email"
                 class="block border-1 p-2.5 px-6 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-2xl"
                 placeholder="Email"
@@ -75,6 +71,7 @@
             </div>
 
             <button
+              @click="register"
               class="h-11 w-full rounded-full text-gray-50 bg-black hover:shadow-lg duration-300 bt-book px-2 py-1.5"
             >
               Register
@@ -114,151 +111,6 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="flex items-center justify-center">
-    <div
-      class="bg-gray-200 text-gray-500 shadow-xl w-full h-screen overflow-hidden md:pt-10"
-    >
-      <div class="md:flex w-full justify-center">
-        <div class="w-full md:w-1/2 py-3 px-5 md:px-10">
-          <div class="text-center mb-4">
-            <h1 class="font-bold text-3xl text-gray-900">REGISTER</h1>
-            <p>Enter your information to register</p>
-          </div>
-          <div>
-            <div class="flex -mx-3">
-              <div class="w-1/2 px-3 mb-4">
-                <div class="flex">
-                  <div
-                    class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
-                  >
-                    <i
-                      class="mdi mdi-account-outline text-gray-400 text-lg"
-                    ></i>
-                  </div>
-                  <input
-                    type="text"
-                    v-model="firstName"
-                    class="w-full -ml-10 pl-5 pr-3 py-2 shadow-md rounded-2xl border-2 border-gray-200 outline-none focus:border-indigo-500"
-                    placeholder="First name"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="w-1/2 px-3 mb-4">
-                <div class="flex">
-                  <div
-                    class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
-                  >
-                    <i
-                      class="mdi mdi-account-outline text-gray-400 text-lg"
-                    ></i>
-                  </div>
-                  <input
-                    type="text"
-                    v-model="lastName"
-                    class="w-full -ml-10 pl-5 pr-3 py-2 shadow-md rounded-2xl border-2 border-gray-200 outline-none focus:border-indigo-500"
-                    placeholder="Last name"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-4">
-                <div class="flex">
-                  <div
-                    class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
-                  >
-                    <i class="mdi mdi-email-outline text-gray-400 text-lg"></i>
-                  </div>
-                  <input
-                    type="email"
-                    class="w-full -ml-10 pl-5 pr-3 py-2 shadow-md rounded-2xl border-2 border-gray-200 outline-none focus:border-indigo-500"
-                    placeholder="Email"
-                    required
-                    v-model="email"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-4">
-                <div class="flex">
-                  <div
-                    class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
-                  >
-                    <i class="mdi mdi-lock-outline text-gray-400 text-lg"></i>
-                  </div>
-                  <input
-                    type="password"
-                    class="w-full -ml-10 pl-5 pr-3 py-2 shadow-md rounded-2xl border-2 border-gray-200 outline-none focus:border-indigo-500"
-                    placeholder="Password"
-                    required
-                    v-model="password"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-4">
-                <div class="flex">
-                  <div
-                    class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
-                  >
-                    <i class="mdi mdi-lock-outline text-gray-400 text-lg"></i>
-                  </div>
-                  <input
-                    type="password"
-                    class="w-full -ml-10 pl-5 pr-3 py-2 shadow-md rounded-2xl border-2 border-gray-200 outline-none focus:border-indigo-500"
-                    placeholder="Confirm Password"
-                    required
-                    v-model="confirmPassword"
-                    :rules="[comparePasswords]"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-4">
-                <button
-                  @click="register"
-                  type="submit"
-                  value="Register"
-                  class="block w-full shadow-md border-3 border-blue-400 max-w-xs mx-auto bg-custom-blue hover:bg-blue-500 focus:bg-blue-700 text-white rounded-2xl px-3 py-2 font-semibold"
-                >
-                  REGISTER NOW
-                </button>
-              </div>
-            </div>
-
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-2">
-                <button
-                  class="block w-full max-w-xs mx-auto hover:text-custom-blue px-3 py-2 font-semibold"
-                >
-                  <a href="/login"
-                  >Already have an account? Login</a>
-                </button>
-              </div>
-            </div>
-             <div class="flex -mx-3">
-              <div class="w-full px-3 mb-2">
-                <button
-                  class="block w-full max-w-xs mx-auto hover:text-custom-blue px-3 py-2 font-semibold"
-                >
-                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSd319wsfw2pg9Vt7hQyVOaDSIQQ-OIqfKJYNLH-_16xFKgX-Q/viewform"
-                  target="_blank"
-                  >Want to be a mentor? Fill the form</a>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script>
@@ -274,6 +126,7 @@ export default {
     return {
       toastMessage: "",
       toastColor: "",
+      fullName: "",
       firstName: "",
       lastName: "",
       password: "",
@@ -286,7 +139,7 @@ export default {
     const email = ref("");
     //  const password = ref("");
     const role = ref("");
-    const confirmPassword = ref("");
+    // const confirmPassword = ref("");
 
     return {
       role,
@@ -294,16 +147,14 @@ export default {
       router,
       email,
       //  password,
-      confirmPassword,
+      // confirmPassword,
     };
   },
 
   computed: {
-    comparePasswords() {
-      return this.password !== this.confirmPassword
-        ? "Passwords do not match"
-        : true;
-    },
+    // comparePasswords() {
+    //   return this.confirmPassword == this.password;
+    // },
   },
 
   methods: {
@@ -353,8 +204,8 @@ export default {
     },
 
     register() {
-      if (this.password !== this.confirmPassword) {
-        this.showErrorToast("Passwords do not match");
+      if (this.password == "" && this.email == "") {
+        this.showErrorToast("Please fill all the fields");
       } else {
         firebase
           .auth()
@@ -372,6 +223,9 @@ export default {
       }
     },
     createUser() {
+      this.firstName = this.fullName.split(" ")[0];
+      this.lastName = this.fullName.split(" ")[1];
+      this.userFullname = this.fullName;
       const user = {
         email: this.email,
         firstName: this.firstName,
@@ -380,6 +234,10 @@ export default {
         userID: this.$root.uid,
         role: this.role,
       };
+      localStorage.setItem("userEmail", this.email);
+      localStorage.setItem("userFullname", this.userFullname);
+      console.log(this.userFullname);
+
       axios
         .post(
           "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentees/",

@@ -7,7 +7,7 @@
     <div class="pb-7 px-6 md:px-0">
       <SearchBar />
     </div>
-    <TagsNew />
+    <TagsNew :searchTags="this.searchTags" />
     <div v-if="this.isLoading" class="flex align-center justify-center p-8">
       <Loading />
     </div>
@@ -35,7 +35,7 @@
             </div>
             <!-- Content Card emplacement -->
             <div
-              class="shadow-2xl rounded-2xl w-full md:w-282 xl:w-379 h-399 pb-8 px-8 relative pt-24"
+              class="shadow-xl hover:shadow-2xl duration-300 rounded-2xl w-full md:w-282 xl:w-379 h-399 pb-8 px-8 relative pt-24"
             >
               <div>
                 <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
@@ -43,11 +43,11 @@
                 </p>
 
                 <div class="flex items-center justify-center pb-4">
-                  <button
-                    class="bg-black text-white hover:bg-white rounded-2xl text-center bt-book px-6 py-1.5"
+                  <p
+                    class="bg-custom-orange text-black rounded-2xl text-center bt-book px-6 py-1.5"
                   >
                     {{ mentorData.price }}$ per session
-                  </button>
+                  </p>
                 </div>
 
                 <div
@@ -170,6 +170,7 @@ export default {
       mentorDatas: this.mentorDatas,
       getMentorDetails: false,
       isLoading: true,
+      searchTags: ["Azerbaijan", "Big4", "Software", "Finance"],
     };
   },
   components: {

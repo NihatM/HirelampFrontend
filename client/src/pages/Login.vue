@@ -5,7 +5,7 @@
     class="pt-11 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-row col-end-1 md:px-32"
   >
     <div
-      class="hidden md:visible w-0 md:w-full lg:w-full xl:w-1/2 md:mb-14 xl:mb-0 relative md:flex flex-col items-center justify-center"
+      class="hidden md:visible w-full md:w-1/2 lg:w-1/2 xl:w-1/2 md:mb-14 xl:mb-0 relative md:flex flex-col items-center justify-center"
     >
       <img src="../assets/login.svg" alt="" class="w-10/12 pb-4" />
       <p class="bt-md">Welcome back my friend</p>
@@ -27,6 +27,7 @@
 </div> -->
             <div class="relative">
               <input
+                v-model="email"
                 type="email"
                 class="block border-1 p-2.5 px-6 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-2xl"
                 placeholder="Email"
@@ -66,6 +67,7 @@
             >
 
             <button
+              @click="login()"
               class="h-11 w-full rounded-full text-gray-50 bg-black hover:shadow-lg duration-300 bt-book px-2 py-1.5"
             >
               Login
@@ -204,57 +206,26 @@ export default {
       toastColor: "",
       password: "",
       passwordFieldType: "password",
+      email: "",
     };
   },
   setup() {
     const toast = useToast();
     const router = useRouter();
-    const email = ref("");
+    //const email = ref("");
     // const password = ref("");
     const errMsg = ref("");
 
     return {
       toast,
       router,
-      email,
+      //email,
       //password
       errMsg,
     };
   },
 
   components: {},
-
-  // methods: {
-  //     registerUser() {
-  //     firebase
-  //         .auth()
-  //         .createUserWithEmailAndPassword(this.email, this.password)
-  //         .then(() => {
-  //         this.showToast = true;
-  //         this.toastMessage = "Registration successful";
-  //         this.toastColor = "green";
-  //         this.register = true;
-  //         })
-  //         .catch(error => {
-  //         this.showToast = true;
-  //         this.toastMessage = error.message;
-  //         this.toastColor = "red";
-  //         });
-  //     },
-  //     showToast() {
-  //     this.showToast = true;
-  //     this.toastMessage = "Registration successful";
-  //     this.toastColor = "green";
-  //     },
-  // },
-
-  // computed: {
-  //   comparePasswords() {
-  //     return this.password !== this.comparePasswords
-  //       ? "Passwords do not match"
-  //       : true;
-  //   },
-  // },
 
   methods: {
     showErrorToast(message) {
@@ -308,54 +279,21 @@ export default {
     },
 
     login() {
+      console.log(this.email);
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
+          localStorage.setItem("userEmail", this.email);
           this.showToast();
           this.$router.push("/mentorpage");
         })
         .catch((error) => {
           this.showErrorToast(error.message);
-          // switch (error.message) {
-          //   case "auth/user-not-found":
-          //     error.message = "User not found";
-          //     break;
-          //   case "auth/wrong-password":
-          //     error.message = "Wrong password";
-          //     break;
-          //   case "auth/invalid-email":
-          //     error.message = "Invalid email";
-          //     break;
-          //   case "auth/user-disabled":
-          //     error.message = "User disabled";
-          //     break;
-          //   case "auth/too-many-requests":
-          //     error.message = "Too many requests";
-          //     break;
-          //   case "auth/email-already-in-use":
-          //     error.message = "Email already in use";
-          //     break;
-          //   case "auth/weak-password":
-          //     error.message = "Weak password";
-          //     break;
-          //   default:
-          //     error.message = "Something went wrong";
-          //     break;
-          // }
         });
-      // .catch((error) => {
-      //   this.$toast.open({
-      //     message: error.message,
-      //     type: "error",
-      //     position: "top-right",
-      //     duration: 3000,
-      //   });
-      // });
     },
   },
 };
-// get a reference to our vue router
 </script>
 
 <style></style>

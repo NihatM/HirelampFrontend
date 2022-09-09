@@ -25,7 +25,7 @@
               :minlength="minChar"
               v-model="search"
               id='location-search"'
-              class="shadow-2xl block p-2.5 px-8 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-full"
+              class="shadow-xl block p-2.5 px-8 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-full"
               required=""
             />
 
@@ -53,7 +53,7 @@
         </div>
       </form>
       <div class="flex justify-start pt-12">
-        <TagsNew />
+        <TagsNew :searchTags="this.searchTags" />
       </div>
     </div>
     <!-- hidden md:visible lg:visible xl:visible -->
@@ -82,6 +82,7 @@ export default {
       getMentorDetails: false,
       mentorDatas: [],
       search: "",
+      searchTags: ["Azerbaijan", "Big4", "Software", "Finance"],
     };
   },
 

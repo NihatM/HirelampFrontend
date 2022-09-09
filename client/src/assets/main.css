@@ -28,6 +28,7 @@
   font-size: 14px;
   line-height: 19px;
   letter-spacing: 0.015em;
+  color: #6f7ea1;
 }
 
 .bt-medium {
@@ -84,6 +85,6 @@
 .bg-top {
   background-image: url("../assets/bgtop.svg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
 }

@@ -149,6 +149,9 @@ export default {
           .auth()
           .signOut()
           .then(() => {
+            localStorage.removeItem("userEmail");
+            localStorage.removeItem("userFullname");
+
             this.$router.push("/");
           })
           .catch((error) => {
