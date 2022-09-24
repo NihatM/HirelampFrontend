@@ -89,13 +89,13 @@
           <img src="../assets/footerline.svg" alt="" class="pb-7" />
 
           <p
-            class="text-sm md:text-base lg:text-md xl:text-md pb-9 text-white bt-footer"
+            class="cursor-not-allowed text-sm md:text-base lg:text-md xl:text-md pb-9 text-white bt-footer"
           >
             About us
           </p>
           <router-link to="/howitworks">
             <p
-              class="text-sm md:text-base lg:text-md xl:text-md pb-9 text-white bt-footer"
+              class="cursor-not-allowed text-sm md:text-base lg:text-md xl:text-md pb-9 text-white bt-footer"
             >
               How it works
             </p>
@@ -103,7 +103,7 @@
 
           <router-link to="/subscribe">
             <p
-              class="text-sm md:text-base lg:text-md xl:text-md pb-9 text-white bt-footer"
+              class="cursor-not-allowed text-sm md:text-base lg:text-md xl:text-md pb-9 text-white bt-footer"
             >
               FAQ
             </p>
@@ -182,13 +182,13 @@
         <div class="flex space-x-6 sm:justify-center sm:mt-0">
           <a
             href="#"
-            class="text-gray-500 hover:text-gray-900 dark:hover:text-white bt-footer"
+            class="cursor-not-allowed text-gray-500 hover:text-gray-900 dark:hover:text-white bt-footer"
           >
             <span>Terms & conditions</span>
           </a>
           <a
             href="#"
-            class="text-gray-500 hover:text-gray-900 dark:hover:text-white bt-footer"
+            class="cursor-not-allowed text-gray-500 hover:text-gray-900 dark:hover:text-white bt-footer"
           >
             <span>Privacy policy</span>
           </a>

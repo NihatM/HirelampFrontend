@@ -1,6 +1,4 @@
 <template>
-  <!-- component -->
-
   <div
     class="pt-11 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-row col-end-1 md:px-32"
   >
@@ -99,95 +97,6 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="flex items-center justify-center">
-    <div
-      class="bg-gray-200 text-gray-500  shadow-sm w-full "
-    >
-      <div class="md:flex w-full">
-  
-        <div
-          class="hidden md:visible md:block w-1/2 py-10 px-10 justify-center items-center align-middle"
-        >
-          <img
-            src="../assets/SignUp.svg"
-            alt=""
-            class="h-100 w-100 md:h-50 md:w-50 xl:w-50 xl:h-50 lg:w-50 lg:h-50"
-          />
-        </div>
-        <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
-          <div class="text-center mb-4">
-            <h1 class="font-bold text-3xl text-gray-900">LOGIN</h1>
-            <p>Enter your information to login</p>
-          </div>
-          <div>
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-10">
-                <div class="flex">
-                  <div
-                    class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
-                  >
-                    <i class="mdi mdi-email-outline text-gray-400 text-lg"></i>
-                  </div>
-                  <input
-                    type="email"
-                    class="w-full -ml-10 pl-5 pr-3 py-2 shadow-md rounded-2xl border-2 border-gray-200 outline-none focus:border-indigo-500"
-                    placeholder="Email"
-                    required
-                    v-model="email"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-10">
-               
-                <div class="flex">
-                  <div
-                    class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"
-                  >
-                    <i class="mdi mdi-lock-outline text-gray-400 text-lg"></i>
-                  </div>
-                  <input
-                    type="password"
-                    class="w-full -ml-10 pl-5 pr-3 py-2 shadow-md rounded-2xl border-2 border-gray-200 outline-none focus:border-indigo-500"
-                    placeholder="Password"
-                    required
-                    v-model="password"
-                  />
-                </div>
-              </div>
-            </div>
-            <p v-if="errMsg">{{ errMsg }}</p>
-
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-4">
-                <button
-                  @click="login"
-                  type="submit"
-                  value="Login"
-                  class="block w-full shadow-md border-3 border-blue-400 max-w-xs mx-auto bg-custom-blue hover:bg-blue-500 focus:bg-blue-700 text-white rounded-2xl px-3 py-2 font-semibold"
-                >
-                  LOGIN
-                </button>
-              </div>
-            </div>
-
-            <div class="flex -mx-3">
-              <div class="w-full px-3 mb-4">
-                <button
-                  class="block w-full max-w-xs mx-auto hover:text-custom-blue px-3 py-2 font-semibold"
-                >
-                  <a href="/signupselection">Don't have an account? Register</a>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <Footer /> -->
 </template>
 
 <script>
@@ -196,6 +105,7 @@ import { useRouter } from "vue-router"; // import router
 import { useToast } from "vue-toastification";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+// import axios from "axios";
 
 export default {
   name: "HomePage",
@@ -266,6 +176,7 @@ export default {
           this.register = true;
           this.createUser();
           this.$root.uid = user.uid;
+
           this.$router.push("/mentorpage");
         })
         .catch((error) => {
@@ -284,6 +195,8 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
+          localStorage.setItem("userID", this.$root.uid);
+          console.log(this.$root.uid);
           localStorage.setItem("userEmail", this.email);
           this.showToast();
           this.$router.push("/mentorpage");
@@ -292,6 +205,14 @@ export default {
           this.showErrorToast(error.message);
         });
     },
+
+    // getUserData(userID) {
+    //   axios.get(
+    //     "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
+    //       userID +
+    //       "/"
+    //   );
+    // },
   },
 };
 </script>

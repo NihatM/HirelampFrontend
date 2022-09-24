@@ -25,7 +25,7 @@
               :minlength="minChar"
               v-model="search"
               id='location-search"'
-              class="shadow-xl block p-2.5 px-8 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-full"
+              class="border-2 border-custom-blue md:border-0 md:border-white shadow-xl block p-2.5 px-8 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-full"
               required=""
             />
 
@@ -52,7 +52,7 @@
           </div>
         </div>
       </form>
-      <div class="flex justify-start pt-12">
+      <div class="flex justify-start pt-4 lg:pt-8">
         <TagsNew :searchTags="this.searchTags" />
       </div>
     </div>

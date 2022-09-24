@@ -1,5 +1,8 @@
 <template>
-  <body style="font-family: 'Lato', sans-serif" class="overflow-x-hidden">
+  <body
+    style="font-family: 'Lato', sans-serif"
+    class="overflow-x-hidden lg:max-w-min"
+  >
     <div class="">
       <Search />
 
@@ -20,9 +23,9 @@
         <div
           class="flex md:flex-nowrap flex-wrap justify-center xl:justify-between gap-4"
         >
-          <div class="flex flex-col items-center pb-8 lg:pb-0">
+          <div class="flex flex-col items-center pb-8 lg:pb-0 shrink-0">
             <div
-              class="border-1 border-border-gray rounded-xl md:shadow-xl hover:shadow-2xl duration-300 xl:w-80 2xl:w-96 h-72 px-8 pt-8 pb-24"
+              class="border-1 border-border-gray rounded-xl md:shadow-xl hover:shadow-2xl duration-300 xl:w-80 h-72 px-8 pt-8 pb-24"
             >
               <img class="w-12 h-12 mb-6" src="../assets/howdowehelp1.png" />
 
@@ -45,9 +48,9 @@
             </div>
           </div>
 
-          <div class="flex flex-col items-center pb-8 lg:pb-0">
+          <div class="flex flex-col items-center pb-8 lg:pb-0 shrink-0">
             <div
-              class="border-1 border-border-gray rounded-xl md:shadow-xl hover:shadow-2xl duration-300 xl:w-80 2xl:w-96 h-72 border-1 px-8 pt-8 pb-24"
+              class="border-1 border-border-gray rounded-xl md:shadow-xl hover:shadow-2xl duration-300 xl:w-80 h-72 border-1 px-8 pt-8 pb-24"
             >
               <img class="w-12 h-12 mb-6" src="../assets/howdowehelp2.png" />
 
@@ -71,9 +74,9 @@
           </div>
           <!-- <div class="w-72 h-80 flex flex-col items-center"> -->
 
-          <div class="flex flex-col items-center pb-8 lg:pb-0">
+          <div class="flex flex-col items-center pb-8 lg:pb-0 shrink-0">
             <div
-              class="border-1 border-border-gray rounded-xl md:shadow-xl hover:shadow-2xl duration-300 xl:w-80 2xl:w-96 h-72 border-1 px-8 pt-8 pb-24"
+              class="border-1 border-border-gray rounded-xl md:shadow-xl hover:shadow-2xl duration-300 xl:w-80 h-72 border-1 px-8 pt-8 pb-24"
             >
               <img class="w-12 h-12 mb-6" src="../assets/howdowehelp3.png" />
 
@@ -260,7 +263,7 @@
               <!-- Content Card emplacement -->
 
               <div
-                class="shadow-xl hover:shadow-2xl duration-300 rounded-2xl w-full md:w-379 xl:w-379 h-399 pb-8 px-8 relative pt-24"
+                class="shadow-xl hover:shadow-2xl duration-300 rounded-2xl w-320 md:w-320 2xl:w-379 h-399 pb-8 px-8 relative pt-24"
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
@@ -325,7 +328,7 @@
               </div>
               <!-- Content Card emplacement -->
               <div
-                class="shadow-xl hover:shadow-2xl duration-300 rounded-2xl w-full md:w-379 xl:w-379 h-399 pb-8 px-8 relative pt-24"
+                class="shadow-xl hover:shadow-2xl duration-300 rounded-2xl w-320 md:w-320 2xl:w-379 h-399 pb-8 px-8 relative pt-24"
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
@@ -391,7 +394,7 @@
               </div>
               <!-- Content Card emplacement -->
               <div
-                class="shadow-xl hover:shadow-2xl duration-300 rounded-2xl w-full md:w-379 xl:w-379 h-399 pb-8 px-8 relative pt-24"
+                class="shadow-xl hover:shadow-2xl duration-300 rounded-2xl w-320 md:w-320 2xl:w-379 h-399 pb-8 px-8 relative pt-24"
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">

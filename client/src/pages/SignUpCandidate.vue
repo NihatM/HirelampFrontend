@@ -236,7 +236,6 @@ export default {
       };
       localStorage.setItem("userEmail", this.email);
       localStorage.setItem("userFullname", this.userFullname);
-      console.log(this.userFullname);
 
       axios
         .post(

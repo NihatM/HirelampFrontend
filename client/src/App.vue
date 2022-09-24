@@ -1,5 +1,7 @@
 <template>
+  <!-- <div class="max-w-min"> -->
   <NavBar :isLoggedIn="isLoggedIn" />
+  <!-- </div> -->
 </template>
 
 <script>

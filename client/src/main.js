@@ -8,7 +8,7 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import Vuelidate from "vuelidate";
 import Vuex from "vuex";
-
+import "tw-elements";
 import firebase from "firebase/compat/app";
 import VCalendar from "v-calendar";
 import "v-calendar/dist/style.css";

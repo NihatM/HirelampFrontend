@@ -17,8 +17,8 @@
         @click="mentorPage()"
         class="text-custom-blue underline underline-offset-2 inline-flex"
       >
-        See More
-        <img src="../assets/ArrowSmall.svg" alt="" class="px-4" />
+        See more
+        <img src="../assets/ArrowSmall.svg" alt="" class="p-2" />
       </button>
     </span>
   </div>

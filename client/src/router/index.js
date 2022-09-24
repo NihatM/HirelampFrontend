@@ -13,8 +13,13 @@ import SignUpMentor from "../pages/SignUpMentor.vue";
 import SignUpMentor2 from "../pages/SignUpMentor2.vue";
 import Login from "../pages/Login.vue";
 import Search from "../pages/SearchMentor.vue";
-import Dashboard from "../pages/CandidateDashboard.vue";
+import CandidateDashboard from "../pages/CandidateDashboard.vue";
 import MentorCategories from "../pages/MentorCategories.vue";
+import AboutMe from "../components/UserDashboard/aboutMe.vue";
+import Sessions from "../components/UserDashboard/Sessions.vue";
+import Payment from "../components/UserDashboard/Payment.vue";
+import Security from "../components/UserDashboard/Security.vue";
+import Termsconditions from "../components/UserDashboard/termsConditions.vue";
 import { getAuth } from "firebase/auth";
 
 const routes = [
@@ -103,13 +108,41 @@ const routes = [
     name: "Mentor Details",
     component: MentorDetails,
   },
+
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
-    meta: {
-      requiresAuth: true,
-    },
+    path: "/Dashboard",
+    name: "CandidateDashboard",
+    component: CandidateDashboard,
+    // meta: {
+    //   requiresAuth: true,
+    // },
+    children: [
+      {
+        path: "aboutme",
+        name: "AboutMe",
+        component: AboutMe,
+      },
+      {
+        path: "sessions",
+        name: "sessions",
+        component: Sessions,
+      },
+      {
+        path: "payment",
+        name: "payment",
+        component: Payment,
+      },
+      {
+        path: "security",
+        name: "security",
+        component: Security,
+      },
+      {
+        path: "termsconditions",
+        name: "termsconditions",
+        component: Termsconditions,
+      },
+    ],
   },
 ];
 

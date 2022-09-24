@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="px-14">
     <h1 class="flex justify-center md:text-3xl p-4 font-bold bt-medium">
       Our Mentors
     </h1>
@@ -13,13 +13,13 @@
     </div>
 
     <ul
-      class="flex md:flex-nowrap lg:flex-nowrap xl:flex-nowrap flex-wrap justify-center items-center pb-14 pt-4 px-6 md:px-0"
+      class="flex md:flex-nowrap lg:flex-nowrap xl:flex-nowrap flex-wrap justify-center items-center pb-14 pt-4 px-2 md:px-0"
     >
       <li
         v-for="mentorData in mentorDatas"
         :key="mentorData.userID"
         :currentMentorId="mentorData.userID"
-        class="rounded-3xl my-4 md:my-2 lg:my-8 xl:my-4 sm:mx-8 md:mx-12 lg:mx-12 h-fit w-full sm:w-full md:w-1/3 lg:w-1/3 xl:w-1/4"
+        class="rounded-3xl my-4 md:my-2 lg:my-8 xl:my-4 sm:mx-8 md:mx-12 lg:mx-8 h-fit w-full sm:w-full md:w-1/3 lg:w-1/3 xl:w-1/4"
       >
         <div class="w-full flex justify-center items-center col-end-1">
           <div class="flex flex-col items-center">
@@ -35,7 +35,7 @@
             </div>
             <!-- Content Card emplacement -->
             <div
-              class="shadow-xl hover:shadow-2xl duration-300 rounded-2xl w-full md:w-282 xl:w-379 h-399 pb-8 px-8 relative pt-24"
+              class="shadow-xl hover:shadow-2xl duration-300 rounded-2xl w-320 md:w-320 2xl:w-379 h-399 pb-8 px-8 relative pt-24"
             >
               <div>
                 <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
@@ -44,7 +44,7 @@
 
                 <div class="flex items-center justify-center pb-4">
                   <p
-                    class="bg-custom-orange text-black rounded-2xl text-center bt-book px-6 py-1.5"
+                    class="bg-price-blue text-black rounded-2xl text-center bt-book px-6 py-1.5"
                   >
                     {{ mentorData.price }}$ per session
                   </p>
@@ -193,6 +193,9 @@ export default {
           console.log(response);
           this.mentorDatas = response.data;
           this.isLoading = false;
+          localStorage.getItem("userEmail")
+            ? (this.email = localStorage.getItem("userEmail"))
+            : null;
         })
         .catch((error) => {
           console.log(error);
