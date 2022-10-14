@@ -1,116 +1,118 @@
 <template>
-  <div
-    class="pt-11 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-row col-end-1 md:px-32"
-  >
+  <body class="md:px-32">
     <div
-      class="hidden md:visible w-full md:w-1/2 lg:w-1/2 xl:w-1/2 md:mb-14 xl:mb-0 relative md:flex flex-col items-center justify-center"
+      class="pt-11 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-row col-end-1"
     >
-      <img src="../assets/login.svg" alt="" class="w-10/12 pb-8" />
-      <p class="bt-md">Welcome aboard my friend</p>
-      <p class="bt-book">just a couple of clicks and we start</p>
-    </div>
-    <div
-      class="w-full xl:w-9/12 align-middle flex flex-col justify-center items-center"
-    >
-      <div class="md:shadow-xl rounded-2xl w-full md:w-8/12 px-14 bg-white">
-        <div class="flex flex-col">
-          <p class="bt-medium pb-11 pt-8">Register</p>
+      <div
+        class="hidden md:visible w-full md:w-1/2 lg:w-1/2 xl:w-1/2 md:mb-14 xl:mb-0 relative md:flex flex-col items-center justify-center"
+      >
+        <img src="../assets/login.svg" alt="" class="w-full pb-8" />
+        <p class="bt-md">Welcome aboard my friend</p>
+        <p class="bt-book">just a couple of clicks and we start</p>
+      </div>
+      <div
+        class="w-full xl:w-9/12 align-middle flex flex-col justify-center items-center"
+      >
+        <div class="md:shadow-xl rounded-2xl w-full md:w-8/12 px-14 bg-white">
+          <div class="flex flex-col">
+            <p class="bt-medium pb-11 pt-8">Register</p>
 
-          <div class="">
-            <div class="relative">
-              <input
-                v-model="fullName"
-                type="text"
-                class="block border-1 p-2.5 px-6 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-2xl"
-                placeholder="Name & Surname"
-              />
+            <div class="">
+              <div class="relative">
+                <input
+                  v-model="fullName"
+                  type="text"
+                  class="block border-1 p-2.5 px-6 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-2xl"
+                  placeholder="Name & Surname"
+                />
+
+                <button
+                  type="submit"
+                  class="absolute top-0 right-0 py-2.5 px-4 h-12 duration-300 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                >
+                  <img src="../assets/Message.svg" alt="" />
+                </button>
+              </div>
+
+              <div class="py-2"></div>
+              <div class="relative">
+                <input
+                  v-model="email"
+                  type="email"
+                  class="block border-1 p-2.5 px-6 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-2xl"
+                  placeholder="Email"
+                />
+
+                <button
+                  type="submit"
+                  class="absolute top-0 right-0 py-2.5 px-4 h-12 duration-300 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                >
+                  <img src="../assets/Message.svg" alt="" />
+                </button>
+              </div>
+
+              <div class="py-2"></div>
+
+              <div class="relative pb-10">
+                <input
+                  :type="passwordFieldType"
+                  v-model="password"
+                  id="floating_outlined"
+                  class="block border-1 p-2.5 px-6 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-2xl"
+                  placeholder="Password"
+                />
+
+                <button
+                  @click="showPassword"
+                  type="password"
+                  class="absolute top-0 right-0 py-2.5 px-4 h-12 duration-300 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                >
+                  <img src="../assets/Show.svg" alt="" />
+                </button>
+              </div>
 
               <button
-                type="submit"
-                class="absolute top-0 right-0 py-2.5 px-4 h-12 duration-300 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                @click="register"
+                class="h-11 w-full rounded-full text-gray-50 bg-black hover:shadow-lg duration-300 bt-book px-2 py-1.5"
               >
-                <img src="../assets/Message.svg" alt="" />
+                Register
               </button>
-            </div>
 
-            <div class="py-2"></div>
-            <div class="relative">
-              <input
-                v-model="email"
-                type="email"
-                class="block border-1 p-2.5 px-6 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-2xl"
-                placeholder="Email"
-              />
+              <div class="relative flex py-2.5 items-center px-20">
+                <div class="flex-grow border-t border-gray-200"></div>
+                <span class="flex-shrink mx-2 text-gray-400">Or</span>
+                <div class="flex-grow border-t border-gray-200"></div>
+              </div>
 
               <button
-                type="submit"
-                class="absolute top-0 right-0 py-2.5 px-4 h-12 duration-300 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                @click="googleSignIn()"
+                class="flex justify-center items-center h-11 w-full rounded-full text-gray-700 bg-gray-200 hover:bg-gray-300 duration-300 bt-book px-2 py-1.5"
               >
-                <img src="../assets/Message.svg" alt="" />
+                <img src="../assets/Google.svg" alt="" class="px-2.5" />
+                <p>Google</p>
               </button>
-            </div>
-
-            <div class="py-2"></div>
-
-            <div class="relative pb-10">
-              <input
-                :type="passwordFieldType"
-                v-model="password"
-                id="floating_outlined"
-                class="block border-1 p-2.5 px-6 w-full h-12 z-20 text-sm text-gray-900 bg-white rounded-2xl"
-                placeholder="Password"
-              />
-
-              <button
-                @click="showPassword"
-                type="password"
-                class="absolute top-0 right-0 py-2.5 px-4 h-12 duration-300 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-              >
-                <img src="../assets/Show.svg" alt="" />
-              </button>
-            </div>
-
-            <button
-              @click="register"
-              class="h-11 w-full rounded-full text-gray-50 bg-black hover:shadow-lg duration-300 bt-book px-2 py-1.5"
-            >
-              Register
-            </button>
-
-            <div class="relative flex py-2.5 items-center px-20">
-              <div class="flex-grow border-t border-gray-200"></div>
-              <span class="flex-shrink mx-2 text-gray-400">Or</span>
-              <div class="flex-grow border-t border-gray-200"></div>
-            </div>
-
-            <button
-              @click="googleSignIn()"
-              class="flex justify-center items-center h-11 w-full rounded-full text-gray-700 bg-gray-200 hover:bg-gray-300 duration-300 bt-book px-2 py-1.5"
-            >
-              <img src="../assets/Google.svg" alt="" class="px-2.5" />
-              <p>Google</p>
-            </button>
-            <div class="flex justify-center items-center">
-              <p class="py-6 px-2.5">Already have an account?</p>
-              <a
-                href="/login"
-                class="underline underline-offset-2 text-custom-blue font-bold"
-                >Login</a
-              >
-            </div>
-            <div class="pb-7">
-              <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSd319wsfw2pg9Vt7hQyVOaDSIQQ-OIqfKJYNLH-_16xFKgX-Q/viewform"
-                target="_blank"
-                class="pb-7 text-custom-blue font-bold"
-                >Want to be a mentor?</a
-              >
+              <div class="flex justify-center items-center">
+                <p class="py-6 px-2.5">Already have an account?</p>
+                <a
+                  href="/login"
+                  class="underline underline-offset-2 text-custom-blue font-bold"
+                  >Login</a
+                >
+              </div>
+              <div class="pb-7">
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSd319wsfw2pg9Vt7hQyVOaDSIQQ-OIqfKJYNLH-_16xFKgX-Q/viewform"
+                  target="_blank"
+                  class="pb-7 text-custom-blue font-bold"
+                  >Want to be a mentor?</a
+                >
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </body>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
-  <!-- <div class="max-w-min"> -->
-  <NavBar :isLoggedIn="isLoggedIn" />
-  <!-- </div> -->
+  <body class="max-w-screen-2xl mx-auto">
+    <NavBar :isLoggedIn="isLoggedIn" />
+  </body>
 </template>
 
 <script>

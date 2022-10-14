@@ -1,6 +1,6 @@
 <template>
   <body class="px-6 lg:px-32 py-4">
-    <div class="container mx-auto">
+    <div class="">
       <div
         v-if="showModal"
         style="
@@ -56,7 +56,7 @@
                 <p class="font-extralight">
                   {{ mentorData.position }}
                 </p>
-                <div class="py-3 flex justify-center">
+                <div class="py-3 flex justify-center flex-nowrap">
                   <img
                     src="../assets/0stars.svg"
                     v-if="this.rating == 0"

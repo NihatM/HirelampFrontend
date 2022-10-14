@@ -13,7 +13,6 @@
               v-if="newImage == null"
               class="preview rounded-full h-32 w-32"
               :src="candDatas.profileImg"
-              
             />
           </div>
         </div>
@@ -43,52 +42,51 @@
       <div>
         <p>{{ candDatas.firstName }} {{ candDatas.lastName }}</p>
       </div>
-      <div class="flex flex-col justify-center space-y-8 py-10">
-        <div class="space-y-4 xl:space-x-8">
+      <div class="flex flex-col justify-center space-y-8 py-10 px-4 md:px-8">
+        <div class="space-y-8 space-x-0 lg:space-y-0 lg:space-x-8 lg:flex">
           <input
             type="text"
-            class="w-320 border border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+            class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
             placeholder="First Name"
             v-model="candDatas.firstName"
           />
           <input
             type="text"
-            class="w-320 border border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+            class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
             placeholder="Last Name"
             v-model="candDatas.lastName"
           />
         </div>
-        <div class="space-y-4 xl:space-x-8">
+        <div class="space-y-8 space-x-0 lg:space-y-0 lg:space-x-8 lg:flex">
           <input
             type="tel"
-            class="w-320 border border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+            class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
             placeholder="Phone number"
             v-model="candDatas.phone"
           />
           <input
             type="email"
-            class="w-320 border border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+            class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
             placeholder="Email"
             v-model="candDatas.email"
           />
         </div>
-        <div class="space-y-4 xl:space-x-8">
+        <div class="space-y-8 space-x-0 lg:space-y-0 lg:space-x-8 lg:flex">
           <input
             type="url"
-            class="w-320 border border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+            class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
             placeholder="Linkedin URL"
             v-model="candDatas.linkedinUrl"
           />
           <input
             type="file"
             accept="application/pdf"
-            class="w-320 border border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+            class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
             placeholder="Upload CV"
-            required
             @change="onFileSelected"
           />
         </div>
-        <div class="px-8 w-full">
+        <div class="w-full">
           <button
             @click="updateCandidate(candDatas.userID)"
             class="py-2 px-14 bg-custom-blue rounded-full flex justify-center items-center text-white"
@@ -161,7 +159,7 @@ export default {
       formData.append("cv", this.file);
       axios
         .put(
-          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
+          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/updateMentee/" +
             userID +
             "/",
           formData

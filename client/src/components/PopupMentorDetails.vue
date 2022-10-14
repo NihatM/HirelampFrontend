@@ -1,142 +1,157 @@
 <template>
-  <body class="max-w-min overflow-x-hidden">
-    <div class="overflow-hidden bg-white w-671 p-9 pt-4 rounded-xl">
-      <div class="">
-        <div class="flex justify-end items-end content-end">
-          <button type="button" class="close font-bold" @click="$emit('close')">
-            <img src="../assets/closeButton.svg" alt="" />
-          </button>
-        </div>
-        <p class="font-black text-2xl flex justify-center pb-9">
-          Choose the date and time
-        </p>
-      </div>
-      <div class="w:full md:w-full flex flex-col lg:flex-row justify-center">
-        <div v-if="!showContact">
-          <v-date-picker
-            is-expanded
-            :attributes="attributes"
-            @dayclick="onDayClick"
-            v-model="date"
-            mode="dateTime"
-            :disabled-dates="
-              { weekdays: this.avDays } || { weekdays: this.todayDate }
-            "
-            :min-date="new Date(new Date().getTime() + 60 * 60 * 24 * 1000)"
-            :minute-increment="30"
-            :valid-hours="this.avHours"
-            is24hr
-          />
-
-          <h1 class="py-2"></h1>
-        </div>
-        <div
-          v-if="!showContact"
-          class="flex flex-col justify-center align-middle items-center"
+  <div class="overflow-hidden bg-white w-671 p-9 pt-4 rounded-xl">
+    <div class="">
+      <div class="flex justify-end items-end content-end">
+        <button
+          type="button"
+          class="close font-bold"
+          @click="$emit('close') && scrollTrue()"
         >
-          <p class="font-extralight text-md">Chosen time</p>
-          <p class="pt-3 pb-4 font-bold">{{ date }}</p>
-          <button
+          <img src="../assets/closeButton.svg" alt="" />
+        </button>
+      </div>
+      <p class="font-black text-2xl flex justify-center pb-9">
+        Choose the date and time
+      </p>
+    </div>
+    <div class="w:full md:w-full flex flex-col lg:flex-row justify-center">
+      <div v-if="!showContact">
+        <v-date-picker
+          is-expanded
+          :attributes="attributes"
+          @dayclick="onDayClick"
+          v-model="date"
+          mode="dateTime"
+          :disabled-dates="
+            { weekdays: this.avDays } || { weekdays: this.todayDate }
+          "
+          :min-date="new Date(new Date().getTime() + 60 * 60 * 24 * 1000)"
+          :minute-increment="30"
+          :valid-hours="this.avHours"
+          is24hr
+        />
+        <h1 class="py-2"></h1>
+        <!-- <button
             :disabled="this.wrongTime === true"
             @click="sendCalendarData"
-            class="cursor-not-allowed disabled inline-flex items-center py-2 px-3 text-sm font-medium text-center rounded-full border-1 border-custom-blue text-custom-blue hover:bg-custom-blue hover:text-gray-50 duration-300"
+            class="cursor-not-allowed disabled inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-custom-blue rounded-2xl hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            Continue
-          </button>
-        </div>
-
-        <div
-          class="flex align-middle justify-center items-center content-center"
-          v-show="showContact"
+            Next
+            <svg
+              class="ml-2 -mr-1 w-4 h-4"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button> -->
+      </div>
+      <div
+        v-if="!showContact"
+        class="flex flex-col justify-center align-middle items-center"
+      >
+        <p class="font-extralight text-md">Chosen time</p>
+        <p class="pt-3 pb-4 font-bold">{{ date }}</p>
+        <button
+          :disabled="this.wrongTime === true"
+          @click="sendCalendarData"
+          class="cursor-not-allowed disabled inline-flex items-center py-2 px-3 text-sm font-medium text-center rounded-full border-1 border-custom-blue text-custom-blue hover:bg-custom-blue hover:text-gray-50 duration-300"
         >
-          <form @submit.prevent="sendContactData">
-            <div class="flex flex-col align-center justify-center">
-              <h1
-                class="text-xl md:text-2xl xl:text-3xl font-bold leading-10 text-gray-800 text-left md:mt-0 mb-4 mt-1 sm:mt-0"
+          Continue
+        </button>
+      </div>
+      <div
+        class="flex align-middle justify-center items-center content-center"
+        v-show="showContact"
+      >
+        <form @submit.prevent="sendContactData">
+          <div class="flex flex-col align-center justify-center">
+            <h1
+              class="text-xl md:text-2xl xl:text-3xl font-bold leading-10 text-gray-800 text-left md:mt-0 mb-4 mt-1 sm:mt-0"
+            >
+              Information for the mentor
+            </h1>
+          </div>
+          <div class="flex flex-col align-center justify-center">
+            <input
+              type="text"
+              class="border border-gray-400 rounded-2xl p-2"
+              placeholder="Full name"
+              v-model="fullName"
+              required
+            />
+            <span class="py-1" />
+            <input
+              type="text"
+              class="border border-gray-400 rounded-2xl p-2"
+              placeholder="Email"
+              v-model="email"
+              required
+            />
+            <span class="py-1" />
+            <input
+              required
+              type="number"
+              class="border border-gray-400 rounded-2xl p-2"
+              placeholder="Phone number"
+              v-model="phone"
+            />
+            <span class="py-1" />
+            <input
+              type="text"
+              class="border border-gray-400 rounded-2xl p-2"
+              placeholder="Subject"
+              v-model="industry"
+            />
+            <span class="py-1" />
+            <textarea
+              class="border border-gray-400 rounded-2xl p-2"
+              placeholder="What do you want to talk about?"
+              v-model="message"
+            ></textarea>
+            <span class="py-1" />
+            <input
+              type="file"
+              accept="application/pdf"
+              class="border border-gray-400 bg-white text-gray-400 rounded-2xl p-2"
+              placeholder="Upload CV"
+              required
+              @change="onFileSelected"
+            />
+            <span class="text-gray-400 text-xs italic text-left"
+              >Upload CV (pdf)</span
+            >
+            <span class="py-1" />
+          </div>
+          <div class="w-full bottom-0 pt-2 flex justify-end">
+            <button
+              submit
+              class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-custom-blue rounded-2xl hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Send
+              <svg
+                class="ml-2 -mr-1 w-4 h-4"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                Information for the mentor
-              </h1>
-            </div>
-            <div class="flex flex-col align-center justify-center">
-              <input
-                type="text"
-                class="border border-gray-400 rounded-2xl p-2"
-                placeholder="Full name"
-                v-model="fullName"
-                required
-              />
-              <span class="py-1" />
-
-              <input
-                type="text"
-                class="border border-gray-400 rounded-2xl p-2"
-                placeholder="Email"
-                v-model="email"
-                required
-              />
-              <span class="py-1" />
-
-              <input
-                required
-                type="number"
-                class="border border-gray-400 rounded-2xl p-2"
-                placeholder="Phone number"
-                v-model="phone"
-              />
-              <span class="py-1" />
-
-              <input
-                type="text"
-                class="border border-gray-400 rounded-2xl p-2"
-                placeholder="Subject"
-                v-model="industry"
-              />
-              <span class="py-1" />
-              <textarea
-                class="border border-gray-400 rounded-2xl p-2"
-                placeholder="What do you want to talk about?"
-                v-model="message"
-              ></textarea>
-              <span class="py-1" />
-              <input
-                type="file"
-                accept="application/pdf"
-                class="border border-gray-400 bg-white text-gray-400 rounded-2xl p-2"
-                placeholder="Upload CV"
-                required
-                @change="onFileSelected"
-              />
-              <span class="text-gray-400 text-xs italic text-left"
-                >Upload CV (pdf)</span
-              >
-
-              <span class="py-1" />
-            </div>
-            <div class="w-full bottom-0 pt-2 flex justify-end">
-              <button
-                submit
-                class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-custom-blue rounded-2xl hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                Send
-                <svg
-                  class="ml-2 -mr-1 w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-          </form>
-        </div>
+                <path
+                  fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-  </body>
+  </div>
 </template>
 
 <script>

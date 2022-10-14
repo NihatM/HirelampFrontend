@@ -6,7 +6,7 @@
       <div
         class="hidden md:visible w-full md:w-1/2 lg:w-1/2 xl:w-1/2 md:mb-14 xl:mb-0 relative md:flex flex-col items-center justify-center"
       >
-        <img src="../assets/login.svg" alt="" class="w-10/12 pb-4" />
+        <img src="../../assets/login.svg" alt="" class="w-10/12 pb-4" />
         <p class="bt-md">Welcome back my friend</p>
         <p class="bt-book">just a couple of clicks and we start</p>
       </div>
@@ -15,7 +15,7 @@
       >
         <div class="md:shadow-xl rounded-2xl w-full md:w-8/12 px-14 bg-white">
           <div class="flex flex-col">
-            <p class="bt-medium pb-11 pt-8">Log in</p>
+            <p class="bt-medium pb-11 pt-8">Log in as a mentor</p>
 
             <div class="">
               <!-- <div class="relative mb-6">
@@ -36,7 +36,7 @@
                   type="submit"
                   class="absolute top-0 right-0 py-2.5 px-4 h-12 duration-300 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
                 >
-                  <img src="../assets/Message.svg" alt="" />
+                  <img src="../../assets/Message.svg" alt="" />
                 </button>
               </div>
 
@@ -56,7 +56,7 @@
                   type="password"
                   class="absolute top-0 right-0 py-2.5 px-4 h-12 duration-300 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
                 >
-                  <img src="../assets/Show.svg" alt="" />
+                  <img src="../../assets/Show.svg" alt="" />
                 </button>
               </div>
               <a
@@ -82,7 +82,7 @@
                 @click="googleSignIn()"
                 class="flex justify-center items-center h-11 w-full rounded-full text-gray-700 bg-gray-200 hover:bg-gray-300 duration-300 bt-book px-2 py-1.5"
               >
-                <img src="../assets/Google.svg" alt="" class="px-2.5" />
+                <img src="../../assets/Google.svg" alt="" class="px-2.5" />
                 <p>Google</p>
               </button>
               <div class="flex justify-center items-center pb-8">
@@ -119,6 +119,7 @@ export default {
       password: "",
       passwordFieldType: "password",
       email: "",
+      isMentor: false,
     };
   },
   setup() {
@@ -176,7 +177,9 @@ export default {
           console.log(token); // Token
           console.log(user); // User that was authenticated
           this.register = true;
-          this.createUser();
+          this.isMentor = true;
+          localStorage.setItem("isMentor", this.isMentor);
+          console.log(this.isMentor);
           this.$root.uid = user.uid;
 
           this.$router.push("/mentorpage");
@@ -262,6 +265,9 @@ export default {
           localStorage.setItem("userID", this.$root.uid);
           console.log(this.$root.uid);
           localStorage.setItem("userEmail", this.email);
+          this.isMentor = true;
+          localStorage.setItem("isMentor", this.isMentor);
+          console.log(this.isMentor);
           this.showToast();
           this.$router.push("/mentorpage");
         })

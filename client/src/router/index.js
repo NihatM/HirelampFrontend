@@ -20,9 +20,20 @@ import Sessions from "../components/UserDashboard/Sessions.vue";
 import Payment from "../components/UserDashboard/Payment.vue";
 import Security from "../components/UserDashboard/Security.vue";
 import Termsconditions from "../components/UserDashboard/termsConditions.vue";
+import rateMentor from "../components/UserDashboard/rateMentor.vue";
+import rateMentorPage from "../pages/UserDashboard/rateMentorPage.vue";
+// import MentorLogin from "../pages/MentorSide/mentorLogin.vue";
+// import MentorDashboard from "../pages/MentorSide/MentorDashboard.vue";
+
 import { getAuth } from "firebase/auth";
 
 const routes = [
+  // {
+  //   path: "/mentorlogin",
+  //   name: "mentorlogin",
+  //   component: MentorLogin,
+  // },
+
   {
     path: "/login",
     name: "Login",
@@ -110,6 +121,12 @@ const routes = [
   },
 
   {
+    path: "/rateMentorPage/:id",
+    name: "rateMentorPage",
+    component: rateMentorPage,
+  },
+
+  {
     path: "/Dashboard",
     name: "CandidateDashboard",
     component: CandidateDashboard,
@@ -122,10 +139,43 @@ const routes = [
         name: "AboutMe",
         component: AboutMe,
       },
+
       {
         path: "sessions",
         name: "sessions",
         component: Sessions,
+        //set rateMentor as a child of sessions
+        children: [
+          {
+            path: "rateMentor/:id",
+            name: "rateMentor",
+            component: rateMentor,
+          },
+        ],
+
+        // children: [
+        //   {
+        //     path: "rateMentor/:id",
+        //     name: "rateMentor",
+        //     component: rateMentor,
+        //   },
+
+        //   {
+        //     path: "rateMentor/:id",
+        //     name: "rateMentor",
+        //     component: rateMentor,
+        //   },
+        //   // {
+        //   //   path: "seeMentorFeedback",
+        //   //   name: "seeMentorFeedback",
+        //   //   component: seeMentorFeedback,
+        //   // },
+        //   // {
+        //   //   path: "seeYourRequest",
+        //   //   name: "seeYourRequest",
+        //   //   component: seeYourRequest,
+        //   // },
+        // ],
       },
       {
         path: "payment",
@@ -144,6 +194,51 @@ const routes = [
       },
     ],
   },
+
+  // {
+  //   path: "/MentorDashboard",
+  //   name: "MentorDashboard",
+  //   component: MentorDashboard,
+  //   // meta: {
+  //   //   requiresAuth: true,
+  //   // },
+  //   children: [
+  //     {
+  //       path: "aboutme",
+  //       name: "AboutMe",
+  //       component: AboutMe,
+  //     },
+
+  //     {
+  //       path: "sessions",
+  //       name: "sessions",
+  //       component: Sessions,
+  //       //set rateMentor as a child of sessions
+  //       children: [
+  //         {
+  //           path: "rateMentor/:id",
+  //           name: "rateMentor",
+  //           component: rateMentor,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       path: "payment",
+  //       name: "payment",
+  //       component: Payment,
+  //     },
+  //     {
+  //       path: "security",
+  //       name: "security",
+  //       component: Security,
+  //     },
+  //     {
+  //       path: "termsconditions",
+  //       name: "termsconditions",
+  //       component: Termsconditions,
+  //     },
+  //   ],
+  // },
 ];
 
 const router = createRouter({

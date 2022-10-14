@@ -1,18 +1,15 @@
 <template>
-  <body
-    style="font-family: 'Lato', sans-serif"
-    class="overflow-x-hidden lg:max-w-min"
-  >
+  <body class="overflow-x-hidden">
     <div class="">
       <Search />
 
       <div class="px-6 lg:px-32 pt-16 lg:pt-16">
         <div class="pb-16">
-          <img src="../assets/line.svg" alt="" class="pb-2" />
+          <img src="../assets/line.svg" alt="" class="pb-3" />
           <p class="text-4xl text-left bt-fontonly font-medium pb-3">
             How do we help you?
           </p>
-          <p class="text-4xl text-left bt-book">
+          <p class="text-4xl text-left bt-book text-text-gray">
             We offer a platform to connect you with industry and role specific
             mentors so that
             <br />
@@ -25,7 +22,7 @@
         >
           <div class="flex flex-col items-center pb-8 lg:pb-0 shrink-0">
             <div
-              class="border-1 border-border-gray rounded-xl md:shadow-xl hover:shadow-2xl duration-300 xl:w-80 h-72 px-8 pt-8 pb-24"
+              class="border-1 border-gray-300 rounded-xl md:shadow-lg hover:shadow-2xl duration-300 xl:w-80 h-72 px-8 pt-8 pb-24"
             >
               <img class="w-12 h-12 mb-6" src="../assets/howdowehelp1.png" />
 
@@ -50,7 +47,7 @@
 
           <div class="flex flex-col items-center pb-8 lg:pb-0 shrink-0">
             <div
-              class="border-1 border-border-gray rounded-xl md:shadow-xl hover:shadow-2xl duration-300 xl:w-80 h-72 border-1 px-8 pt-8 pb-24"
+              class="border-1 border-gray-300 rounded-xl md:shadow-lg hover:shadow-2xl duration-300 xl:w-80 h-72 border-1 px-8 pt-8 pb-24"
             >
               <img class="w-12 h-12 mb-6" src="../assets/howdowehelp2.png" />
 
@@ -76,7 +73,7 @@
 
           <div class="flex flex-col items-center pb-8 lg:pb-0 shrink-0">
             <div
-              class="border-1 border-border-gray rounded-xl md:shadow-xl hover:shadow-2xl duration-300 xl:w-80 h-72 border-1 px-8 pt-8 pb-24"
+              class="border-1 border-gray-300 rounded-xl md:shadow-lg hover:shadow-2xl duration-300 xl:w-80 h-72 border-1 px-8 pt-8 pb-24"
             >
               <img class="w-12 h-12 mb-6" src="../assets/howdowehelp3.png" />
 
@@ -103,12 +100,12 @@
 
       <div class="px-6 lg:px-32 pt-16 lg:pt-44">
         <div class="pb-16">
-          <img src="../assets/line.svg" alt="" class="pb-2" />
+          <img src="../assets/line.svg" alt="" class="pb-3" />
 
           <p class="text-4xl text-left bt-medium pb-3">
             How do these all work?
           </p>
-          <p class="text-4xl text-left bt-book">
+          <p class="text-4xl text-left bt-book text-text-gray">
             Landing the dream job is easier than you think. Here is how Hirelamp
             works
           </p>
@@ -190,20 +187,22 @@
         >
           <!-- <button v-on:click="test">TEST v-on</button> -->
           <div class="">
-            <img src="../assets/line.svg" alt="" class="pb-2" />
+            <img src="../assets/line.svg" alt="" class="pb-3" />
 
             <p
               class="text-xl md:text-4xl xl:text-6xl text-left bt-medium pb-3.5"
             >
               Connect to mentors from more than 20 companies and 10 countries
             </p>
-            <p class="text-4xl text-left bt-book pb-12 max-w-2xl">
+            <p
+              class="text-4xl text-left bt-book pb-12 max-w-2xl text-text-gray"
+            >
               The most effective way of landing your dream is to get help from
               someone who'd already gone through the same road.
             </p>
             <button
               @click="mentorPage()"
-              class="border-2 rounded-2xl border-custom-blue flex items-start text-custom-blue hover:bg-custom-blue hover:text-white duration-300 bt-book px-2 py-1.5"
+              class="border-2 rounded-full border-custom-blue flex items-start text-custom-blue hover:bg-custom-blue hover:text-white duration-300 bt-book px-3 py-2"
             >
               Read more
             </button>
@@ -223,13 +222,13 @@
 
       <div class="px-6">
         <div class="pb-16 md:px-32">
-          <img src="../assets/line.svg" alt="" class="pb-2" />
+          <img src="../assets/line.svg" alt="" class="pb-3" />
           <div class="flex md:flex-row flex-col justify-between">
             <div class="flex flex-col">
               <p class="text-4xl text-left bt-medium pb-3">
                 Mentors from the top companies.
               </p>
-              <p class="text-4xl text-left bt-book">
+              <p class="text-4xl text-left bt-book text-text-gray">
                 Pick the right mentor for you to prepare company and role
                 specific challenges.
               </p>
@@ -272,7 +271,7 @@
 
                   <div class="flex items-center justify-center pb-4">
                     <button
-                      class="bg-custom-orange text-black rounded-2xl text-center bt-book px-6 py-1.5"
+                      class="bg-price-blue text-black rounded-2xl text-center bt-book px-6 py-1.5"
                     >
                       35$ Per session
                     </button>
@@ -337,7 +336,7 @@
 
                   <div class="flex items-center justify-center pb-4">
                     <button
-                      class="bg-custom-orange text-black rounded-2xl text-center bt-book px-6 py-1.5"
+                      class="bg-price-blue text-black rounded-2xl text-center bt-book px-6 py-1.5"
                     >
                       30$ Per session
                     </button>
@@ -403,7 +402,7 @@
 
                   <div class="flex items-center justify-center pb-4">
                     <button
-                      class="bg-custom-orange text-black rounded-2xl text-center bt-book px-6 py-1.5"
+                      class="bg-price-blue text-black rounded-2xl text-center bt-book px-6 py-1.5"
                     >
                       40$ Per session
                     </button>
@@ -447,14 +446,14 @@
         </div>
       </div>
 
-      <div
+      <mentorRequest />
+
+      <!-- <div
         class="p-6 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-col md:flex-row col-end-1 md:px-32 pt-40"
       >
-        <div
-          class="w-full xl:w-9/12 align-middle flex flex-col justify-center content-center"
-        >
+        <div class="w-full xl:w-9/12 flex flex-col">
           <div
-            class="px-3 w-full md:w-0 md:mb-14 xl:mb-0 relative flex items-center justify-center"
+            class="px-3 w-full md:w-0 md:mb-14 xl:mb-0 relative flex items-center justify-center align-middle"
           >
             <img
               src="../assets/mentorin.svg"
@@ -462,12 +461,11 @@
               class="md:h-100 lg:h-100 xl:h-100 md:w-1/2 xl:w-w-full lg:w-full"
             />
           </div>
-          <!-- <button v-on:click="test">TEST v-on</button> -->
           <div class="pb-9">
             <p class="text-4xl text-left bt-medium pb-3.5">
-              Cannot find the mentor you want to talk to?
+              Can't find the mentor you want to talk to?
             </p>
-            <p class="text-4xl text-left bt-book max-w-xl">
+            <p class="text-4xl text-left bt-book max-w-xl text-text-gray">
               Just share the link to his/her LinkedIn profile. We will be in
               touch to bring the mentor you search for to our platform or
               suggest others that can be helpful.
@@ -499,17 +497,12 @@
             </div>
           </form>
         </div>
-        <!-- hidden md:visible lg:visible xl:visible -->
         <div
           class="w-0 md:w-full lg:w-full xl:w-1/2 md:mb-14 xl:mb-0 relative flex items-center justify-center"
         >
-          <img
-            src="../assets/mentorin.svg"
-            alt=""
-            class="md:h-100 lg:h-100 xl:h-100 md:w-1/2 xl:w-w-full lg:w-full"
-          />
+          <img src="../assets/mentorin.svg" alt="" class="" />
         </div>
-      </div>
+      </div> -->
 
       <Footer />
     </div>
@@ -528,6 +521,7 @@
 // import "../assets/main.css";
 import Search from "../components/Search.vue";
 import Footer from "../components/Footer.vue";
+import mentorRequest from "../components/mentorRequest.vue";
 // import axios from "axios";
 export default {
   name: "HomePage",
@@ -549,6 +543,7 @@ export default {
     // Navigation,
     Footer,
     Search,
+    mentorRequest,
   },
 
   methods: {

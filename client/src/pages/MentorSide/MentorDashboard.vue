@@ -2,7 +2,7 @@
   <div class="flex px-6 py-4 md:px-32 md:space-x-9">
     <div class="w-1/3 rounded-xl shadow-md overflow-hidden hidden md:block">
       <div class="">
-        <userDashboard />
+        <mentorDashboard />
       </div>
     </div>
     <!-- <div class="w-1/3 rounded-xl shadow-md overflow-hidden visiblle md:hidden">
@@ -19,8 +19,8 @@
 
 <script>
 import axios from "axios";
-import userDashboard from "../components/userDashboard.vue";
-import Footer from "../components/Footer.vue";
+import mentorDashboard from "../../components/mentorDashboard.vue";
+import Footer from "../../components/Footer.vue";
 export default {
   name: "CandidateDashboard",
 
@@ -35,7 +35,7 @@ export default {
 
   components: {
     Footer,
-    userDashboard,
+    mentorDashboard,
     // aboutMe,
   },
 

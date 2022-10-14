@@ -5,6 +5,30 @@
     url("../assets/fonts/Biotif-Regular.ttf") format("truetype");
 }
 
+.bt-dash {
+  font-family: "Biotif";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.bt-bold {
+  font-family: "Biotif";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.bt-navbar {
+  font-family: "Biotif";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+}
+
 .bt-book {
   font-family: "Biotif";
   font-style: normal;
@@ -76,6 +100,22 @@
 
 .bt-fontonly {
   font-family: "Biotif";
+}
+
+.bt-title {
+  font-family: "Biotif";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 56px;
+  line-height: 120%;
+}
+
+.bt-button {
+  font-family: "Biotif";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
 }
 
 .bg-bottom {

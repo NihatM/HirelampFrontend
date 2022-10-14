@@ -46,7 +46,8 @@ export default {
 
   methods: {
     searchTag(searchtag) {
-      this.$router.push("/search/" + searchtag);
+      // this.$router.push("/search/" + searchtag);
+      window.location.href = "/search/" + searchtag;
     },
     mentorPage() {
       this.$router.push("/mentorpage");

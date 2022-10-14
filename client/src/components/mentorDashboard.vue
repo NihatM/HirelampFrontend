@@ -13,7 +13,10 @@
         <p class="text-gray-500">{{ candDatas.email }}</p>
       </div>
       <div class="flex flex-col text-left bt-dash divide-y-2 py-12">
-        <router-link class="flex align-middle py-3" to="/dashboard/aboutme">
+        <router-link
+          class="flex align-middle py-3"
+          to="/mentorDashboard/aboutme"
+        >
           <img
             src="../assets/aboutMe.svg"
             alt=""
@@ -21,7 +24,10 @@
           />
           <p>About Me</p>
         </router-link>
-        <router-link class="flex align-middle py-3" to="/dashboard/sessions">
+        <router-link
+          class="flex align-middle py-3"
+          to="/mentorDashboard/sessions"
+        >
           <img
             src="../assets/aboutMe.svg"
             alt=""
@@ -37,7 +43,10 @@
           />
           <p class="flex align-middle hover:text-custom-blue">Payment</p>
         </router-link> -->
-        <router-link to="/dashboard/security" class="flex align-middle py-3">
+        <router-link
+          to="/mentorDashboard/security"
+          class="flex align-middle py-3"
+        >
           <img
             src="../assets/dashboardSecurity.svg"
             alt=""
