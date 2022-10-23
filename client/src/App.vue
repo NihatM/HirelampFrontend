@@ -7,7 +7,7 @@
 <script>
 import NavBar from "./components/NavBar.vue";
 import firebase from "./utilities/firebase";
-
+// import axios from "axios";
 export default {
   name: "App",
   components: {
@@ -34,6 +34,36 @@ export default {
       }
     });
   },
+  // methods: {
+  //   async getCandidateUserID() {
+  //     console.log(this.isLoggedIn);
+  //     if (this.isLoggedIn == true) {
+  //       localStorage.getItem("userID")
+  //         ? (this.userID = localStorage.getItem("userID"))
+  //         : null;
+  //       this.getCandidateData(this.userID);
+  //     }
+  //   },
+  //   async getCandidateData(userID) {
+  //     axios
+  //       .get(
+  //         "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
+  //           userID +
+  //           "/"
+  //       )
+  //       .then((response) => {
+  //         this.candDatas = response.data;
+  //         this.profileImg = this.candDatas.profileImg;
+  //         this.fullName =
+  //           this.candDatas.firstName + " " + this.candDatas.lastName;
+  //         this.isLoading = false;
+  //         //upcoming sessions
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   },
+  // },
 };
 </script>
 <style>

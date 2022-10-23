@@ -52,7 +52,7 @@
           <p class="flex align-middle">Terms and conditions</p>
         </router-link> -->
         <button
-          @click="handleSignOut"
+          @click="handleSignOut()"
           :isLoggedIn="isLoggedIn"
           class="flex py-3"
         >
@@ -81,33 +81,18 @@ export default {
       isLoggedIn: true,
     };
   },
-  beforeMount() {
+  mounted() {
     this.getCandidateUserID();
   },
+  // beforeUnmount() {
+  //   localStorage.removeItem("userEmail");
+  //   localStorage.removeItem("userFullname");
+  //   localStorage.removeItem("userID");
+  // },
 
   components: {},
 
   methods: {
-    // async getCandDatas() {
-    //   axios
-    //     .get(
-    //       "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/"
-    //     )
-    //     .then((response) => {
-    //       console.log(response);
-    //       this.candDatas = response.data;
-    //       this.isLoading = false;
-    //       localStorage.getItem("userID")
-    //         ? (this.userID = localStorage.getItem("userID"))
-    //         : null;
-    //       console.log(this.userID);
-    //       this.getCandidateData(this.userID);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
-
     handleSignOut() {
       if (this.isLoggedIn) {
         firebase
@@ -116,7 +101,15 @@ export default {
           .then(() => {
             this.isLoggedIn = false;
             localStorage.removeItem("userEmail");
-            localStorage.removeItem("userFullname");
+            localStorage.removeItem("fullName");
+            localStorage.removeItem("userID");
+            localStorage.removeItem("isMentor");
+
+            // console.log(localStorage.getItem("userEmail"));
+            console.log(localStorage.getItem("fullName"));
+            console.log(localStorage.getItem("userID"));
+            console.log(localStorage.getItem("isMentor"));
+
             this.$router.push("/");
           })
           .catch((error) => {
@@ -126,13 +119,14 @@ export default {
     },
 
     async getCandidateUserID() {
-      localStorage.getItem("userID")
-        ? (this.userID = localStorage.getItem("userID"))
-        : null;
+      localStorage.getItem("userID");
+      this.userID = localStorage.getItem("userID");
+      console.log(this.userID);
       this.getCandidateData(this.userID);
     },
 
     async getCandidateData(userID) {
+      console.log(userID);
       axios
         .get(
           "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
@@ -141,6 +135,7 @@ export default {
         )
         .then((response) => {
           this.candDatas = response.data;
+          console.log(this.candDatas);
           this.isLoading = false;
         })
         .catch((error) => {

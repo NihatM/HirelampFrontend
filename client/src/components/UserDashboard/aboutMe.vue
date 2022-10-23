@@ -110,8 +110,8 @@ export default {
     };
   },
 
-  beforeMount() {
-    this.getCandidateUserID();
+  mounted() {
+    // this.getCandidateUserID();
   },
 
   methods: {
@@ -172,31 +172,31 @@ export default {
         });
     },
 
-    async getCandidateUserID() {
-      localStorage.getItem("userID")
-        ? (this.userID = localStorage.getItem("userID"))
-        : null;
-      console.log(this.userID);
-      this.getCandidateData(this.userID);
-    },
+    // async getCandidateUserID() {
+    //   localStorage.getItem("userID")
+    //     ? (this.userID = localStorage.getItem("userID"))
+    //     : null;
+    //   console.log(this.userID);
+    //   this.getCandidateData(this.userID);
+    // },
 
-    async getCandidateData(userID) {
-      axios
-        .get(
-          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
-            userID +
-            "/"
-        )
-        .then((response) => {
-          console.log(response);
-          this.candDatas = response.data;
-          console.log(this.candDatas);
-          this.isLoading = false;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
+    // async getCandidateData(userID) {
+    //   axios
+    //     .get(
+    //       "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
+    //         userID +
+    //         "/"
+    //     )
+    //     .then((response) => {
+    //       console.log(response);
+    //       this.candDatas = response.data;
+    //       console.log(this.candDatas);
+    //       this.isLoading = false;
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
 
     sendNewUserData() {
       const formData = new FormData();

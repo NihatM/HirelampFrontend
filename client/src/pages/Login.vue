@@ -24,6 +24,7 @@
   </div>
   <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com">
 </div> -->
+
               <div class="relative">
                 <input
                   v-model="email"
@@ -88,7 +89,7 @@
               <div class="flex justify-center items-center pb-8">
                 <p class="py-6 px-2.5">Have no account yet?</p>
                 <a
-                  href="/signup"
+                  href="/mentorLogin"
                   class="underline underline-offset-2 text-custom-blue"
                   >Register</a
                 >
@@ -107,6 +108,7 @@ import { useRouter } from "vue-router"; // import router
 import { useToast } from "vue-toastification";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import axios from "axios";
 // import axios from "axios";
 
 export default {
@@ -119,6 +121,7 @@ export default {
       password: "",
       passwordFieldType: "password",
       email: "",
+      isMentor: false,
     };
   },
   setup() {
@@ -176,74 +179,14 @@ export default {
           console.log(token); // Token
           console.log(user); // User that was authenticated
           this.register = true;
-          this.createUser();
+          this.isMentor = false;
+          console.log(this.isMentor);
+          localStorage.setItem("isMentor", this.isMentor);
           this.$root.uid = user.uid;
 
           this.$router.push("/mentorpage");
         })
         .catch((error) => {
-          // if (error.code === "auth/account-exists-with-different-credential") {
-          //   this.showErrorToast("Email already exists");
-          // }
-          // else if (error.code === "auth/invalid-email") {
-          //   this.showErrorToast("Invalid email");
-          // }
-          // else if (error.code === "auth/user-disabled") {
-          //   this.showErrorToast("User disabled");
-          // }
-          // else if (error.code === "auth/user-not-found") {
-          //   this.showErrorToast("User not found");
-          // }
-          // else if (error.code === "auth/wrong-password") {
-          //   this.showErrorToast("Wrong password");
-          // }
-          // else if (error.code === "auth/weak-password") {
-          //   this.showErrorToast("Weak password");
-          // }
-          // else if (error.code === "auth/email-already-in-use") {
-          //   this.showErrorToast("Email already in use");
-          // }
-          // else if (error.code === "auth/operation-not-allowed") {
-          //   this.showErrorToast("Operation not allowed");
-          // }
-          // else if (error.code === "auth/invalid-credential") {
-          //   this.showErrorToast("Invalid credential");
-          // }
-          // else if (error.code === "auth/invalid-verification-code") {
-          //   this.showErrorToast("Invalid verification code");
-          // }
-          // else if (error.code === "auth/invalid-verification-id") {
-          //   this.showErrorToast("Invalid verification id");
-          // }
-          // else if (error.code === "auth/missing-verification-code") {
-          //   this.showErrorToast("Missing verification code");
-          // }
-          // else if (error.code === "auth/missing-verification-id") {
-          //   this.showErrorToast("Missing verification id");
-          // }
-          // else if (error.code === "auth/phone-number-already-exists") {
-          //   this.showErrorToast("Phone number already exists");
-          // }
-          // else if (error.code === "auth/invalid-phone-number") {
-          //   this.showErrorToast("Invalid phone number");
-          // }
-          // else if (error.code === "auth/quota-exceeded") {
-          //   this.showErrorToast("Quota exceeded");
-          // }
-          // else if (error.code === "auth/captcha-check-failed") {
-          //   this.showErrorToast("Captcha check failed");
-          // }
-          // else if (error.code === "auth/invalid-app-credential") {
-          //   this.showErrorToast("Invalid app credential");
-          // }
-          // else if (error.code === "auth/invalid-app-id") {
-          //   this.showErrorToast("Invalid app id");
-          // }
-          // else if (error.code === "auth/invalid-verification-payload") {
-          //   this.showErrorToast("Invalid verification payload");
-          // }
-          // else
-
           this.showErrorToast(error.message);
         });
     },
@@ -262,8 +205,10 @@ export default {
           localStorage.setItem("userID", this.$root.uid);
           console.log(this.$root.uid);
           localStorage.setItem("userEmail", this.email);
+          this.isMentor = false;
+          localStorage.setItem("isMentor", this.isMentor);
           this.showToast();
-          this.$router.push("/mentorpage");
+          this.getUsername(this.$root.uid);
         })
         .catch((error) => {
           this.showErrorToast(error.message);
@@ -312,13 +257,34 @@ export default {
         });
     },
 
-    // getUserData(userID) {
-    //   axios.get(
-    //     "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
-    //       userID +
-    //       "/"
-    //   );
-    // },
+    getUsername(userID) {
+      //get username
+      console.log(userID);
+      axios
+        .get(
+          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
+            userID +
+            "/"
+        )
+        .then((response) => {
+          console.log(response.data);
+          // get first name and last name merge them and store in local storage
+          this.fullName =
+            response.data.firstName + " " + response.data.lastName;
+          localStorage.setItem("fullName", this.fullName);
+          console.log(this.fullName);
+          //wait 1 second and then redirect to dashboard
+          setTimeout(() => {
+            this.$router.push("/mentorpage");
+          }, 1000);
+
+          // localStorage.setItem("fullName", response.data.full_name);
+          // localStorage.setItem("username", response.data.username);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>

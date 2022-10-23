@@ -162,20 +162,18 @@
           <!-- This example requires Tailwind CSS v2.0+ -->
           <div class="relative inline-block text-left">
             <div class="w-full">
-              <router-link to="/dashboard/aboutme" v-if="isLoggedIn">
-                <button
-                  @click="showMenu = !showMenu"
-                  type="button"
-                  class="text-gray-800 hover:text-custom-blue truncate bt-navbar flex flex-row justify-center align-middle content-center items-center"
-                >
-                  <img
-                    class="h-10 w-10 rounded-full"
-                    :src="profileImg"
-                    alt=""
-                  />
-                  {{ this.fullName }}
-                </button>
-              </router-link>
+              <button
+                v-if="isLoggedIn"
+                @click="
+                  showMenu = !showMenu;
+                  navigateToDashboard();
+                "
+                type="button"
+                class="text-gray-800 hover:text-custom-blue truncate bt-navbar flex flex-row justify-center align-middle content-center items-center"
+              >
+                <img class="h-10 w-10 rounded-full" :src="profileImg" alt="" />
+                {{ this.fullName }}
+              </button>
             </div>
           </div>
         </ul>
@@ -234,20 +232,18 @@
             class="relative inline-block text-left px-3 pb-3"
           >
             <div class="w-full">
-              <router-link to="/dashboard/aboutme" v-if="isLoggedIn">
-                <button
-                  @click="showMenuMobile = !showMenuMobile"
-                  type="button"
-                  class="text-gray-800 hover:text-custom-blue truncate bt-navbar flex flex-row justify-center align-middle content-center items-center"
-                >
-                  <img
-                    class="h-10 w-10 rounded-full"
-                    :src="profileImg"
-                    alt=""
-                  />
-                  <p class="pl-2">{{ this.fullName }}</p>
-                </button>
-              </router-link>
+              <button
+                v-if="isLoggedIn"
+                @click="
+                  showMenuMobile = !showMenuMobile;
+                  navigateToDashboard();
+                "
+                type="button"
+                class="text-gray-800 hover:text-custom-blue truncate bt-navbar flex flex-row justify-center align-middle content-center items-center"
+              >
+                <img class="h-10 w-10 rounded-full" :src="profileImg" alt="" />
+                <p class="pl-2">{{ this.fullName }}</p>
+              </button>
             </div>
           </div>
         </ul>
@@ -262,11 +258,10 @@ import firebase from "../utilities/firebase";
 import axios from "axios";
 export default {
   props: { isLoggedIn: Boolean },
-
   data() {
     return {
       showMenu: false,
-      fullName: this.fullName,
+      // fullName: this.fullName,
       showDropdown: false,
       candData: [],
       profileImg: this.profileImg,
@@ -274,19 +269,28 @@ export default {
       showMenuMobile: false,
       hideMenuMobile: false,
       showDashboardIcon: false,
+      userID: this.userID,
     };
   },
+  // beforeMount() {
+  //   this.displayUsername();
+  //   // this.getCandidateUserID();
+  //   this.handleResize();
+  //   // this.showDashboardMenu();
+  //   //this.showDashboardMenu();
+  // },
 
-  beforeMount() {
-    this.displayUsername();
-    this.getCandidateUserID();
-    this.handleResize();
-    // this.showDashboardMenu();
-    //this.showDashboardMenu();
+  computed: {
+    //check if user is logged in then display username from localstorage
+    fullName() {
+      return localStorage.getItem("fullName");
+    },
   },
 
   //watch if the current page is dashboard then show the dashboard icon
   watch: {
+    // watch if isLoggedin is true then show the username
+
     $route(to) {
       if (
         to.path == "/dashboard/aboutme" ||
@@ -298,17 +302,60 @@ export default {
         this.showDashboardIcon = false;
       }
     },
+    // isLoggedInFunction() {
+    //   if (this.isLoggedIn == true) {
+    //     this.displayUsername();
+    //   }
+    // },
+    // constanlty check if the user is logged in
   },
+
+  created() {
+    this.isLoggedInFunction();
+  },
+
+  beforeMount() {},
 
   //what if screen is mobile size then show the mobile menu
   mounted() {
-    window.addEventListener("resize", this.handleResize);
     this.handleResize();
+    this.displayUsername();
+
+    // this.getCandidateUserID();
   },
-
   methods: {
-    //if showMenu is open then close it when the screen is resized
+    isLoggedInFunction() {
+      localStorage.getItem("userID");
+      this.userID = localStorage.getItem("userID");
+      if (this.isLoggedIn == true) {
+        console.log(this.userID);
+        axios
+          .get(
+            "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
+              this.userID +
+              "/"
+          )
+          .then((response) => {
+            console.log(response.data);
+            // get first name and last name merge them and store in local storage
+            this.fullName =
+              response.data.firstName + " " + response.data.lastName;
+            localStorage.setItem("fullName", this.fullName);
+            console.log(this.fullName);
+            //wait 1 second and then redirect to dashboard
+            setTimeout(() => {
+              this.$router.push("/mentorpage");
+            }, 1000);
 
+            // localStorage.setItem("fullName", response.data.full_name);
+            // localStorage.setItem("username", response.data.username);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
+    //if showMenu is open then close it when the screen is resized
     handleResize() {
       if (window.innerWidth <= 768) {
         this.showMenuMobile = false;
@@ -322,9 +369,7 @@ export default {
         this.showMenuMobile = false;
       }
     },
-
     // if the page is dashboard then show the dashboard menu
-
     showDashboardMenu() {
       if (this.$route.path == "/dashboard/aboutme") {
         this.showDashboard = true;
@@ -335,55 +380,57 @@ export default {
       }
     },
 
-    //if dashboard is clicked then show the dropdown menu and close the mobile menu
-    // showDashboardMenu() {
-    //   this.showDropdown = !this.showDropdown;
-    //   this.showMenuMobile = false;
+    navigateToDashboard() {
+      // check if isMentor true then send to mentor dashboard else send to candidate dashboard
+      localStorage.getItem("isMentor") == "true"
+        ? this.$router.push("/mentorDashboard/aboutme")
+        : this.$router.push("/dashboard/aboutme");
+
+      console.log(localStorage.getItem("isMentor"));
+      // if (this.isMentor == true) {
+      //   this.$router.push("/mentorDashboard/aboutme");
+      // } else {
+      //   this.$router.push("/dashboard/aboutme");
+      // }
+    },
+
+    // async getCandidateUserID() {
+    //   console.log(this.isLoggedIn);
+    //   if (this.isLoggedIn == true) {
+    //     localStorage.getItem("userID")
+    //       ? (this.userID = localStorage.getItem("userID"))
+    //       : null;
+    //     this.getCandidateData(this.userID);
+    //   }
     // },
-
-    //  firebase.auth().onAuthStateChanged((user) => {
-    //       if (user) {
-    //         this.fullName = user.displayName;
-    //         this.isLoggedIn = true;
-    //       } else {
-    //         this.isLoggedIn = false;
-    //       }
+    // async getCandidateData(userID) {
+    //   axios
+    //     .get(
+    //       "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
+    //         userID +
+    //         "/"
+    //     )
+    //     .then((response) => {
+    //       this.candDatas = response.data;
+    //       this.profileImg = this.candDatas.profileImg;
+    //       this.fullName =
+    //         this.candDatas.firstName + " " + this.candDatas.lastName;
+    //       this.isLoading = false;
+    //       //upcoming sessions
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
     //     });
-
-    async getCandidateUserID() {
-      localStorage.getItem("userID")
-        ? (this.userID = localStorage.getItem("userID"))
-        : null;
-
-      this.getCandidateData(this.userID);
-    },
-
-    async getCandidateData(userID) {
-      axios
-        .get(
-          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
-            userID +
-            "/"
-        )
-        .then((response) => {
-          this.candDatas = response.data;
-          this.profileImg = this.candDatas.profileImg;
-          this.fullName =
-            this.candDatas.firstName + " " + this.candDatas.lastName;
-          this.isLoading = false;
-          //upcoming sessions
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-
+    // },
     displayUsername() {
-      localStorage.getItem("userFullname")
-        ? (this.fullName = localStorage.getItem("userFullname"))
-        : null;
+      //if the current page is MentorPage then show the user name
+      if (this.isLoggedIn == true) {
+        localStorage.getItem("fullName")
+          ? (this.fullName = localStorage.getItem("fullName"))
+          : null;
+        console.log(this.fullName);
+      }
     },
-
     handleSignOut() {
       if (this.isLoggedIn) {
         firebase
@@ -391,7 +438,10 @@ export default {
           .signOut()
           .then(() => {
             localStorage.removeItem("userEmail");
-            localStorage.removeItem("userFullname");
+            localStorage.removeItem("fullName");
+            localStorage.removeItem("userID");
+            localStorage.removeItem("isMentor");
+
             this.$router.push("/");
             console.log("Sign out successful");
           })

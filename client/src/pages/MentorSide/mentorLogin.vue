@@ -107,7 +107,7 @@ import { useRouter } from "vue-router"; // import router
 import { useToast } from "vue-toastification";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-// import axios from "axios";
+import axios from "axios";
 
 export default {
   name: "HomePage",
@@ -268,8 +268,9 @@ export default {
           this.isMentor = true;
           localStorage.setItem("isMentor", this.isMentor);
           console.log(this.isMentor);
+          this.getUsername(this.$root.uid);
+
           this.showToast();
-          this.$router.push("/mentorpage");
         })
         .catch((error) => {
           this.showErrorToast(error.message);
@@ -315,6 +316,39 @@ export default {
             this.showErrorToast("Invalid app id");
           } else error.message === "Something went wrong";
           this.showErrorToast;
+        });
+    },
+
+    getUsername(userID) {
+      //get username
+      console.log(userID);
+      axios
+        .get(
+          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/expert/profile/" +
+            userID +
+            "/"
+        )
+        .then((response) => {
+          console.log(response.data);
+          // get first name and last name merge them and store in local storage
+          this.fullName =
+            response.data.firstName + " " + response.data.lastName;
+          localStorage.setItem("fullName", this.fullName);
+          console.log(this.fullName);
+          // get profile pic and store in local storage
+          this.profilePic = response.data.profilePic;
+          localStorage.setItem("profilePic", this.profilePic);
+          console.log(this.profilePic);
+
+          setTimeout(() => {
+            this.$router.push("/mentorpage");
+          }, 1000);
+
+          // localStorage.setItem("fullName", response.data.full_name);
+          // localStorage.setItem("username", response.data.username);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
 

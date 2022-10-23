@@ -15,6 +15,10 @@ module.exports = {
     backgroundImage: ["responsive", "hover", "focus", "group-hover", "active"],
     margin: ["responsive", "hover", "active"],
     padding: ["responsive", "active"],
+    borderWidth: ["responsive", "hover", "focus", "active"],
+    borderColor: ["responsive", "hover", "focus", "active"],
+    borderRadius: ["responsive", "hover", "focus", "active"],
+    boxShadow: ["responsive", "hover", "focus", "active"],
   },
   theme: {
     extend: {
@@ -47,6 +51,7 @@ module.exports = {
         "custom-orange": "#FFB23B",
         "price-blue": "#D0EBFF",
         "text-gray": "#7C7878",
+        "notif-orange": "#FF8020",
       },
       boxShadow: {
         "3xl": "0 0px 20px -15px rgba(0, 0, 0, 0.3)",

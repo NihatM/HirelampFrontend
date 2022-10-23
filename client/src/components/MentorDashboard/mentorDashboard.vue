@@ -14,26 +14,36 @@
       </div>
       <div class="flex flex-col text-left bt-dash divide-y-2 py-12">
         <router-link
+          v-on:click="toggleTabs(1)"
           class="flex align-middle py-3"
           to="/mentorDashboard/aboutme"
+          v-bind:class="{
+            'text-gray-900   ': openTab !== 1,
+            'text-custom-blue  ': openTab === 1,
+          }"
         >
           <img
-            src="../assets/aboutMe.svg"
+            src="../../assets/aboutMe.svg"
             alt=""
             class="h-5 w-5 mr-4 align-middle"
           />
           <p>About Me</p>
         </router-link>
         <router-link
+          v-on:click="toggleTabs(2)"
           class="flex align-middle py-3"
           to="/mentorDashboard/sessions"
+          v-bind:class="{
+            'text-gray-900   ': openTab !== 2,
+            'text-custom-blue  ': openTab === 2,
+          }"
         >
           <img
-            src="../assets/aboutMe.svg"
+            src="../../assets/aboutMe.svg"
             alt=""
             class="h-5 w-5 mr-4 align-middle"
           />
-          <p class="flex align-middle active:text-custom-blue">Sessions</p>
+          <p class="flex align-middle">Sessions</p>
         </router-link>
         <!-- <router-link class="flex align-middle py-4" to="/dashboard/payment">
           <img
@@ -44,11 +54,16 @@
           <p class="flex align-middle hover:text-custom-blue">Payment</p>
         </router-link> -->
         <router-link
+          v-on:click="toggleTabs(3)"
           to="/mentorDashboard/security"
           class="flex align-middle py-3"
+          v-bind:class="{
+            'text-gray-900   ': openTab !== 3,
+            'text-custom-blue  ': openTab === 3,
+          }"
         >
           <img
-            src="../assets/dashboardSecurity.svg"
+            src="../../assets/dashboardSecurity.svg"
             alt=""
             class="h-5 w-5 mr-4 align-middle"
           />
@@ -66,7 +81,7 @@
           class="flex py-3"
         >
           <img
-            src="../assets/logout.svg"
+            src="../../assets/logout.svg"
             alt=""
             class="h-5 w-5 mr-4 align-middle"
           />
@@ -79,7 +94,7 @@
 
 <script>
 import axios from "axios";
-import firebase from "../utilities/firebase";
+import firebase from "../../utilities/firebase";
 
 export default {
   name: "CandidateDashboard",
@@ -88,34 +103,24 @@ export default {
     return {
       candDatas: "",
       isLoggedIn: true,
+      openTab: 1,
     };
   },
-  beforeMount() {
+  mounted() {
     this.getCandidateUserID();
   },
+  // beforeUnmount() {
+  //   localStorage.removeItem("userEmail");
+  //   localStorage.removeItem("userFullname");
+  //   localStorage.removeItem("userID");
+  // },
 
   components: {},
 
   methods: {
-    // async getCandDatas() {
-    //   axios
-    //     .get(
-    //       "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/"
-    //     )
-    //     .then((response) => {
-    //       console.log(response);
-    //       this.candDatas = response.data;
-    //       this.isLoading = false;
-    //       localStorage.getItem("userID")
-    //         ? (this.userID = localStorage.getItem("userID"))
-    //         : null;
-    //       console.log(this.userID);
-    //       this.getCandidateData(this.userID);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
+    toggleTabs(tabNumber) {
+      this.openTab = tabNumber;
+    },
 
     handleSignOut() {
       if (this.isLoggedIn) {
@@ -125,7 +130,10 @@ export default {
           .then(() => {
             this.isLoggedIn = false;
             localStorage.removeItem("userEmail");
-            localStorage.removeItem("userFullname");
+            localStorage.removeItem("fullName");
+            localStorage.removeItem("userID");
+            localStorage.removeItem("isMentor");
+
             this.$router.push("/");
           })
           .catch((error) => {
@@ -135,21 +143,23 @@ export default {
     },
 
     async getCandidateUserID() {
-      localStorage.getItem("userID")
-        ? (this.userID = localStorage.getItem("userID"))
-        : null;
+      localStorage.getItem("userID");
+      this.userID = localStorage.getItem("userID");
+      console.log(this.userID);
       this.getCandidateData(this.userID);
     },
 
     async getCandidateData(userID) {
+      console.log(userID);
       axios
         .get(
-          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
+          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/expert/profile/" +
             userID +
             "/"
         )
         .then((response) => {
           this.candDatas = response.data;
+          console.log(this.candDatas);
           this.isLoading = false;
         })
         .catch((error) => {
