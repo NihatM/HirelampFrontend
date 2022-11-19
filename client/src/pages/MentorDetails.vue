@@ -556,16 +556,20 @@ export default {
           counter++;
         }
       }
-      let str = "";
-      if (this.currentURL[this.currentURL.length] === "/")
-        str = this.currentURL.slice(i + 1, this.currentURL.length - 1);
-      else str = this.currentURL.slice(i + 1, this.currentURL.length);
+
+      console.log(this.$route.params.id);
+      console.log(this.$route.params.str);
+      // let str = "";
+      // if (this.currentURL[this.currentURL.length] === "/")
+      //   str = this.currentURL.slice(i + 1, this.currentURL.length - 1);
+      // else str = this.currentURL.slice(i + 1, this.currentURL.length);
       axios
         .get(
           "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/expert/profile/" +
-            str
+            localStorage.getItem("mentorId")
         )
         .then((response) => {
+          localStorage.removeItem("fullname");
           this.mentorData = response.data;
           console.log(this.mentorData.ratings.length);
           // this.mentorData.rating = response.data.rating;

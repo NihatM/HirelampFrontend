@@ -1,6 +1,89 @@
 <template>
   <div>
     <div class="flex flex-col">
+      <!-- Open modal Popup Calendar -->
+      <div class="flex flex-col">
+        <!-- create a table with names -->
+
+        <div
+          class="fixed z-50 inset-0 overflow-y-auto"
+          aria-labelledby="modal-title"
+          role="dialog"
+          aria-modal="true"
+          v-if="openModal"
+        >
+          <div
+            class="flex items-end justify-center pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+          >
+            <!--
+            Background overlay, show/hide based on modal state.
+      
+            Entering: "ease-out duration-300"
+              From: "opacity-0"
+              To: "opacity-100"
+            Leaving: "ease-in duration-200"
+              From: "opacity-100"
+              To: "opacity-0"
+          -->
+            <div
+              class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+              aria-hidden="true"
+            ></div>
+
+            <!-- This element is to trick the browser into centering the modal contents. -->
+            <span
+              class="hidden sm:inline-block sm:align-middle sm:h-screen"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <!--
+            Modal panel, show/hide based on modal state.
+      
+            Entering: "ease-out duration-300"
+              From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              To: "opacity-100 translate-y-0 sm:scale-100"
+            Leaving: "ease-in duration-200"
+              From: "opacity-100 translate-y-0 sm:scale-100"
+              To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+          -->
+            <div
+              class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-headline"
+            >
+              <div class="bg-white px-4 pb-4 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                  <div class="mt-3 text-center sm:mt-0 w-full sm:text-left">
+                    <div class="flex justify-between">
+                      <h3
+                        class="text-lg leading-6 font-medium text-gray-900"
+                        id="modal-headline"
+                      >
+                        Select available slots
+                      </h3>
+                      <!-- <button @click="this.openModal = false">
+                        <img src="" alt="">
+                      </button> -->
+                      <button
+                        type="button"
+                        class="close font-bold"
+                        @click="this.openModal = false"
+                      >
+                        <img src="../../assets/closeButton.svg" alt="" />
+                      </button>
+                    </div>
+                    <div class="flex justify-center">
+                      <PopupCalendar @sendOption="fetchData" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="flex justify-center p-4 relative">
         <div class="relative">
           <div class="image-preview">
@@ -18,7 +101,7 @@
         </div>
 
         <div
-          class="z-50 absolute rounded-full h-32 w-32 cursor-pointer"
+          class="z-40 absolute rounded-full h-32 w-32 cursor-pointer"
           @click="imageInput"
         >
           <input
@@ -51,7 +134,7 @@
           role="tablist"
         >
           <li
-            class="nav-item flex"
+            class="nav-item duration-300 ease-in-out hover:text-blue-500"
             role="presentation"
             v-bind:class="{
               'text-gray-900 border-b-2  border-gray-200': openTab !== 1,
@@ -65,7 +148,7 @@
             </a>
           </li>
           <li
-            class="nav-item"
+            class="nav-item duration-300 ease-in-out hover:text-blue-500"
             role="presentation"
             v-bind:class="{
               'text-gray-900 border-b-2  border-gray-200': openTab !== 2,
@@ -105,7 +188,7 @@
               type="tel"
               class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
               placeholder="Phone number"
-              v-model="mentorDatas.phone"
+              v-model="mentorDatas.phoneNumber"
             />
             <span
               class="text-notif-orange text-xs italic text-left flex justify-start"
@@ -140,35 +223,6 @@
         v-bind:class="{ hidden: openTab !== 2, block: openTab === 2 }"
       >
         <div class="flex flex-row space-x-6 px-4">
-          <!-- <div class="flex flex-col space-y-4">
-            <div class="flex flex-col space-y-2">
-              <p class="text-xs text-gray-400">Company</p>
-              <input
-                type="text"
-                class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                placeholder="Company"
-                v-model="mentorDatas.company"
-              />
-            </div>
-            <div class="flex flex-col space-y-2">
-              <p class="text-xs text-gray-400">Position</p>
-              <input
-                type="text"
-                class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                placeholder="Position"
-                v-model="mentorDatas.position"
-              />
-            </div>
-            <div class="flex flex-col space-y-2">
-              <p class="text-xs text-gray-400">Industry</p>
-              <input
-                type="text"
-                class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                placeholder="Industry"
-                v-model="mentorDatas.industry"
-              />
-            </div> -->
-
           <div class="flex flex-row space-x-4">
             <div class="flex flex-col space-y-2">
               <p class="text-left text-xs text-gray-400">Field</p>
@@ -176,7 +230,7 @@
                 type="text"
                 class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
                 placeholder="Field"
-                v-model="mentorDatas.field"
+                v-model="mentorDatas.position"
               />
             </div>
             <div class="flex flex-col space-y-2">
@@ -186,7 +240,7 @@
                 type="text"
                 class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
                 placeholder="Company"
-                v-model="mentorDatas.company"
+                v-model="mentorDatas.currentCompany"
               />
             </div>
 
@@ -197,7 +251,7 @@
                 type="text"
                 class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
                 placeholder="Country or City"
-                v-model="mentorDatas.region"
+                v-model="mentorDatas.location"
               />
             </div>
 
@@ -214,8 +268,7 @@
           </div>
         </div>
 
-        <!-- dropdown -->
-        <div class="flex flex-row py-8 px-4">
+        <div class="flex flex-row py-8 px-4 space-x-8">
           <div class="">
             <div class="flex flex-col space-y-2">
               <p class="text-left text-xs text-gray-400">
@@ -228,7 +281,7 @@
                 class="text-white bg-custom-blue hover:bg-cyan-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 type="button"
               >
-                Job search consultation
+                Please select at least one
                 <svg
                   class="ml-2 w-4 h-4"
                   fill="none"
@@ -260,24 +313,25 @@
                       id="checkbox-item-1"
                       type="checkbox"
                       placegolder="Services"
-                      value=""
+                      value="Job Search Consultation"
+                      v-model="selectedServices"
                       class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
                       for="checkbox-item-1"
                       class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                      {{ services }}
+                      Job search consultation
                     </label>
                   </div>
                 </li>
                 <li>
                   <div class="flex items-center">
                     <input
-                      checked=""
                       id="checkbox-item-2"
                       type="checkbox"
-                      value=""
+                      value="Career Coaching"
+                      v-model="selectedServices"
                       class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
@@ -292,7 +346,8 @@
                     <input
                       id="checkbox-item-3"
                       type="checkbox"
-                      value=""
+                      value="Mock Interview"
+                      v-model="selectedServices"
                       class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
@@ -305,7 +360,38 @@
               </ul>
             </div>
           </div>
+          <div class="flex flex-col space-y-2">
+            <p class="text-left text-xs text-gray-400">
+              Choose your available time
+            </p>
+
+            <button
+              @click="this.openModal = true"
+              class="text-white bg-custom-blue hover:bg-cyan-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Select your available time
+            </button>
+          </div>
         </div>
+        <!-- dropdown -->
+        <!-- <div class="flex flex-row py-8 px-4">
+          <div class="">
+            <div class="flex flex-col space-y-2">
+              <p class="text-left text-xs text-gray-400">
+                Select your available time
+              </p>
+
+              <textarea
+                class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+                name=""
+                id=""
+                cols="50"
+                rows="5"
+                placeholder="Example: Monday 10:00PM - 12:00AM"
+              ></textarea>
+            </div>
+          </div>
+        </div> -->
         <div class="px-4 pb-2">
           <p class="font-bold text-left pb-2">About me</p>
           <div class="flex flex-row space-x-4 w-full">
@@ -314,8 +400,8 @@
               <textarea
                 type="text"
                 class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                placeholder="Field"
-                v-model="mentorDatas.shortDescription"
+                placeholder="Short and clear description about you"
+                v-model="mentorDatas.bio"
               />
             </div>
             <div class="flex flex-col w-full space-y-2">
@@ -324,8 +410,8 @@
               <textarea
                 type="text"
                 class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                placeholder="Company"
-                v-model="mentorDatas.workedFor"
+                placeholder=" Example: Google, Facebook, etc"
+                v-model="mentorDatas.expertise"
               />
             </div>
           </div>
@@ -335,7 +421,7 @@
               <textarea
                 type="text"
                 class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                placeholder="Field"
+                placeholder="Example: 5 years of experience in IT"
                 v-model="mentorDatas.experience"
               />
             </div>
@@ -345,19 +431,19 @@
               <textarea
                 type="text"
                 class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                placeholder="Company"
+                placeholder="Example: BSc from University of Indonesia"
                 v-model="mentorDatas.education"
               />
             </div>
           </div>
-          <div class="w-full py-8">
-            <button
-              @click="updateMentor(mentorDatas.userID)"
-              class="py-2 px-14 bg-custom-blue rounded-full flex justify-center items-center text-white"
-            >
-              <p class="text-white">Save</p>
-            </button>
-          </div>
+        </div>
+        <div class="w-full py-8 px-4">
+          <button
+            @click="updateMentor()"
+            class="py-2 px-14 bg-custom-blue rounded-full flex justify-center items-center text-white"
+          >
+            <p class="text-white">Save</p>
+          </button>
         </div>
       </div>
     </div>
@@ -366,6 +452,7 @@
 
 <script>
 import axios from "axios";
+import PopupCalendar from "../MentorDashboard/PopupCalendar.vue";
 export default {
   data() {
     return {
@@ -375,7 +462,7 @@ export default {
       openTab: 1,
       dropDown: false,
       services: "",
-
+      openModal: false,
       careerCoaching: false,
       mockInterview: false,
       servicesArray: [
@@ -383,7 +470,13 @@ export default {
         "Career coaching",
         "Mock interview",
       ],
+      selectedCheckbox: [],
+      selectedServices: [],
+      newDate: [],
     };
+  },
+  components: {
+    PopupCalendar,
   },
 
   beforeMount() {
@@ -392,6 +485,24 @@ export default {
   },
 
   methods: {
+    getSelectedCheckbox() {
+      this.selectedServices = [];
+      this.servicesArray.forEach((item) => {
+        if (this.$refs[item].checked) {
+          this.selectedServices.push(item);
+        }
+      });
+    },
+
+    // get emit data
+    fetchData(data) {
+      //turn obj in string
+      this.newDate = JSON.stringify(data);
+
+      this.mentorDatas.availability = this.newDate;
+      console.log(this.mentorDatas.availability);
+    },
+
     divideServices() {
       // this.services = this.mentorDatas.services.split(", ");
       console.log(this.services);
@@ -415,51 +526,95 @@ export default {
         reader.readAsDataURL(input.files[0]);
         this.mentorDatas.profileImg = input.files[0];
       }
+      // if new image is not uploaded, use the old image
+      // else {
+      //   this.newImage = this.mentorDatas.profileImg;
+      // }
     },
 
     // at click div open input tag
-    imageInput() {
+    async imageInput() {
       document.getElementById("imageInput").click();
     },
 
-    // onFileSelected(event) {
-    //   this.file = event.target.files[0];
-    //   console.log(this.file);
-    // },
-    // onImageSelected(event) {
-    //   this.newImage = event.target.files[0];
-    //   console.log(this.newImage);
-    // },
-    // changeImage() {
-    //   document.getElementById("fileUpload").click();
-    //   //this.mentorDatas.profileImg = this.newImage;
-    //   console.log(this.newImage);
-    //   console.log(this.mentorDatas.profileImg);
-    // },
-
     // push updates to database
-    updateMentor(userID) {
+    async updateMentor() {
+      // if there is a new image then change the image to base64
+
+      if (this.newImage) {
+        // reader = new FileReader();
+        const reader = new FileReader();
+        reader.readAsDataURL(this.mentorDatas.profileImg);
+        reader.onload = () => {
+          this.mentorDatas.profileImg = reader.result;
+
+          console.log(this.mentorDatas.profileImg);
+
+          fetch(
+            "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/updateMentor/" +
+              this.userID +
+              "/",
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                profileImg: this.mentorDatas.profileImg,
+              }),
+            }
+          );
+        };
+      }
+
       const formData = new FormData();
+
+      this.mentorDatas.services = this.selectedServices.toString();
+
+      this.mentorDatas.services = this.mentorDatas.services.replace(/,/g, ", ");
+
+      //if null then set to empty string
+      for (let key in this.mentorDatas) {
+        if (this.mentorDatas[key] == null && key != "profileImg") {
+          console.log(key, "is null");
+          this.mentorDatas[key] = "N/A";
+        }
+      }
+
       formData.append("firstName", this.mentorDatas.firstName);
       formData.append("lastName", this.mentorDatas.lastName);
-      formData.append("phone", this.mentorDatas.phone);
+      formData.append("phoneNumber", this.mentorDatas.phoneNumber);
       formData.append("email", this.mentorDatas.email);
-      formData.append("linkedinUrl", this.mentorDatas.linkedinUrl);
-      formData.append("profileImg", this.mentorDatas.profileImg);
-      formData.append("cv", this.file);
-      axios
-        .put(
-          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/updateMentor/" +
-            userID +
-            "/",
-          formData
-        )
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      formData.append("bio", this.mentorDatas.bio);
+      formData.append("currentCompany", this.mentorDatas.currentCompany);
+      formData.append("services", this.mentorDatas.services);
+      formData.append("expertise", this.mentorDatas.expertise);
+      formData.append("experience", this.mentorDatas.experience);
+      formData.append("education", this.mentorDatas.education);
+
+      formData.append("availability", this.mentorDatas.availability);
+      // formData.append("CV", this.file);
+
+      setTimeout(() => {
+        axios
+          .put(
+            "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/updateMentor/" +
+              this.userID +
+              "/",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, 1000);
     },
 
     async getMentorUserID() {
@@ -471,6 +626,7 @@ export default {
     },
 
     async getMentorData(userID) {
+      console.log(userID);
       axios
         .get(
           "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/expert/profile/" +
@@ -493,10 +649,10 @@ export default {
       formData.append("profileImg", this.file);
       formData.append("firstName", this.mentorDatas.firstName);
       formData.append("lastName", this.mentorDatas.lastName);
-      formData.append("phone", this.mentorDatas.phone);
+      formData.append("phoneNumber", this.mentorDatas.phoneNumber);
       formData.append("email", this.mentorDatas.email);
-      formData.append("linkedinUrl", this.mentorDatas.linkedinUrl);
-      formData.append("cv", this.mentorDatas.cv);
+      // formData.append("linkedinUrl", this.mentorDatas.linkedinUrl);
+      // formData.append("CV", this.mentorDatas.CV);
       axios
         .put(
           "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/expert/profile/" +

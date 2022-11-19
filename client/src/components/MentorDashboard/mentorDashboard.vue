@@ -39,11 +39,27 @@
           }"
         >
           <img
-            src="../../assets/aboutMe.svg"
+            src="../../assets/dashboardSessions.svg"
             alt=""
             class="h-5 w-5 mr-4 align-middle"
           />
           <p class="flex align-middle">Sessions</p>
+        </router-link>
+        <router-link
+          v-on:click="toggleTabs(3)"
+          class="flex align-middle py-3"
+          to="/mentorDashboard/payment"
+          v-bind:class="{
+            'text-gray-900   ': openTab !== 3,
+            'text-custom-blue  ': openTab === 3,
+          }"
+        >
+          <img
+            src="../../assets/dashboardPayment.svg"
+            alt=""
+            class="h-5 w-5 mr-4 align-middle"
+          />
+          <p class="flex align-middle">Payment</p>
         </router-link>
         <!-- <router-link class="flex align-middle py-4" to="/dashboard/payment">
           <img
@@ -54,12 +70,12 @@
           <p class="flex align-middle hover:text-custom-blue">Payment</p>
         </router-link> -->
         <router-link
-          v-on:click="toggleTabs(3)"
+          v-on:click="toggleTabs(4)"
           to="/mentorDashboard/security"
           class="flex align-middle py-3"
           v-bind:class="{
-            'text-gray-900   ': openTab !== 3,
-            'text-custom-blue  ': openTab === 3,
+            'text-gray-900   ': openTab !== 4,
+            'text-custom-blue  ': openTab === 4,
           }"
         >
           <img
@@ -107,7 +123,7 @@ export default {
     };
   },
   mounted() {
-    this.getCandidateUserID();
+    this.getMentorProfileID();
   },
   // beforeUnmount() {
   //   localStorage.removeItem("userEmail");
@@ -142,14 +158,14 @@ export default {
       }
     },
 
-    async getCandidateUserID() {
+    async getMentorProfileID() {
       localStorage.getItem("userID");
       this.userID = localStorage.getItem("userID");
       console.log(this.userID);
-      this.getCandidateData(this.userID);
+      this.getMentorProfile(this.userID);
     },
 
-    async getCandidateData(userID) {
+    async getMentorProfile(userID) {
       console.log(userID);
       axios
         .get(

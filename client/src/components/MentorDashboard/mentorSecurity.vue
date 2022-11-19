@@ -206,7 +206,6 @@ export default {
         .then((response) => {
           console.log(response);
           this.candDatas = response.data;
-
           console.log(this.candDatas);
           this.isLoading = false;
           // split date and time and convert date to dd/mm/yyyy and time to hh:mm

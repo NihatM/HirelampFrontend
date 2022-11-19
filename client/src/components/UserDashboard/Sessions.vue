@@ -368,6 +368,10 @@ export default {
             element.date = element.date.split("T")[0];
           });
 
+          // check the current date and time
+          // var today = new Date();
+          //if session is past, add a new button
+
           // this.candDatas.forEach((candData) => {
           //   candData.date = new Date(candData.date).toLocaleDateString();
           // });

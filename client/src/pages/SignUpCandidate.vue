@@ -10,10 +10,22 @@
         <p class="bt-md">Welcome aboard my friend</p>
         <p class="bt-book">just a couple of clicks and we start</p>
       </div>
+
       <div
         class="w-full xl:w-9/12 align-middle flex flex-col justify-center items-center"
       >
-        <div class="md:shadow-xl rounded-2xl w-full md:w-8/12 px-14 bg-white">
+        <div class="flex justify-end w-full md:w-8/12">
+          <button
+            class="bg-custom-blue text-white px-2 py-1.5 rounded-t-xl shadow-2xl bt-placeholder hover:bg-blue-500 duration-300"
+          >
+            <a href="/mentorRegister" class="font-bold hover:text-gray-50"
+              >Register as a mentor</a
+            >
+          </button>
+        </div>
+        <div
+          class="md:shadow-xl rounded-b-2xl rounded-tl-2xl w-full md:w-8/12 px-14 bg-white"
+        >
           <div class="flex flex-col">
             <p class="bt-medium pb-11 pt-8">Register</p>
 
@@ -99,14 +111,14 @@
                   >Login</a
                 >
               </div>
-              <div class="pb-7">
+              <!-- <div class="pb-7">
                 <a
                   href="https://docs.google.com/forms/d/e/1FAIpQLSd319wsfw2pg9Vt7hQyVOaDSIQQ-OIqfKJYNLH-_16xFKgX-Q/viewform"
                   target="_blank"
                   class="pb-7 text-custom-blue font-bold"
                   >Want to be a mentor?</a
                 >
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

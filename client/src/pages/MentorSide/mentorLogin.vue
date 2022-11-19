@@ -13,7 +13,18 @@
       <div
         class="w-full xl:w-9/12 align-middle flex flex-col justify-center items-center"
       >
-        <div class="md:shadow-xl rounded-2xl w-full md:w-8/12 px-14 bg-white">
+        <div class="flex justify-end w-full md:w-8/12">
+          <button
+            class="bg-custom-blue text-white px-2 py-1.5 rounded-t-xl shadow-2xl bt-placeholder hover:bg-blue-500 duration-300"
+          >
+            <a href="/login" class="font-bold hover:text-gray-50"
+              >Login as a candidate</a
+            >
+          </button>
+        </div>
+        <div
+          class="md:shadow-xl rounded-b-2xl rounded-tl-2xl w-full md:w-8/12 px-14 bg-white"
+        >
           <div class="flex flex-col">
             <p class="bt-medium pb-11 pt-8">Log in as a mentor</p>
 
@@ -88,7 +99,7 @@
               <div class="flex justify-center items-center pb-8">
                 <p class="py-6 px-2.5">Have no account yet?</p>
                 <a
-                  href="/signup"
+                  href="/mentorRegister"
                   class="underline underline-offset-2 text-custom-blue"
                   >Register</a
                 >
@@ -334,15 +345,14 @@ export default {
           this.fullName =
             response.data.firstName + " " + response.data.lastName;
           localStorage.setItem("fullName", this.fullName);
+
           console.log(this.fullName);
           // get profile pic and store in local storage
           this.profilePic = response.data.profilePic;
           localStorage.setItem("profilePic", this.profilePic);
           console.log(this.profilePic);
 
-          setTimeout(() => {
-            this.$router.push("/mentorpage");
-          }, 1000);
+          this.$router.push("/mentorpage");
 
           // localStorage.setItem("fullName", response.data.full_name);
           // localStorage.setItem("username", response.data.username);

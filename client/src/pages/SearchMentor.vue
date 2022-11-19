@@ -7,7 +7,18 @@
       <SearchBar />
     </div>
     <TagsNew :searchTags="this.searchTags" />
+    <div
+      class="w-full flex flex-col justify-center py-12"
+      v-if="notFound == true"
+    >
+      <p class="text-4xl text-center bt-medium -pb-12">
+        Oops, nothing found 📡
+      </p>
+      <mentorRequest />
+    </div>
+
     <ul
+      v-if="notFound == false"
       class="flex md:flex-nowrap lg:flex-nowrap xl:flex-nowrap flex-wrap justify-center items-center pb-14 pt-4"
     >
       <li
@@ -154,11 +165,13 @@
 import axios from "axios";
 import Footer from "../components/Footer.vue";
 import SearchBar from "../components/SearchBar.vue";
+import mentorRequest from "../components/mentorRequest.vue";
 
 export default {
   name: "MentorPage",
   data() {
     return {
+      notFound: false,
       email: "",
       maxChar: 50,
       mentorDatas: [],
@@ -226,6 +239,16 @@ export default {
           }
           // let finalarr2;
           this.mentorDatas = finalarr1;
+          console.log(this.mentorDatas);
+          // if (this.mentorDatas.length === 0) {
+          //   this.notFound == true;
+          // }
+
+          // if mentorData is empty then notFound is true
+
+          if (this.mentorDatas.length === 0) {
+            this.notFound = true;
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -237,6 +260,7 @@ export default {
     Footer,
     SearchBar,
     // DropDownMenu,
+    mentorRequest,
   },
 };
 </script>

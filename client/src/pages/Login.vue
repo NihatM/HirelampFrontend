@@ -13,18 +13,22 @@
       <div
         class="w-full xl:w-9/12 align-middle flex flex-col justify-center items-center"
       >
-        <div class="md:shadow-xl rounded-2xl w-full md:w-8/12 px-14 bg-white">
+        <div class="flex justify-end w-full md:w-8/12">
+          <button
+            class="bg-custom-blue text-white px-2 py-1.5 rounded-t-xl shadow-2xl bt-placeholder hover:bg-blue-500 duration-300"
+          >
+            <a href="/mentorLogin" class="font-bold hover:text-gray-50"
+              >Login as a mentor</a
+            >
+          </button>
+        </div>
+        <div
+          class="md:shadow-xl rounded-b-2xl rounded-tl-2xl w-full md:w-8/12 px-14 bg-white"
+        >
           <div class="flex flex-col">
             <p class="bt-medium pb-11 pt-8">Log in</p>
 
             <div class="">
-              <!-- <div class="relative mb-6">
-  <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-  </div>
-  <input type="text" id="input-group-1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com">
-</div> -->
-
               <div class="relative">
                 <input
                   v-model="email"
@@ -89,7 +93,7 @@
               <div class="flex justify-center items-center pb-8">
                 <p class="py-6 px-2.5">Have no account yet?</p>
                 <a
-                  href="/mentorLogin"
+                  href="/signup"
                   class="underline underline-offset-2 text-custom-blue"
                   >Register</a
                 >
@@ -260,6 +264,7 @@ export default {
     getUsername(userID) {
       //get username
       console.log(userID);
+
       axios
         .get(
           "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
@@ -268,18 +273,11 @@ export default {
         )
         .then((response) => {
           console.log(response.data);
-          // get first name and last name merge them and store in local storage
           this.fullName =
             response.data.firstName + " " + response.data.lastName;
           localStorage.setItem("fullName", this.fullName);
           console.log(this.fullName);
-          //wait 1 second and then redirect to dashboard
-          setTimeout(() => {
-            this.$router.push("/mentorpage");
-          }, 1000);
-
-          // localStorage.setItem("fullName", response.data.full_name);
-          // localStorage.setItem("username", response.data.username);
+          this.$router.push("/mentorpage");
         })
         .catch((error) => {
           console.log(error);

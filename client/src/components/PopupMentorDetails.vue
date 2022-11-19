@@ -384,6 +384,7 @@ export default {
         const mentorfullName =
           this.mentorData.firstName + " " + this.mentorData.lastName;
         const formData = new FormData();
+        console.log(this.fullName, this.email, this.phone, this.message);
         formData.append("fullName", this.fullName);
         formData.append("email", this.email);
         formData.append("mobilePhone", this.phone);
@@ -397,7 +398,6 @@ export default {
           ).toISOString()
         );
         formData.append("mentorFullName", mentorfullName);
-        console.log(formData);
         await axios.post(
           "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/contactForm/",
           formData,

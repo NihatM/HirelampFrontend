@@ -13,7 +13,7 @@
         <p class="text-gray-500">{{ candDatas.email }}</p>
       </div>
       <div class="flex flex-col text-left bt-dash divide-y-2 py-12">
-        <router-link class="flex align-middle py-3" to="/dashboard/aboutme">
+        <router-link class="flex align-middle py-3" :to="`${newRoute}/aboutme`">
           <img
             src="../assets/aboutMe.svg"
             alt=""
@@ -21,23 +21,33 @@
           />
           <p>About Me</p>
         </router-link>
-        <router-link class="flex align-middle py-3" to="/dashboard/sessions">
+        <router-link
+          class="flex align-middle py-3"
+          :to="`${newRoute}/sessions`"
+        >
           <img
-            src="../assets/aboutMe.svg"
+            src="../assets/dashboardSessions.svg"
             alt=""
             class="h-5 w-5 mr-4 align-middle"
           />
           <p class="flex align-middle active:text-custom-blue">Sessions</p>
         </router-link>
-        <!-- <router-link class="flex align-middle py-4" to="/dashboard/payment">
+        <router-link
+          v-if="isMentor"
+          class="flex align-middle py-4"
+          :to="`${newRoute}/payment`"
+        >
           <img
             src="../assets/dashboardPayment.svg"
             alt=""
-            class="h-6 w-6 mr-4 align-middle"
+            class="h-5 w-5 mr-4 align-middle"
           />
           <p class="flex align-middle hover:text-custom-blue">Payment</p>
-        </router-link> -->
-        <router-link to="/dashboard/security" class="flex align-middle py-3">
+        </router-link>
+        <router-link
+          :to="`${newRoute}/security`"
+          class="flex align-middle py-3"
+        >
           <img
             src="../assets/dashboardSecurity.svg"
             alt=""
@@ -79,6 +89,7 @@ export default {
     return {
       candDatas: "",
       isLoggedIn: true,
+      isMentor: false,
     };
   },
   mounted() {
@@ -122,14 +133,47 @@ export default {
       localStorage.getItem("userID");
       this.userID = localStorage.getItem("userID");
       console.log(this.userID);
-      this.getCandidateData(this.userID);
+      localStorage.getItem("isMentor");
+      this.isMentor = localStorage.getItem("isMentor");
+      console.log(localStorage.getItem("isMentor"));
+      if (localStorage.getItem("isMentor") == "true") {
+        this.getMentorData(localStorage.getItem("userID"));
+      } else {
+        this.getCandidateData(localStorage.getItem("userID"));
+      }
+      this.changeRoute();
     },
 
+    changeRoute() {
+      if (localStorage.getItem("isMentor") == "true") {
+        // navigate to mentorDashboard instad of dashboard
+        this.newRoute = "/mentorDashboard";
+      } else {
+        this.newRoute = "/dashboard";
+      }
+    },
     async getCandidateData(userID) {
       console.log(userID);
       axios
         .get(
           "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
+            userID +
+            "/"
+        )
+        .then((response) => {
+          this.candDatas = response.data;
+          console.log(this.candDatas);
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    async getMentorData(userID) {
+      console.log(userID);
+      axios
+        .get(
+          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/expert/profile/" +
             userID +
             "/"
         )

@@ -13,7 +13,18 @@
       <div
         class="w-full xl:w-9/12 align-middle flex flex-col justify-center items-center"
       >
-        <div class="md:shadow-xl rounded-2xl w-full md:w-8/12 px-14 bg-white">
+        <div class="flex justify-end w-full md:w-8/12">
+          <button
+            class="bg-custom-blue text-white px-2 py-1.5 rounded-t-xl shadow-2xl bt-placeholder hover:bg-blue-500 duration-300"
+          >
+            <a href="/signup" class="font-bold hover:text-gray-50"
+              >Register as a candidate</a
+            >
+          </button>
+        </div>
+        <div
+          class="md:shadow-xl rounded-b-2xl rounded-tl-2xl w-full md:w-8/12 px-14 bg-white"
+        >
           <div class="flex flex-col">
             <p class="bt-medium pb-11 pt-8">Register as a mentor</p>
 
@@ -94,7 +105,7 @@
               <div class="flex justify-center items-center">
                 <p class="py-6 px-2.5">Already have an account?</p>
                 <a
-                  href="/login"
+                  href="/mentorLogin"
                   class="underline underline-offset-2 text-custom-blue font-bold"
                   >Login</a
                 >

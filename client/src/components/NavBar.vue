@@ -172,7 +172,7 @@
                 class="text-gray-800 hover:text-custom-blue truncate bt-navbar flex flex-row justify-center align-middle content-center items-center"
               >
                 <img class="h-10 w-10 rounded-full" :src="profileImg" alt="" />
-                {{ this.fullName }}
+                <span class="pl-2 pt-1">{{ this.fullName }}</span>
               </button>
             </div>
           </div>
@@ -241,15 +241,19 @@
                 type="button"
                 class="text-gray-800 hover:text-custom-blue truncate bt-navbar flex flex-row justify-center align-middle content-center items-center"
               >
-                <img class="h-10 w-10 rounded-full" :src="profileImg" alt="" />
-                <p class="pl-2">{{ this.fullName }}</p>
+                <img class="h-10 mr-4 rounded-full" :src="profileImg" alt="" />
+
+                <p v-if="this.fullname !== null">
+                  {{ this.fullName }}
+                </p>
+                <p v-if="this.fullname == null">Profile</p>
               </button>
             </div>
           </div>
         </ul>
       </nav>
     </div>
-    <router-view />
+    <router-view :key="$route.fullPath" />
   </body>
 </template>
 <script>
@@ -280,13 +284,6 @@ export default {
   //   //this.showDashboardMenu();
   // },
 
-  computed: {
-    //check if user is logged in then display username from localstorage
-    fullName() {
-      return localStorage.getItem("fullName");
-    },
-  },
-
   //watch if the current page is dashboard then show the dashboard icon
   watch: {
     // watch if isLoggedin is true then show the username
@@ -302,12 +299,6 @@ export default {
         this.showDashboardIcon = false;
       }
     },
-    // isLoggedInFunction() {
-    //   if (this.isLoggedIn == true) {
-    //     this.displayUsername();
-    //   }
-    // },
-    // constanlty check if the user is logged in
   },
 
   created() {
@@ -319,39 +310,26 @@ export default {
   //what if screen is mobile size then show the mobile menu
   mounted() {
     this.handleResize();
-    this.displayUsername();
 
     // this.getCandidateUserID();
   },
   methods: {
     isLoggedInFunction() {
-      localStorage.getItem("userID");
-      this.userID = localStorage.getItem("userID");
-      if (this.isLoggedIn == true) {
-        console.log(this.userID);
+      console.log(localStorage.getItem("fullName"));
+      if (localStorage.getItem("fullName") != null) {
+        console.log("logged in");
+        this.fullName = localStorage.getItem("fullName");
+        this.usernameDisplayed = true;
+        localStorage.setItem("usernameDisplayed", this.usernameDisplayed);
+        this.mentorID = localStorage.getItem("userID");
         axios
           .get(
-            "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
-              this.userID +
-              "/"
+            "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/expert/profile/" +
+              this.mentorID
           )
           .then((response) => {
-            console.log(response.data);
-            // get first name and last name merge them and store in local storage
-            this.fullName =
-              response.data.firstName + " " + response.data.lastName;
-            localStorage.setItem("fullName", this.fullName);
-            console.log(this.fullName);
-            //wait 1 second and then redirect to dashboard
-            setTimeout(() => {
-              this.$router.push("/mentorpage");
-            }, 1000);
-
-            // localStorage.setItem("fullName", response.data.full_name);
-            // localStorage.setItem("username", response.data.username);
-          })
-          .catch((error) => {
-            console.log(error);
+            this.profileImg = response.data.profileImg;
+            // console.log(this.profileImg);
           });
       }
     },
@@ -428,7 +406,7 @@ export default {
         localStorage.getItem("fullName")
           ? (this.fullName = localStorage.getItem("fullName"))
           : null;
-        console.log(this.fullName);
+        // console.log(this.fullName);
       }
     },
     handleSignOut() {
