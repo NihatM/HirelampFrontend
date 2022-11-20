@@ -88,12 +88,12 @@
         <div class="relative">
           <div class="image-preview">
             <img
-              v-if="newImage !== null"
+              v-if="newImage !== ''"
               class="preview rounded-full h-32 w-32"
               :src="newImage"
             />
             <img
-              v-if="newImage == null"
+              v-if="newImage == ''"
               class="preview rounded-full h-32 w-32"
               :src="mentorDatas.profileImg"
             />
@@ -223,47 +223,50 @@
         v-bind:class="{ hidden: openTab !== 2, block: openTab === 2 }"
       >
         <div class="flex flex-row space-x-6 px-4">
-          <div class="flex flex-row space-x-4">
-            <div class="flex flex-col space-y-2">
-              <p class="text-left text-xs text-gray-400">Field</p>
-              <input
-                type="text"
-                class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                placeholder="Field"
-                v-model="mentorDatas.position"
-              />
+          <div class="flex flex-col md:flex-row space-y-4">
+            <div class="flex md:block space-x-4">
+              <div class="flex flex-col space-y-2">
+                <p class="text-left text-xs text-gray-400">Field</p>
+                <input
+                  type="text"
+                  class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+                  placeholder="Field"
+                  v-model="mentorDatas.position"
+                />
+              </div>
+              <div class="flex flex-col space-y-2">
+                <p class="text-left text-xs text-gray-400">Company</p>
+
+                <input
+                  type="text"
+                  class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+                  placeholder="Company"
+                  v-model="mentorDatas.currentCompany"
+                />
+              </div>
             </div>
-            <div class="flex flex-col space-y-2">
-              <p class="text-left text-xs text-gray-400">Company</p>
+            <div class="flex md:block space-x-4">
+              <div class="flex flex-col space-y-2">
+                <p class="text-left text-xs text-gray-400">Country or City</p>
 
-              <input
-                type="text"
-                class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                placeholder="Company"
-                v-model="mentorDatas.currentCompany"
-              />
-            </div>
+                <input
+                  type="text"
+                  class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+                  placeholder="Country or City"
+                  v-model="mentorDatas.location"
+                />
+              </div>
 
-            <div class="flex flex-col space-y-2">
-              <p class="text-left text-xs text-gray-400">Country or City</p>
+              <div class="flex flex-col space-y-2">
+                <p class="text-left text-xs text-gray-400">Your services fee</p>
 
-              <input
-                type="text"
-                class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                placeholder="Country or City"
-                v-model="mentorDatas.location"
-              />
-            </div>
-
-            <div class="flex flex-col space-y-2">
-              <p class="text-left text-xs text-gray-400">Your services fee</p>
-
-              <input
-                type="text"
-                class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                placeholder="Your service fee"
-                v-model="mentorDatas.price"
-              />
+                <input
+                  type="text"
+                  class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+                  placeholder="Your service fee"
+                  v-model="mentorDatas.price"
+                />
+              </div>
             </div>
           </div>
         </div>

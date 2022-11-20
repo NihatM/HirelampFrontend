@@ -45,7 +45,7 @@
           <li class="nav-item text-left">
             <a class="nav-link" href="#"
               ><router-link
-                to="/dashboard/aboutme"
+                :to="`${newRoute}/aboutme`"
                 @click="showDashboard = !showDashboard"
                 class="text-gray-800 hover:text-custom-blue bt-navbar flex"
               >
@@ -63,7 +63,7 @@
           <li class="nav-item text-left">
             <a class="nav-link" href="#"
               ><router-link
-                to="/dashboard/sessions"
+                :to="`${newRoute}/sessions`"
                 @click="showDashboard = !showDashboard"
                 class="text-gray-800 hover:text-custom-blue truncate bt-navbar flex"
               >
@@ -80,7 +80,7 @@
           <li class="nav-item text-left">
             <a class="nav-link" href="#"
               ><router-link
-                to="/dashboard/security"
+                :to="`${newRoute}/security`"
                 @click="showDashboard = !showDashboard"
                 class="text-gray-800 hover:text-custom-blue truncate bt-navbar flex"
               >
@@ -171,8 +171,9 @@
                 type="button"
                 class="text-gray-800 hover:text-custom-blue truncate bt-navbar flex flex-row justify-center align-middle content-center items-center"
               >
-                <img class="h-10 w-10 rounded-full" :src="profileImg" alt="" />
-                <span class="pl-2 pt-1">{{ this.fullName }}</span>
+                <!-- <img class="h-10 w-10 rounded-full" :src="profileImg" alt="" />
+                <span class="pl-2 pt-1">{{ this.fullName }}</span> -->
+                <p>Profile</p>
               </button>
             </div>
           </div>
@@ -243,10 +244,11 @@
               >
                 <img class="h-10 mr-4 rounded-full" :src="profileImg" alt="" />
 
-                <p v-if="this.fullname !== null">
+                <!-- <p v-if="this.fullname !== null">
                   {{ this.fullName }}
                 </p>
-                <p v-if="this.fullname == null">Profile</p>
+                <p v-if="this.fullname == null">Profile</p> -->
+                <p>Profile</p>
               </button>
             </div>
           </div>
@@ -292,7 +294,11 @@ export default {
       if (
         to.path == "/dashboard/aboutme" ||
         to.path == "/dashboard/sessions" ||
-        to.path == "/dashboard/security"
+        to.path == "/dashboard/security" ||
+        to.path == "/mentorDashboard/aboutme" ||
+        to.path == "/mentorDashboard/sessions" ||
+        to.path == "/mentorDashboard/security" ||
+        to.path == "/mentorFeedback"
       ) {
         this.showDashboardIcon = true;
       } else {
@@ -302,18 +308,37 @@ export default {
   },
 
   created() {
-    this.isLoggedInFunction();
+    // this.isLoggedInFunction();
   },
 
   beforeMount() {},
 
   //what if screen is mobile size then show the mobile menu
   mounted() {
+    window.addEventListener("resize", this.handleResize);
+    this.getCandidateUserID();
     this.handleResize();
 
     // this.getCandidateUserID();
   },
   methods: {
+    async getCandidateUserID() {
+      localStorage.getItem("userID");
+      this.userID = localStorage.getItem("userID");
+      console.log(this.userID);
+      localStorage.getItem("isMentor");
+
+      this.isMentor = localStorage.getItem("isMentor");
+      console.log(localStorage.getItem("isMentor"));
+      console.log(this.isMentor);
+      if (this.isMentor == "true") {
+        this.newRoute = "/mentorDashboard";
+      } else if (this.isMentor == "false") {
+        this.newRoute = "/dashboard";
+      }
+      // this.changeRoute();
+    },
+
     isLoggedInFunction() {
       console.log(localStorage.getItem("fullName"));
       if (localStorage.getItem("fullName") != null) {
@@ -349,7 +374,10 @@ export default {
     },
     // if the page is dashboard then show the dashboard menu
     showDashboardMenu() {
-      if (this.$route.path == "/dashboard/aboutme") {
+      if (
+        this.$route.path == "/dashboard/aboutme" ||
+        this.$route.path == "/mentorDashboard/aboutme"
+      ) {
         this.showDashboard = true;
         this.showDashboardIcon = true;
       } else {
@@ -365,41 +393,8 @@ export default {
         : this.$router.push("/dashboard/aboutme");
 
       console.log(localStorage.getItem("isMentor"));
-      // if (this.isMentor == true) {
-      //   this.$router.push("/mentorDashboard/aboutme");
-      // } else {
-      //   this.$router.push("/dashboard/aboutme");
-      // }
     },
 
-    // async getCandidateUserID() {
-    //   console.log(this.isLoggedIn);
-    //   if (this.isLoggedIn == true) {
-    //     localStorage.getItem("userID")
-    //       ? (this.userID = localStorage.getItem("userID"))
-    //       : null;
-    //     this.getCandidateData(this.userID);
-    //   }
-    // },
-    // async getCandidateData(userID) {
-    //   axios
-    //     .get(
-    //       "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
-    //         userID +
-    //         "/"
-    //     )
-    //     .then((response) => {
-    //       this.candDatas = response.data;
-    //       this.profileImg = this.candDatas.profileImg;
-    //       this.fullName =
-    //         this.candDatas.firstName + " " + this.candDatas.lastName;
-    //       this.isLoading = false;
-    //       //upcoming sessions
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
     displayUsername() {
       //if the current page is MentorPage then show the user name
       if (this.isLoggedIn == true) {
@@ -419,6 +414,8 @@ export default {
             localStorage.removeItem("fullName");
             localStorage.removeItem("userID");
             localStorage.removeItem("isMentor");
+            console.log("sign out");
+            console.log(localStorage.getItem("isMentor"));
 
             this.$router.push("/");
             console.log("Sign out successful");

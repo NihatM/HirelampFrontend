@@ -3,14 +3,14 @@
     <div class="px-4">
       <div class="flex justify-center align-middle items-center p-4">
         <img
-          :src="candDatas.profileImg"
+          :src="mentorDatas.profileImg"
           alt=""
           class="rounded-full h-32 w-32"
         />
       </div>
       <div>
-        <p>{{ candDatas.firstName }} {{ candDatas.lastName }}</p>
-        <p class="text-gray-500">{{ candDatas.email }}</p>
+        <p>{{ mentorDatas.firstName }} {{ mentorDatas.lastName }}</p>
+        <p class="text-gray-500">{{ mentorDatas.email }}</p>
       </div>
       <div class="flex flex-col text-left bt-dash divide-y-2 py-12">
         <router-link
@@ -113,11 +113,11 @@ import axios from "axios";
 import firebase from "../../utilities/firebase";
 
 export default {
-  name: "CandidateDashboard",
+  name: "MentorDashboard",
 
   data() {
     return {
-      candDatas: "",
+      mentorDatas: "",
       isLoggedIn: true,
       openTab: 1,
     };
@@ -174,8 +174,8 @@ export default {
             "/"
         )
         .then((response) => {
-          this.candDatas = response.data;
-          console.log(this.candDatas);
+          this.mentorDatas = response.data;
+          console.log(this.mentorDatas);
           this.isLoading = false;
         })
         .catch((error) => {

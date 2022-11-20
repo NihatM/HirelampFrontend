@@ -5,12 +5,12 @@
         <div class="relative">
           <div class="image-preview">
             <img
-              v-if="newImage !== null"
+              v-if="newImage !== ''"
               class="preview rounded-full h-32 w-32"
               :src="newImage"
             />
             <img
-              v-if="newImage == null"
+              v-if="newImage == ''"
               class="preview rounded-full h-32 w-32"
               :src="candDatas.profileImg"
             />
@@ -113,6 +113,9 @@ export default {
   mounted() {
     // this.getCandidateUserID();
   },
+  beforeMount() {
+    this.getCandidateUserID();
+  },
 
   methods: {
     previewImage(event) {
@@ -125,78 +128,143 @@ export default {
         reader.readAsDataURL(input.files[0]);
         this.candDatas.profileImg = input.files[0];
       }
+      // if new image is not uploaded, use the old image
+      // else {
+      //   this.newImage = this.candDatas.profileImg;
+      // }
     },
 
     // at click div open input tag
-    imageInput() {
+    async imageInput() {
       document.getElementById("imageInput").click();
     },
 
-    // onFileSelected(event) {
-    //   this.file = event.target.files[0];
-    //   console.log(this.file);
-    // },
-    // onImageSelected(event) {
-    //   this.newImage = event.target.files[0];
-    //   console.log(this.newImage);
-    // },
-    // changeImage() {
-    //   document.getElementById("fileUpload").click();
-    //   //this.candDatas.profileImg = this.newImage;
-    //   console.log(this.newImage);
-    //   console.log(this.candDatas.profileImg);
+    // push updates to database
+    // async updateCandidate(userID) {
+    //   if (this.newImage) {
+    //     // reader = new FileReader();
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(this.candDatas.profileImg);
+    //     reader.onload = () => {
+    //       this.candDatas.profileImg = reader.result;
+    //       const formData = new FormData();
+    //       formData.append("firstName", this.candDatas.firstName);
+    //       formData.append("lastName", this.candDatas.lastName);
+    //       formData.append("phone", this.candDatas.phone);
+    //       formData.append("email", this.candDatas.email);
+    //       formData.append("linkedinUrl", this.candDatas.linkedinUrl);
+    //       formData.append("profileImg", this.candDatas.profileImg);
+    //       formData.append("cv", this.file);
+    //       axios
+    //         .put(
+    //           "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/updateMentee/" +
+    //             userID +
+    //             "/",
+    //           formData
+    //         )
+    //         .then((res) => {
+    //           console.log(res);
+    //         })
+    //         .catch((err) => {
+    //           console.log(err);
+    //         });
+    //     };
+    //   }
     // },
 
-    // push updates to database
-    updateCandidate(userID) {
+    async updateCandidate() {
+      if (this.newImage) {
+        // reader = new FileReader();
+        const reader = new FileReader();
+        reader.readAsDataURL(this.candDatas.profileImg);
+        reader.onload = () => {
+          this.candDatas.profileImg = reader.result;
+
+          console.log(this.candDatas.profileImg);
+          console.log(this.userID);
+
+          fetch(
+            "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/updateMentee/" +
+              this.userID +
+              "/",
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                profileImg: this.candDatas.profileImg,
+              }),
+            }
+          );
+        };
+      }
+
       const formData = new FormData();
+
+      //if null then set to empty string
+      for (let key in this.candDatas) {
+        if (this.candDatas[key] == null && key != "profileImg") {
+          console.log(key, "is null");
+          this.candDatas[key] = "N/A";
+        }
+      }
+
       formData.append("firstName", this.candDatas.firstName);
       formData.append("lastName", this.candDatas.lastName);
       formData.append("phone", this.candDatas.phone);
       formData.append("email", this.candDatas.email);
       formData.append("linkedinUrl", this.candDatas.linkedinUrl);
-      formData.append("profileImg", this.candDatas.profileImg);
       formData.append("cv", this.file);
-      axios
-        .put(
-          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/updateMentee/" +
-            userID +
-            "/",
-          formData
-        )
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+
+      setTimeout(() => {
+        axios
+          .put(
+            "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/updateMentee/" +
+              localStorage.getItem("userID") +
+              "/",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+            location.reload();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, 1000);
     },
 
-    // async getCandidateUserID() {
-    //   localStorage.getItem("userID")
-    //     ? (this.userID = localStorage.getItem("userID"))
-    //     : null;
-    //   console.log(this.userID);
-    //   this.getCandidateData(this.userID);
-    // },
+    async getCandidateUserID() {
+      localStorage.getItem("userID")
+        ? (this.userID = localStorage.getItem("userID"))
+        : null;
+      console.log(this.userID);
+      this.getCandidateData(this.userID);
+    },
 
-    // async getCandidateData(userID) {
-    //   axios
-    //     .get(
-    //       "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
-    //         userID +
-    //         "/"
-    //     )
-    //     .then((response) => {
-    //       console.log(response);
-    //       this.candDatas = response.data;
-    //       console.log(this.candDatas);
-    //       this.isLoading = false;
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
+    async getCandidateData(userID) {
+      axios
+        .get(
+          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentee/" +
+            userID +
+            "/"
+        )
+        .then((response) => {
+          console.log(response);
+          this.candDatas = response.data;
+          console.log(this.candDatas);
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
 
     sendNewUserData() {
       const formData = new FormData();

@@ -4,42 +4,51 @@
       <p class="bt-md text-left text-gray-800">Sessions</p>
     </div>
     <ul
-      class="nav nav-tabs flex flex-row flex-wrap list-none border-b-0 pl-0 mb-0 md:mb-4"
+      class="nav nav-tabs flex flex-row flex-wrap list-none border-b-0 pl-0 mb-0 md:mb-4 space-x-4"
       id="tabs-tab"
       role="tablist"
     >
-      <li class="nav-item flex" role="presentation">
+      <li
+        class="nav-item duration-300 ease-in-out hover:text-blue-500"
+        role="presentation"
+        v-bind:class="{
+          'text-gray-900 border-b-2  border-gray-200': openTab !== 1,
+          'text-custom-blue border-b-2 border-custom-blue': openTab === 1,
+        }"
+      >
         <a
-          class="cursor-pointer nav-link block font-medium text-xs leading-tight uppercase border-x-2 border-t-0 border-b-2 px-6 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent underline underline-offset-4 decoration-8 hover:undeline-custom-blue"
-          v-bind:class="{
-            'text-gray-900 bg-gray-200': openTab !== 1,
-            'text-custom-blue bg-pink-600 ': openTab === 1,
-          }"
+          class="cursor-pointer px-2 block font-medium text-sm leading-tight my-2"
           v-on:click="toggleTabs(1)"
-          >Upcoming<span class="px-2 text-white bg-red-600 rounded-full">{{
-            upcomingSessions
-          }}</span>
+          >Upcoming<span
+            class="text-xs px-2 text-white bg-red-600 rounded-full"
+            >{{ upcomingSessions }}</span
+          >
         </a>
       </li>
-      <li class="nav-item" role="presentation">
+      <li
+        class="nav-item duration-300 ease-in-out hover:text-blue-500"
+        role="presentation"
+        v-bind:class="{
+          'text-gray-900 border-b-2  border-gray-200': openTab !== 2,
+          'text-custom-blue border-b-2 border-custom-blue': openTab === 2,
+        }"
+      >
         <a
-          class="cursor-pointer nav-link block font-medium text-xs leading-tight uppercase border-x-0 border-t-0 border-b-2 border-transparent px-6 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
-          v-bind:class="{
-            'text-gray-900 bg-gray-200': openTab !== 2,
-            'text-custom-blue bg-pink-600 underline underline-offset-8 underline-4':
-              openTab === 2,
-          }"
+          class="cursor-pointer px-2 block font-medium text-sm leading-tight my-2"
           v-on:click="toggleTabs(2)"
           >Past</a
         >
       </li>
-      <li class="nav-item" role="presentation">
+      <li
+        class="nav-item duration-300 ease-in-out hover:text-blue-500"
+        role="presentation"
+        v-bind:class="{
+          'text-gray-900 border-b-2  border-gray-200': openTab !== 3,
+          'text-custom-blue border-b-2 border-custom-blue': openTab === 3,
+        }"
+      >
         <a
-          class="cursor-pointer nav-link block font-medium text-xs leading-tight uppercase border-x-0 border-t-0 border-b-2 border-transparent px-6 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
-          v-bind:class="{
-            'text-gray-900 bg-gray-200': openTab !== 3,
-            'text-custom-blue bg-pink-600': openTab === 3,
-          }"
+          class="cursor-pointer px-2 block font-medium text-sm leading-tight my-2"
           v-on:click="toggleTabs(3)"
           >All</a
         >
@@ -48,8 +57,15 @@
     <div class="tab-content" id="tabs-tabContent">
       <div v-bind:class="{ hidden: openTab !== 1, block: openTab === 1 }">
         <!-- list of upcoming sessions -->
-
-        <ul>
+        <div v-if="noSessionsUpcoming == true" class="flex h-96">
+          <div
+            class="flex flex-col justify-center align-middle content-center items-center"
+          >
+            <p class="text-center bt-book py-8">No upcoming sessions</p>
+            <img src="../../assets/noSessions.svg" alt="" class="h-50 w-50" />
+          </div>
+        </div>
+        <ul v-if="noSessionsUpcoming == false">
           <li
             class="flex py-2"
             v-for="candData in candDatas"
@@ -126,7 +142,15 @@
       </div>
     </div>
     <div v-bind:class="{ hidden: openTab !== 2, block: openTab === 2 }">
-      <ul>
+      <div v-if="noSessionsPast == true" class="flex h-96">
+        <div
+          class="flex flex-col justify-center align-middle content-center items-center"
+        >
+          <p class="text-center bt-book py-8">No upcoming sessions</p>
+          <img src="../../assets/noSessions.svg" alt="" class="h-50 w-50" />
+        </div>
+      </div>
+      <ul v-if="noSessionsPast == false">
         <li
           class="flex p-2"
           v-for="pastCandData in pastCandDatas"
@@ -186,7 +210,15 @@
       </ul>
     </div>
     <div v-bind:class="{ hidden: openTab !== 3, block: openTab === 3 }">
-      <ul>
+      <div v-if="noSessionsAll == true" class="flex h-96">
+        <div
+          class="flex flex-col justify-center align-middle content-center items-center"
+        >
+          <p class="text-center bt-book py-8">No upcoming sessions</p>
+          <img src="../../assets/noSessions.svg" alt="" class="h-50 w-50" />
+        </div>
+      </div>
+      <ul v-if="noSessionsAll == false">
         <li
           class="flex p-2"
           v-for="allCandData in allCandDatas"
@@ -260,6 +292,9 @@ export default {
       allCandDatas: "",
       openTab: 1,
       upcomingSessions: 0,
+      noSessionsUpcoming: false,
+      noSessionsPast: false,
+      noSessionsAll: false,
     };
   },
 
@@ -328,6 +363,9 @@ export default {
 
           // the number of upcoming sessions
           this.upcomingSessions = this.candDatas.length;
+          if (this.upcomingSessions == 0) {
+            this.noSessionsUpcoming = true;
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -347,6 +385,9 @@ export default {
           this.pastCandDatas.forEach((element) => {
             element.date = element.date.split("T")[0];
           });
+          if (this.pastCandDatas.length == 0) {
+            this.noSessionsPast = true;
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -375,6 +416,9 @@ export default {
           // this.candDatas.forEach((candData) => {
           //   candData.date = new Date(candData.date).toLocaleDateString();
           // });
+          if (this.allCandDatas.length == 0) {
+            this.noSessionsAll = true;
+          }
         })
         .catch((error) => {
           console.log(error);

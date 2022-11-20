@@ -33,7 +33,7 @@
           <p class="flex align-middle active:text-custom-blue">Sessions</p>
         </router-link>
         <router-link
-          v-if="isMentor"
+          v-if="isMentor == true"
           class="flex align-middle py-4"
           :to="`${newRoute}/payment`"
         >
@@ -117,6 +117,7 @@ export default {
             localStorage.removeItem("isMentor");
 
             // console.log(localStorage.getItem("userEmail"));
+
             console.log(localStorage.getItem("fullName"));
             console.log(localStorage.getItem("userID"));
             console.log(localStorage.getItem("isMentor"));
@@ -134,24 +135,28 @@ export default {
       this.userID = localStorage.getItem("userID");
       console.log(this.userID);
       localStorage.getItem("isMentor");
+
       this.isMentor = localStorage.getItem("isMentor");
       console.log(localStorage.getItem("isMentor"));
-      if (localStorage.getItem("isMentor") == "true") {
-        this.getMentorData(localStorage.getItem("userID"));
-      } else {
-        this.getCandidateData(localStorage.getItem("userID"));
-      }
-      this.changeRoute();
-    },
-
-    changeRoute() {
-      if (localStorage.getItem("isMentor") == "true") {
-        // navigate to mentorDashboard instad of dashboard
+      console.log(this.isMentor);
+      if (this.isMentor == "true") {
+        this.getMentorData(this.userID);
         this.newRoute = "/mentorDashboard";
-      } else {
+      } else if (this.isMentor == "false") {
+        this.getCandidateData(this.userID);
         this.newRoute = "/dashboard";
       }
+      // this.changeRoute();
     },
+
+    // changeRoute() {
+    //   if (localStorage.getItem("isMentor") == "true") {
+    //     // navigate to mentorDashboard instad of dashboard
+    //     this.newRoute = "/mentorDashboard";
+    //   } else {
+    //     this.newRoute = "/dashboard";
+    //   }
+    // },
     async getCandidateData(userID) {
       console.log(userID);
       axios

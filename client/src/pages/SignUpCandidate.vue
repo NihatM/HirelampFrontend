@@ -1,7 +1,7 @@
 <template>
-  <body class="md:px-32">
+  <body class="">
     <div
-      class="pt-11 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-row col-end-1"
+      class="pt-11 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-row col-end-1 px-4 md:px-32"
     >
       <div
         class="hidden md:visible w-full md:w-1/2 lg:w-1/2 xl:w-1/2 md:mb-14 xl:mb-0 relative md:flex flex-col items-center justify-center"
@@ -24,7 +24,7 @@
           </button>
         </div>
         <div
-          class="md:shadow-xl rounded-b-2xl rounded-tl-2xl w-full md:w-8/12 px-14 bg-white"
+          class="shadow-xl rounded-b-2xl rounded-tl-2xl w-full md:w-8/12 px-14 bg-white"
         >
           <div class="flex flex-col">
             <p class="bt-medium pb-11 pt-8">Register</p>
