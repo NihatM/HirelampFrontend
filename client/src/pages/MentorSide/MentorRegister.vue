@@ -6,7 +6,7 @@
       <div
         class="hidden md:visible w-full md:w-1/2 lg:w-1/2 xl:w-1/2 md:mb-14 xl:mb-0 relative md:flex flex-col items-center justify-center"
       >
-        <img src="../../assets/login.svg" alt="" class="w-full pb-8" />
+        <img src="../../assets/login.svg" alt="" class="w-8/12 pb-8" />
         <p class="bt-md">Welcome aboard my friend</p>
         <p class="bt-book">just a couple of clicks and we start</p>
       </div>
@@ -18,7 +18,7 @@
             class="bg-custom-blue text-white px-2 py-1.5 rounded-t-xl shadow-2xl bt-placeholder hover:bg-blue-500 duration-300"
           >
             <a href="/signup" class="font-bold hover:text-gray-50"
-              >Register as a candidate</a
+              >Register as a user</a
             >
           </button>
         </div>

@@ -6,7 +6,7 @@
       <div
         class="hidden md:visible w-full md:w-1/2 lg:w-1/2 xl:w-1/2 md:mb-14 xl:mb-0 relative md:flex flex-col items-center justify-center"
       >
-        <img src="../assets/login.svg" alt="" class="w-full pb-8" />
+        <img src="../assets/login.svg" alt="" class="w-8/12 pb-8" />
         <p class="bt-md">Welcome aboard my friend</p>
         <p class="bt-book">just a couple of clicks and we start</p>
       </div>
@@ -106,7 +106,7 @@
               <div class="flex justify-center items-center">
                 <p class="py-6 px-2.5">Already have an account?</p>
                 <a
-                  href="/mentorRegister"
+                  href="/login"
                   class="underline underline-offset-2 text-custom-blue font-bold"
                   >Login</a
                 >

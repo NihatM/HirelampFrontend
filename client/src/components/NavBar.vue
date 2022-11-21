@@ -15,7 +15,7 @@
           <!-- v-if="this.$store.state.userType === 'candidate'" -->
           <div
             v-if="showDashboardIcon"
-            @click="showDashboard = true && !showMenu"
+            @click="showDashboard = !showDashboard && !showMenuMobile"
             class="flex md:hidden px-4"
           >
             <button

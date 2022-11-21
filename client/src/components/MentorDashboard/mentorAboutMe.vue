@@ -364,9 +364,7 @@
             </div>
           </div>
           <div class="flex flex-col space-y-2">
-            <p class="text-left text-xs text-gray-400">
-              Choose your available time
-            </p>
+            <p class="text-left text-xs text-gray-400">Choose time slots</p>
 
             <button
               @click="this.openModal = true"
