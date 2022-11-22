@@ -139,7 +139,8 @@ export default {
     async getPaymentData() {
       axios
         .get(
-          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/payments/8d49ebf8-4634-454d-9cbf-a512b94b871f/"
+          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/payments/" +
+            localStorage.getItem("userID")
         )
         .then((response) => {
           this.candDatas = response.data;

@@ -107,15 +107,18 @@
                   </div>
                 </div>
                 <div class="flex flex-row justify-between pt-8">
-                  <div class="flex items-center">
-                    <button @click="giveFeedback()" class="">
+                  <!-- <div class="flex items-center">
+                    <button
+                      @click="seeUpcomingRequest(candData.mentorID)"
+                      class=""
+                    >
                       <p
                         class="bt-footer text-custom-blue md:underline bt-button py-2"
                       >
                         See request
                       </p>
                     </button>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -172,10 +175,9 @@
               </div>
 
               <div class="flex flex-row justify-between pt-8">
-                <div class="flex items-center">
-                  <!-- border-2 border-custom-blue rounded-full -->
+                <!-- <div class="flex items-center">
                   <button
-                    @click="seeYourRequest(pastCandData.mentorID)"
+                    @click="seePastRequest(pastCandData.mentorID)"
                     class=""
                   >
                     <p
@@ -184,7 +186,7 @@
                       See request
                     </p>
                   </button>
-                </div>
+                </div> -->
                 <div>
                   <!-- <router-link
                         to="/Dashboard/sessions/rateMentor/08PUJIQJ9BRVF3hmoSptTDrhzys2"
@@ -258,13 +260,13 @@
               <div
                 class="flex flex-row justify-between content-end align-bottom pt-8"
               >
-                <div
+                <!-- <div
                   class="flex align-middle justify-center items-center content-center"
                 >
                   <p class="bt-footer text-custom-blue underline">
                     See request
                   </p>
-                </div>
+                </div> -->
                 <div v-if="this.buttonTextBool">
                   <button
                     v-if="
@@ -325,15 +327,31 @@ export default {
     giveFeedback() {
       // localStorage.getItem("userID");
       // this.$router.push("/Dashboard/sessions/rateMentor");
+
       this.$router.push("/mentorFeedback/" + localStorage.getItem("userID"));
       // this.$router.push("/rateMentorPage/" + mentorId);
     },
 
-    seeYourRequest(mentorID) {
-      this.$router.push({
-        name: "seeYourRequest/",
-        params: { mentorID: mentorID },
-      });
+    seeUpcomingRequest(mentorId) {
+      this.$router.push("/seeUpcomingRequest/" + mentorId);
+      this.timeFlag = "Upcoming";
+      if (this.timeFlag == "Upcoming") {
+        localStorage.setItem("timeFlag", this.timeFlag);
+      }
+    },
+
+    seePastRequest(mentorID) {
+      //Check the timeFlag of the selected session
+      this.timeFlag = "Past";
+      if (this.timeFlag == "Past") {
+        localStorage.setItem("timeFlag", this.timeFlag);
+      }
+
+      this.$router.push("/mentorSeeRequest/" + mentorID);
+      // this.$router.push({
+      //   name: "mentorSeeR/",
+      //   params: { mentorID: mentorID },
+      // });
     },
 
     //if the session is upcoming then don't show the rate mentor button if the session is past then show the rate mentor button
@@ -356,9 +374,7 @@ export default {
       localStorage.setItem("sessionID", sessionId);
 
       //console.log("jajajajjaja");
-      this.$router.push(
-        "/mentorFeedback/afcebf76-657c-44f3-9f44-0d79dfd96c96/"
-      );
+      this.$router.push("/mentorFeedback/" + localStorage.getItem("userID"));
     },
 
     async getUpcomingCandidateData() {

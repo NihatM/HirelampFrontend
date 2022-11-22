@@ -222,9 +222,13 @@
         class=""
         v-bind:class="{ hidden: openTab !== 2, block: openTab === 2 }"
       >
-        <div class="flex flex-row space-x-6 px-4">
-          <div class="flex flex-col md:flex-row space-y-4">
-            <div class="flex md:block space-x-4">
+        <div class="flex flex-row md:space-x-6 px-4 items-stretch">
+          <!-- class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center items-center w-full" -->
+
+          <div
+            class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-between items-center w-full"
+          >
+            <div class="flex md:block space-x-4 md:space-x-0">
               <div class="flex flex-col space-y-2">
                 <p class="text-left text-xs text-gray-400">Field</p>
                 <input
@@ -236,7 +240,6 @@
               </div>
               <div class="flex flex-col space-y-2">
                 <p class="text-left text-xs text-gray-400">Company</p>
-
                 <input
                   type="text"
                   class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
@@ -245,7 +248,7 @@
                 />
               </div>
             </div>
-            <div class="flex md:block space-x-4">
+            <div class="flex md:block space-x-4 md:space-x-0">
               <div class="flex flex-col space-y-2">
                 <p class="text-left text-xs text-gray-400">Country or City</p>
 

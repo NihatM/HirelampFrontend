@@ -161,7 +161,7 @@
 
           <!-- This example requires Tailwind CSS v2.0+ -->
           <div class="relative inline-block text-left">
-            <div class="w-full">
+            <div class="w-full pl-3">
               <button
                 v-if="isLoggedIn"
                 @click="

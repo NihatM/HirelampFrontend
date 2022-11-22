@@ -29,6 +29,7 @@ import mentorSessions from "../components/MentorDashboard/mentorSessions.vue";
 import mentorSecurity from "../components/MentorDashboard/mentorSecurity.vue";
 import mentorPayment from "../components/MentorDashboard/mentorPayment.vue";
 import mentorFeedback from "../pages/MentorSide/mentorFeedback.vue";
+import mentorSeeRequest from "../pages/MentorSide/mentorSeeRequest.vue";
 import notFoundPage from "../pages/notFoundPage.vue";
 import PopupCalendar from "../components/MentorDashboard/PopupCalendar.vue";
 
@@ -265,6 +266,12 @@ const routes = [
         component: mentorPayment,
       },
     ],
+  },
+
+  {
+    path: "/mentorSeeRequest/:id",
+    name: "mentorSeeRequest",
+    component: mentorSeeRequest,
   },
 
   // {
