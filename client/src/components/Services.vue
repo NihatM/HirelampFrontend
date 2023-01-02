@@ -65,9 +65,6 @@ export default {
     searchCat(category) {
       this.$router.push("/mentors/categories/" + category);
     },
-    mentorPage() {
-      this.$router.push("/mentorpage");
-    },
   },
 };
 </script>

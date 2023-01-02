@@ -32,6 +32,7 @@ import mentorFeedback from "../pages/MentorSide/mentorFeedback.vue";
 import mentorSeeRequest from "../pages/MentorSide/mentorSeeRequest.vue";
 import notFoundPage from "../pages/notFoundPage.vue";
 import PopupCalendar from "../components/MentorDashboard/PopupCalendar.vue";
+import webinarPage from "../pages/webinarPage.vue";
 
 import { getAuth } from "firebase/auth";
 
@@ -117,9 +118,10 @@ const routes = [
   },
 
   {
-    path: "/mentorpage",
+    path: "/mentors",
     name: "Mentor Page",
     component: MentorPage,
+    props: true,
   },
   {
     path: "/mentors/categories/:category",
@@ -130,14 +132,16 @@ const routes = [
     // },
   },
   {
-    path: "/mentordetails/:id",
+    path: "/mentor/:id",
     name: "Mentor Details",
     component: MentorDetails,
+    props: true,
   },
   {
-    path: "/mentordetails/:str",
+    path: "/mentor/:str",
     name: "MentorDetails",
     component: MentorDetails,
+    props: true,
   },
 
   {
@@ -318,6 +322,11 @@ const routes = [
   //     },
   //   ],
   // },
+  {
+    path: "/webinarPage",
+    name: "webinarPage",
+    component: webinarPage,
+  },
 ];
 
 const router = createRouter({

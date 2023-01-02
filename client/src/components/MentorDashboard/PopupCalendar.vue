@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-md flex justify-center">
     <div class="space-y-8 py-8 text-left flex flex-col justify-center">
-      <div class="flex justify-between text-left">
+      <div class="flex md:flex-row flex-col md:justify-between">
         <div class="">
           <input
             id="monday"
@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <div class="flex justify-between">
+      <div class="flex md:flex-row flex-col md:justify-between">
         <div class="">
           <input
             id="checkbox-item-1"
@@ -63,7 +63,7 @@
         </div>
       </div>
 
-      <div class="flex justify-between">
+      <div class="flex md:flex-row flex-col md:justify-between">
         <div class="">
           <input
             id="checkbox-item-1"
@@ -82,6 +82,7 @@
         </div>
         <div class="px-4">
           <textarea
+            v-model="availableTimes.wednesday"
             class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
             name=""
             id=""
@@ -93,7 +94,7 @@
         </div>
       </div>
 
-      <div class="flex justify-between">
+      <div class="flex md:flex-row flex-col md:justify-between">
         <div class="">
           <input
             id="checkbox-item-1"
@@ -112,6 +113,7 @@
         </div>
         <div class="px-4">
           <textarea
+            v-model="availableTimes.thursday"
             class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
             name=""
             id=""
@@ -123,7 +125,7 @@
         </div>
       </div>
 
-      <div class="flex justify-between">
+      <div class="flex md:flex-row flex-col md:justify-between">
         <div class="">
           <input
             id="checkbox-item-1"
@@ -142,6 +144,7 @@
         </div>
         <div class="px-4">
           <textarea
+            v-model="availableTimes.friday"
             class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
             name=""
             id=""
@@ -153,7 +156,7 @@
         </div>
       </div>
 
-      <div class="flex justify-between">
+      <div class="flex md:flex-row flex-col md:justify-between">
         <div class="">
           <input
             id="checkbox-item-1"
@@ -172,6 +175,7 @@
         </div>
         <div class="px-4">
           <textarea
+            v-model="availableTimes.saturday"
             class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
             name=""
             id=""
@@ -183,7 +187,7 @@
         </div>
       </div>
 
-      <div class="flex justify-between">
+      <div class="flex md:flex-row flex-col md:justify-between">
         <div class="">
           <input
             id="checkbox-item-1"
@@ -202,6 +206,7 @@
         </div>
         <div class="px-4">
           <textarea
+            v-model="availableTimes.sunday"
             class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
             name=""
             id=""
@@ -225,6 +230,8 @@
 </template>
 
 <script>
+import { useToast } from "vue-toastification";
+
 export default {
   data() {
     return {
@@ -241,11 +248,42 @@ export default {
       availableTimes: [],
     };
   },
+  setup() {
+    const toast = useToast();
+    return {
+      toast,
+    };
+  },
 
   methods: {
+    showToast() {
+      this.toast.success("Saved successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    },
+    showErrorToast(message) {
+      this.toast.error(message, {
+        position: "top-right",
+        duration: 3000,
+        action: {
+          text: "Dismiss",
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          },
+        },
+      });
+    },
     //send the option to the parent component
     //send selected option to the parent component
     sendOption() {
+      this.showToast();
+
       console.log(this.selectedCheckbox);
       // convert available times to string
       // this.availableTimes = this.availableTimes.toString();
@@ -262,6 +300,7 @@ export default {
       };
 
       this.$emit("sendOption", obj);
+      this.$emit("close");
     },
 
     //get the values of the selected options

@@ -5,6 +5,27 @@
     url("../assets/fonts/Biotif-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Effra";
+  src: url("../assets/fonts/Effra-AzMedium.ttf") format("truetype"),
+    url("../assets/fonts/EffraAzRegular.ttf") format("truetype"),
+    url("../assets/fonts/Effra-AzLight.ttf") format("truetype");
+}
+
+.effra-light {
+  font-family: "Effra";
+  font-weight: 100;
+  font-style: normal;
+}
+
+.effra-medium {
+  font-family: "Effra";
+}
+
+.effra-regular {
+  font-family: "Effra";
+}
+
 .bt-dash {
   font-family: "Biotif";
   font-style: normal;

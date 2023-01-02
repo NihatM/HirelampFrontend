@@ -55,10 +55,18 @@
         v-if="!showContact"
         class="flex flex-col justify-center align-middle items-center"
       >
-        <p class="font-extralight text-md">Chosen time</p>
-        <p class="pt-3 pb-4 font-bold">{{ date }}</p>
+        <p v-if="date == ''" class="font-extrabold text-md">
+          Please choose a time slot to continue
+        </p>
+        <p v-if="date !== ''" class="font-extralight text-md">Chosen time</p>
+        <p v-if="showPST == false" class="pt-3 pb-4 font-bold">
+          {{ this.testDate }}
+        </p>
+        <p v-if="showPST == true && date !== ''" class="pt-3 pb-4 font-bold">
+          {{ this.testDate }} PST timezone
+        </p>
         <button
-          :disabled="this.wrongTime === true"
+          :disabled="this.wrongTime === true || date === ''"
           @click="sendCalendarData"
           class="cursor-not-allowed disabled inline-flex items-center py-2 px-3 text-sm font-medium text-center rounded-full border-1 border-custom-blue text-custom-blue hover:bg-custom-blue hover:text-gray-50 duration-300"
         >
@@ -96,26 +104,36 @@
             <span class="py-1" />
             <input
               required
-              type="number"
-              class="border border-gray-400 rounded-2xl p-2"
+              type="tel"
+              class="border border-gray-400 rounded-2xl p-2 appearance-none"
               placeholder="Phone number"
               v-model="phone"
             />
             <span class="py-1" />
             <input
+              required
               type="text"
               class="border border-gray-400 rounded-2xl p-2"
               placeholder="Subject"
               v-model="industry"
             />
             <span class="py-1" />
+            <input
+              required
+              type="url"
+              class="border border-gray-400 rounded-2xl p-2"
+              placeholder="Your LinkedIn profile"
+              v-model="linkedinUrl"
+            />
+            <span class="py-1" />
             <textarea
+              required
               class="border border-gray-400 rounded-2xl p-2"
               placeholder="What do you want to talk about?"
               v-model="message"
             ></textarea>
             <span class="py-1" />
-            <input
+            <!-- <input
               type="file"
               accept="application/pdf"
               class="border border-gray-400 bg-white text-gray-400 rounded-2xl p-2"
@@ -126,7 +144,7 @@
             <span class="text-gray-400 text-xs italic text-left"
               >Upload CV (pdf)</span
             >
-            <span class="py-1" />
+            <span class="py-1" /> -->
           </div>
           <div class="w-full bottom-0 pt-2 flex justify-end">
             <button
@@ -178,8 +196,9 @@ export default {
       phone: "",
       industry: "",
       message: "",
+      linkedinUrl: "",
       file: null,
-      date: new Date(),
+      date: "",
       validHours: [12, 13, 14],
       avDays: [],
       avHours: [],
@@ -188,6 +207,9 @@ export default {
       bookedDate: new Date(),
       todayDate: new Date(),
       scrollVisible: false,
+      mentorfullName: "",
+      testDate: "",
+      showPST: false,
     };
   },
   components: {
@@ -209,6 +231,7 @@ export default {
   // },
   mounted() {
     this.autoFillUserData();
+    this.ifAdil();
   },
   beforeMount() {
     this.getMentorData();
@@ -219,6 +242,7 @@ export default {
       return this.days.map((day) => day.date);
     },
     attributes() {
+      this.splitDate();
       return this.dates.map((date) => ({
         highlight: true,
         dates: date,
@@ -254,11 +278,11 @@ export default {
 
     autoFillUserData() {
       localStorage.getItem("userEmail")
-        ? (this.email = localStorage.getItem("userEmail"))
+        ? this.email == localStorage.getItem("userEmail")
         : null;
       console.log(this.email);
       localStorage.getItem("userFullname")
-        ? (this.fullName = localStorage.getItem("userFullname"))
+        ? this.fullName == localStorage.getItem("userFullname")
         : null;
     },
 
@@ -278,6 +302,22 @@ export default {
       //close modal
       this.$emit("close");
     },
+
+    splitDate() {
+      this.testDate = this.date.toString().slice(0, 24);
+
+      console.log(this.testDate);
+    },
+
+    ifAdil() {
+      if (
+        localStorage.getItem("mentorId") ===
+        "72a64aa8-8973-4a79-b177-9abd28aa7d08"
+      ) {
+        this.showPST = true;
+      }
+    },
+
     getMentorData() {
       const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
       this.currentURL = window.location.href;
@@ -289,18 +329,23 @@ export default {
           counter++;
         }
       }
-      let str = "";
-      if (this.currentURL[this.currentURL.length] === "/")
-        str = this.currentURL.slice(i + 1, this.currentURL.length - 1);
-      else str = this.currentURL.slice(i + 1, this.currentURL.length);
+      // let str = "";
+      // if (this.currentURL[this.currentURL.length] === "/")
+      //   str = this.currentURL.slice(i + 1, this.currentURL.length - 1);
+      // else str = this.currentURL.slice(i + 1, this.currentURL.length);
       axios
         .get(
           "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/expert/profile/" +
-            str
+            localStorage.getItem("mentorId")
         )
         .then((response) => {
           console.log(response.data);
+
           this.mentorData = response.data;
+          // mentor full name
+          this.mentorfullName =
+            this.mentorData.firstName + " " + this.mentorData.lastName;
+
           this.newMentorTags = this.mentorData.tags.split(",");
           for (let i = 0; i < this.newMentorTags.length; i++) {
             this.newMentorTags[i] = this.newMentorTags[i].trim();
@@ -352,14 +397,21 @@ export default {
       this.avHours = this.filterAvailability(this.chosenDate);
       console.log(this.avDays);
       let currentDate = new Date();
+      // set hour to 0 if time is not selected
+
+      // currentDate.setHours(0, 0, 0, 0);
       if (
         this.days[0].date.getTime() <= currentDate.getTime() ||
         this.avDays.includes(this.days[0].date.getDay() + 1)
       ) {
         this.wrongTime = true;
-        this.showErrorToast("You can't book a date in the past!");
+        this.showErrorToast("Date is unavailable!");
       } else {
         this.bookedDate = this.days[0].date.toISOString();
+        //check if the selected time is 0 or not
+        // if (this.bookedDate.slice(11, 13) === "00") {
+        //   this.bookedDate = this.bookedDate.slice(0, 11) + "12:00:00.000Z";
+        // }
         console.log(this.bookedDate, this.days[0].date);
         this.wrongTime = false;
       }
@@ -374,6 +426,7 @@ export default {
     },
     async sendContactData() {
       this.validateEmail();
+      console.log(this.bookedDate);
       //eslint-disable-next-line
       // if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
       //   this.showErrorToast("Email is not valid");
@@ -381,31 +434,52 @@ export default {
       if (this.fullName === "" || this.email === "" || this.phone === "") {
         this.showErrorToast("Invalid request");
       } else {
-        const mentorfullName =
-          this.mentorData.firstName + " " + this.mentorData.lastName;
         const formData = new FormData();
-        console.log(this.fullName, this.email, this.phone, this.message);
+        console.log(
+          this.fullName,
+          this.email,
+          this.phone,
+          this.message,
+          this.mentorfullName,
+          this.file,
+          new Date(
+            new Date(this.date).getTime() + 1000 * 60 * 60 * 4
+          ).toISOString()
+        );
+        console.log(this.mentorfullName);
         formData.append("fullName", this.fullName);
         formData.append("email", this.email);
         formData.append("mobilePhone", this.phone);
         formData.append("industry", this.industry);
         formData.append("talksAbout", this.message);
-        formData.append("file", this.file);
+        formData.append("linkedinURL", this.linkedinUrl);
+        formData.append("bookingDateStr", this.date);
+        // formData.append("file", this.file);
         formData.append(
           "bookingDate",
           new Date(
             new Date(this.date).getTime() + 1000 * 60 * 60 * 4
           ).toISOString()
         );
-        formData.append("mentorFullName", mentorfullName);
-        await axios.post(
+
+        formData.append("mentorFullName", this.mentorfullName);
+        // console.log(this.file.length);
+        axios.post(
           "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/contactForm/",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
+          formData
+
+          // {
+          //   email: this.email,
+          //   mentorFullName: "Orkhan Abbasov",
+          //   mobilePhone: this.phone,
+          //   fullName: this.fullName,
+          //   industry: this.industry,
+          //   talksAbout: this.message,
+          //   bookingDate: new Date(
+          //     new Date(this.date).getTime() + 1000 * 60 * 60 * 4
+          //   ).toISOString(),
+          //   formData,
+          // }
         );
         this.showToast();
         this.fullName = "";

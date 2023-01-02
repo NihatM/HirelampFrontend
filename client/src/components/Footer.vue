@@ -39,7 +39,7 @@
                 >
                   <img
                     src="../assets/linkedin.svg"
-                    alt=""
+                    alt="linkedin"
                     class="md:h-10 md:w-1/2 xl:w-1/2 lg:w-1/2 h-10 w-1/2 fill-white"
                   />
                 </a>
@@ -50,7 +50,7 @@
                 >
                   <img
                     src="../assets/instagram.svg"
-                    alt=""
+                    alt="instagram"
                     class="md:h-10 md:w-1/2 xl:w-1/2 lg:w-1/2 h-10 w-1/2"
                 /></a>
                 <a
@@ -60,7 +60,7 @@
                 >
                   <img
                     src="../assets/facebook.svg"
-                    alt=""
+                    alt="facebook"
                     class="md:h-10 md:w-1/2 xl:w-1/2 lg:w-1/2 h-10 w-1/2"
                   />
                 </a>
@@ -71,7 +71,7 @@
                 >
                   <img
                     src="../assets/twitter.svg"
-                    alt=""
+                    alt="twitter"
                     class="md:h-10 md:w-1/2 xl:w-1/2 lg:w-1/2 h-10 w-1/2"
                   />
                 </a>

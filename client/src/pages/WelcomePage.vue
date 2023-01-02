@@ -113,7 +113,12 @@
         <div class="flex flex-col md:flex-row items-center justify-between">
           <div class="pb-14 md:pb-0">
             <div class="w-72 h-80 flex flex-col items-center">
-              <img class="w-44 h-44 mb-6" src="../assets/howallthisworks.svg" />
+              <img
+                class="w-44 h-44 mb-6"
+                src="../assets/howallthisworks.svg"
+                alt="We have mentors suiting multiple companies, industries and
+                roles. Pick the one you want to talk to."
+              />
 
               <p class="text-center bt-smalltitle font-bold pb-3.5">
                 Explore to find
@@ -133,6 +138,8 @@
               <img
                 class="w-44 h-44 mb-6"
                 src="../assets/howallthisworks1.svg"
+                alt="Each mentor has different availability and rate. Book the time
+                slot fitting the you the best and pay the fee."
               />
 
               <p class="text-center bt-smalltitle font-bold pb-3.5">
@@ -153,6 +160,7 @@
               <img
                 class="w-44 h-44 mb-6"
                 src="../assets/howallthisworks2.svg"
+                alt="Hop on and have a timed session. Make the most out of it so that you can nail the job interview."
               />
 
               <p class="text-center bt-smalltitle font-bold pb-3.5">
@@ -319,7 +327,7 @@
               <div class="bg-white h-32 w-32 rounded-full relative -mb-24">
                 <button class="z-50">
                   <img
-                    src="../assets/Etibar_Huseynli.jpeg"
+                    src="../assets/Turkan_Akbarova.jpg"
                     class="rounded-full"
                     alt=""
                   />
@@ -331,14 +339,14 @@
               >
                 <div>
                   <p class="text-center bt-smalltitle font-bold pb-3.5 pt-3">
-                    Etibar Huseynli
+                    Turkan Akbarova
                   </p>
 
                   <div class="flex items-center justify-center pb-4">
                     <button
                       class="bg-price-blue text-black rounded-2xl text-center bt-book px-6 py-1.5"
                     >
-                      30$ Per session
+                      100$ Per session
                     </button>
                   </div>
 
@@ -348,7 +356,7 @@
                     <div class="flex flex-row items-start">
                       <img src="../assets/jobicon.svg" alt="" class="pr-2" />
 
-                      <p class="bt-book truncate">QSS Analytics LLC</p>
+                      <p class="bt-book truncate">CGI AG</p>
                     </div>
                     <div class="flex flex-row items-start">
                       <img
@@ -357,18 +365,18 @@
                         class="pr-2"
                       />
 
-                      <p class="bt-book truncate">Azerbaijan</p>
+                      <p class="bt-book truncate">Germany</p>
                     </div>
                   </div>
 
                   <p class="text-center bt-smalltext h-24 pb-6">
-                    Data strategy consultation for companies, BI and Analytics,
-                    Interview preparation for Data Science roles, Guidance on
-                    starting Data Science & ML career
+                    CV preparation based on German standards, Screening &
+                    evaluation of portfolio, Adjustments in LinkedIn profile,
+                    Creating an email body template for job applications
                   </p>
                   <div class="flex justify-center">
                     <button
-                      @click="mentorPageEtibar()"
+                      @click="mentorPageTurkan()"
                       class="h-11 w-32 border-2 rounded-full border-custom-blue text-custom-blue hover:bg-custom-blue hover:text-white duration-300 bt-book px-2 py-1.5"
                     >
                       See More
@@ -551,17 +559,17 @@ export default {
       this.$router.push("/mentors/categories/" + str);
     },
     mentorPage() {
-      this.$router.push("/mentorpage");
+      this.$router.push("/mentors");
     },
 
     mentorPageGurban() {
-      this.$router.push("/mentordetails/3e2fed52-17bc-4e90-a6af-78c74ee7a650");
+      this.$router.push("/mentor/Gurban-Abbasov");
     },
-    mentorPageEtibar() {
-      this.$router.push("/mentordetails/bd37b061-8e19-4641-ab3c-3ec9d12fbac0");
+    mentorPageTurkan() {
+      this.$router.push("/mentor/Turkan-Akbarova");
     },
     mentorPageEmin() {
-      this.$router.push("/mentordetails/ce852337-1385-4401-b46b-b1c782fbad92");
+      this.$router.push("/mentor/ce852337-1385-4401-b46b-b1c782fbad92");
     },
   },
 

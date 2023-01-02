@@ -15,16 +15,6 @@
           <div
             class="flex items-end justify-center pt-4 px-4 pb-20 text-center sm:block sm:p-0"
           >
-            <!--
-            Background overlay, show/hide based on modal state.
-      
-            Entering: "ease-out duration-300"
-              From: "opacity-0"
-              To: "opacity-100"
-            Leaving: "ease-in duration-200"
-              From: "opacity-100"
-              To: "opacity-0"
-          -->
             <div
               class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
               aria-hidden="true"
@@ -222,59 +212,63 @@
         class=""
         v-bind:class="{ hidden: openTab !== 2, block: openTab === 2 }"
       >
-        <div class="flex flex-row md:space-x-6 px-4 items-stretch">
+        <div
+          class="flex flex-col md:flex-row md:space-x-6 px-4 justify-between w-fit items-stretch"
+        >
           <!-- class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center items-center w-full" -->
 
-          <div
+          <!-- <div
             class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-between items-center w-full"
-          >
-            <div class="flex md:block space-x-4 md:space-x-0">
-              <div class="flex flex-col space-y-2">
-                <p class="text-left text-xs text-gray-400">Field</p>
-                <input
-                  type="text"
-                  class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                  placeholder="Field"
-                  v-model="mentorDatas.position"
-                />
-              </div>
-              <div class="flex flex-col space-y-2">
-                <p class="text-left text-xs text-gray-400">Company</p>
-                <input
-                  type="text"
-                  class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                  placeholder="Company"
-                  v-model="mentorDatas.currentCompany"
-                />
-              </div>
+          > -->
+          <div class="flex md:block md:space-y-4 space-x-4 md:space-x-0">
+            <div class="flex flex-col space-y-2">
+              <p class="text-left text-xs text-gray-400">Field</p>
+              <input
+                type="text"
+                class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+                placeholder="Field"
+                v-model="mentorDatas.position"
+              />
             </div>
-            <div class="flex md:block space-x-4 md:space-x-0">
-              <div class="flex flex-col space-y-2">
-                <p class="text-left text-xs text-gray-400">Country or City</p>
-
-                <input
-                  type="text"
-                  class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                  placeholder="Country or City"
-                  v-model="mentorDatas.location"
-                />
-              </div>
-
-              <div class="flex flex-col space-y-2">
-                <p class="text-left text-xs text-gray-400">Your services fee</p>
-
-                <input
-                  type="text"
-                  class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
-                  placeholder="Your service fee"
-                  v-model="mentorDatas.price"
-                />
-              </div>
+            <div class="flex flex-col space-y-2">
+              <p class="text-left text-xs text-gray-400">Company</p>
+              <input
+                type="text"
+                class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+                placeholder="Company"
+                v-model="mentorDatas.currentCompany"
+              />
             </div>
           </div>
+          <div class="flex md:block md:space-y-4 space-x-4 md:space-x-0">
+            <div class="flex flex-col space-y-2">
+              <p class="text-left text-xs text-gray-400">Country or City</p>
+
+              <input
+                type="text"
+                class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+                placeholder="Country or City"
+                v-model="mentorDatas.location"
+              />
+            </div>
+
+            <div class="flex flex-col space-y-2">
+              <p class="text-left text-xs text-gray-400">Your services fee</p>
+
+              <input
+                type="text"
+                class="border w-full border-gray-700 bg-white text-gray-400 rounded-2xl p-2"
+                placeholder="Your service fee"
+                v-model="mentorDatas.price"
+              />
+            </div>
+          </div>
+          <!-- </div> -->
         </div>
 
-        <div class="flex flex-row py-8 px-4 space-x-8">
+        <div
+          class="flex flex-row py-8 px-4 space-x-8 items-stretch w-full justify-between"
+        >
           <div class="">
             <div class="flex flex-col space-y-2">
               <p class="text-left text-xs text-gray-400">
@@ -287,7 +281,7 @@
                 class="text-white bg-custom-blue hover:bg-cyan-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 type="button"
               >
-                Please select at least one
+                Select at least one
                 <svg
                   class="ml-2 w-4 h-4"
                   fill="none"
@@ -456,6 +450,9 @@
 
 <script>
 import axios from "axios";
+
+import { useToast } from "vue-toastification";
+
 import PopupCalendar from "../MentorDashboard/PopupCalendar.vue";
 export default {
   data() {
@@ -483,12 +480,42 @@ export default {
     PopupCalendar,
   },
 
+  setup() {
+    const toast = useToast();
+    return {
+      toast,
+    };
+  },
+
   beforeMount() {
     this.getMentorUserID();
     this.divideServices();
   },
 
   methods: {
+    showToast() {
+      this.toast.success("Changes saved successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    },
+    showErrorToast(message) {
+      this.toast.error(message, {
+        position: "top-right",
+        duration: 3000,
+        action: {
+          text: "Dismiss",
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          },
+        },
+      });
+    },
     getSelectedCheckbox() {
       this.selectedServices = [];
       this.servicesArray.forEach((item) => {
@@ -614,6 +641,7 @@ export default {
           )
           .then((res) => {
             console.log(res);
+            this.showToast();
           })
           .catch((err) => {
             console.log(err);
@@ -672,6 +700,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          this.showErrorToast("Something went wrong, please try again later");
         });
     },
   },

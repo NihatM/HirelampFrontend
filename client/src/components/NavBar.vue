@@ -1,14 +1,16 @@
 <template>
-  <body
-    class="pt-2 justify-center items-center bg-transparent overflow-x-hidden"
-  >
-    <div class="px-6 md:px-32">
+  <body class="justify-center items-center overflow-hidden">
+    <div
+      :class="$route.path === '/' ? 'bg-light-blue' : 'bg-white'"
+      class="px-6 pt-2 md:px-32"
+    >
       <nav class="py-3 md:flex md:justify-between md:items-center">
         <div class="flex items-center justify-between">
           <router-link to="/" class="text-blue-600 font-bold md:max-w-xs">
             <img
               class="w-1/4 h-1/4 md:w-3/6 md:h-3/6 lg:w-2/6 lg:h-1/6 xl:w-3/12 xl:h-3/12"
               src="../../public/hirelamp_logo_navbar.png"
+              alt="Hirelamp Logo"
           /></router-link>
           <!-- Mobile menu button -->
 
@@ -129,7 +131,7 @@
           <li class="nav-item text-left">
             <a class="nav-link" href="#"
               ><router-link
-                to="/mentorpage"
+                to="/mentors"
                 @click="showMenu = !showMenu"
                 class="text-gray-800 hover:text-custom-blue truncate bt-navbar"
                 >Our mentors</router-link
@@ -197,7 +199,7 @@
           <li class="nav-item text-left">
             <a class="nav-link" href="#"
               ><router-link
-                to="/mentorpage"
+                to="/mentor"
                 @click="showMenuMobile = !showMenuMobile"
                 class="text-gray-800 hover:text-custom-blue truncate bt-navbar"
                 >Our mentors</router-link
@@ -278,17 +280,10 @@ export default {
       userID: this.userID,
     };
   },
-  // beforeMount() {
-  //   this.displayUsername();
-  //   // this.getCandidateUserID();
-  //   this.handleResize();
-  //   // this.showDashboardMenu();
-  //   //this.showDashboardMenu();
-  // },
 
   //watch if the current page is dashboard then show the dashboard icon
   watch: {
-    // watch if isLoggedin is true then show the username
+    // if the current page is welcome page then make background color blue
 
     $route(to) {
       if (
@@ -304,6 +299,7 @@ export default {
       } else {
         this.showDashboardIcon = false;
       }
+      // if the screen is scrolled by one page then show the dashboard icon
     },
   },
 

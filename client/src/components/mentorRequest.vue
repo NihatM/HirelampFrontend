@@ -1,6 +1,11 @@
 <template>
+  <!-- <div class="absolute w-full">
+    <div class="relative hidden md:flex justify-end items-center w-screen">
+      <div class="absolute bg-custom-blue w-screen"></div>
+    </div>
+  </div> -->
   <div
-    class="p-6 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-col md:flex-row col-end-1 md:px-32"
+    class="px-6 py-6 md:py-24 md:w-auto xl:w-auto mx-auto flex items-stretch justify-between flex-col md:flex-row col-end-1 md:px-32"
   >
     <div class="w-full xl:w-9/12 flex flex-col">
       <div

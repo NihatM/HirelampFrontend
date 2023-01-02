@@ -140,9 +140,11 @@ export default {
       console.log(localStorage.getItem("isMentor"));
       console.log(this.isMentor);
       if (this.isMentor == "true") {
+        console.log("mentor");
         this.getMentorData(this.userID);
         this.newRoute = "/mentorDashboard";
       } else if (this.isMentor == "false") {
+        console.log("candidate");
         this.getCandidateData(this.userID);
         this.newRoute = "/dashboard";
       }

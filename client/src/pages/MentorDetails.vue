@@ -98,7 +98,7 @@
                   </p>
                 </div>
               </div>
-              <div class="shadow-2xl rounded-xl px-6">
+              <div class="shadow-2xl rounded-b-xl px-6 bg-gray-100">
                 <div
                   class="flex flex-row pb-3 items-center justify-center space-x-9"
                 >
@@ -123,6 +123,10 @@
 
                 <div class="flex justify-center pb-4">
                   <button
+                    :disabled="this.isMentor"
+                    :class="
+                      this.isMentor ? 'bg-gray-500 cursor-not-allowed' : ''
+                    "
                     @click="showModal = true"
                     class="h-11 w-10/12 rounded-full text-gray-50 bg-custom-blue hover:bg-price-green duration-300 text-xl font-bold px-2"
                   >
@@ -242,6 +246,10 @@
 
                     <div class="flex justify-center">
                       <button
+                        :disabled="this.isMentor"
+                        :class="
+                          this.isMentor ? 'bg-gray-500 cursor-not-allowed' : ''
+                        "
                         @click="showModal = true"
                         class="h-11 w-10/12 rounded-full text-gray-50 bg-custom-blue hover:bg-price-green duration-300 text-xl font-bold px-2"
                       >
@@ -382,7 +390,20 @@ import PopupMentorDetails from "../components/PopupMentorDetails.vue";
 import "../assets/main.css";
 import axios from "axios";
 export default {
+  head: {
+    title: "Mentor Details",
+    meta: [
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "" },
+    ],
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+  },
+
   name: "MentorDetails",
+
+  props: ["mentorId"],
+
   data() {
     return {
       wrongTime: false,
@@ -427,7 +448,7 @@ export default {
       showModal: false,
 
       open: false,
-
+      isMentor: false,
       isModalVisible: false,
       showRating: "",
       rating: 0,
@@ -546,6 +567,10 @@ export default {
       });
     },
     getMentorData() {
+      localStorage.getItem("isMentor") == "true"
+        ? (this.isMentor = true)
+        : (this.isMentor = false);
+      console.log(this.isMentor);
       const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
       this.currentURL = window.location.href;
       let counter = 0;
@@ -557,6 +582,23 @@ export default {
         }
       }
 
+      // remove the - between the name
+      let name = this.$route.params.id;
+      let nameArray = name.split("-");
+      let nameString = "";
+      for (let i = 0; i < nameArray.length; i++) {
+        nameString += nameArray[i] + " ";
+      }
+      this.mentorName = nameString;
+      console.log(this.mentorName);
+
+      // divide first name and last name
+      let nameArray2 = nameString.split(" ");
+      this.mentorFirstName = nameArray2[0];
+      this.mentorLastName = nameArray2[1];
+      console.log(this.mentorFirstName);
+      console.log(this.mentorLastName);
+
       console.log(this.$route.params.id);
       console.log(this.$route.params.str);
       // let str = "";
@@ -565,12 +607,15 @@ export default {
       // else str = this.currentURL.slice(i + 1, this.currentURL.length);
       axios
         .get(
-          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/expert/profile/" +
-            localStorage.getItem("mentorId")
+          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/mentor/" +
+            this.mentorFirstName +
+            " " +
+            this.mentorLastName
         )
         .then((response) => {
           localStorage.removeItem("fullname");
           this.mentorData = response.data;
+          console.log(this.mentorData);
           console.log(this.mentorData.ratings.length);
           // this.mentorData.rating = response.data.rating;
           //      this.mentorData.rating = Math.round(this.response.data.rating);
@@ -665,49 +710,49 @@ export default {
     onFileSelected(event) {
       this.file = event.target.files[0];
     },
-    async sendContactData() {
-      this.validateEmail();
-      //eslint-disable-next-line
-      // if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
-      //   this.showErrorToast("Email is not valid");
-      // }
-      if (this.fullName === "" || this.email === "" || this.phone === "") {
-        this.showErrorToast("Invalid request");
-      } else {
-        const mentorfullName =
-          this.mentorData.firstName + " " + this.mentorData.lastName;
-        const formData = new FormData();
-        formData.append("fullName", this.fullName);
-        formData.append("email", this.email);
-        formData.append("mobilePhone", this.phone);
-        formData.append("industry", this.industry);
-        formData.append("talksAbout", this.message);
-        formData.append("file", this.file);
-        formData.append(
-          "bookingDate",
-          new Date(
-            new Date(this.date).getTime() + 1000 * 60 * 60 * 4
-          ).toISOString()
-        );
-        formData.append("mentorFullName", mentorfullName);
-        await axios.post(
-          "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/contactForm/",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        this.showToast();
-        this.fullName = "";
-        this.email = "";
-        this.phone = "";
-        this.industry = "";
-        this.message = "";
-        this.file = null;
-      }
-    },
+    // async sendContactData() {
+    //   this.validateEmail();
+    //   //eslint-disable-next-line
+    //   // if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+    //   //   this.showErrorToast("Email is not valid");
+    //   // }
+    //   if (this.fullName === "" || this.email === "" || this.phone === "") {
+    //     this.showErrorToast("Invalid request");
+    //   } else {
+    //     const mentorfullName =
+    //       this.mentorData.firstName + " " + this.mentorData.lastName;
+    //     const formData = new FormData();
+    //     formData.append("fullName", this.fullName);
+    //     formData.append("email", this.email);
+    //     formData.append("mobilePhone", this.phone);
+    //     formData.append("industry", this.industry);
+    //     formData.append("talksAbout", this.message);
+    //     formData.append("file", this.file);
+    //     formData.append(
+    //       "bookingDate",
+    //       new Date(
+    //         new Date(this.date).getTime() + 1000 * 60 * 60 * 4
+    //       ).toISOString()
+    //     );
+    //     formData.append("mentorFullName", mentorfullName);
+    //     await axios.post(
+    //       "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/contactForm/",
+    //       formData,
+    //       {
+    //         headers: {
+    //           "Content-Type": "multipart/form-data",
+    //         },
+    //       }
+    //     );
+    //     this.showToast();
+    //     this.fullName = "";
+    //     this.email = "";
+    //     this.phone = "";
+    //     this.industry = "";
+    //     this.message = "";
+    //     this.file = null;
+    //   }
+    // },
   },
 };
 </script>

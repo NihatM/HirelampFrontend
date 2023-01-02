@@ -186,22 +186,35 @@ export default {
   methods: {
     async mentorDetails(mentorId) {
       //console.log(mentorId);
-      axios
+      await axios
         .get(
           "https://2d13ac092947-hirelamp-bbcf628a86ebae0f2646300d98508d5.co/expert/profile/" +
             mentorId +
             "/"
         )
         .then((response) => {
-          console.log(response);
           this.mentorDatas = response.data;
-          console.log(this.currentMentorId);
+          console.log(this.mentorDatas);
+          console.log(mentorId);
+          this.fullname =
+            this.mentorDatas.firstName + "-" + this.mentorDatas.lastName;
+          // router push to mentor details with fullname as :str
+          localStorage.setItem("fullname", this.fullname);
+          console.log(localStorage.getItem("fullname"));
+          this.$router.push({
+            path: "/mentor/" + this.fullname,
+          });
         })
         .catch((error) => {
           console.log(error);
         });
-      //console.log("jajajajjaja");
-      this.$router.push("/mentordetails/" + mentorId);
+      // this.goToMentorDetails(this.fullname);
+      // this.$router.push({
+      //   path: "/mentorDetails/" + this.fullname,
+      // });
+      // console.log(this.fullname);
+      console.log(localStorage.getItem("fullname"));
+      localStorage.setItem("mentorId", mentorId);
     },
 
     searchMentor() {

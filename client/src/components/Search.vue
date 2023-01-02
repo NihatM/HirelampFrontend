@@ -1,23 +1,48 @@
 <template>
   <body>
+    <div class="absolute w-full">
+      <img src="../assets/bgtop.svg" alt="" />
+      <div
+        class="relative hidden md:flex justify-end items-center w-screen space-y-24"
+      >
+        <div
+          class="absolute border-t border-b border-l border-blue-400 rounded-tl-full rounded-bl-full w-12 h-24 animate-pulse"
+        ></div>
+        <div
+          class="absolute border-t border-b border-l border-blue-400 rounded-tl-full rounded-bl-full w-8 h-16 animate-pulse"
+        ></div>
+      </div>
+    </div>
     <div
-      class="p-6 md:w-auto mx-auto flex items-stretch justify-between flex-col md:flex-row col-end-1 md:pl-32"
+      class="relative py-6 md:w-auto mx-auto flex items-stretch justify-between flex-col md:flex-row col-end-1"
     >
       <div
-        class="w-full lg:w-8/12 align-middle flex flex-col justify-center content-center"
+        class="px-6 md:px-0 w-full lg:w-8/12 align-middle flex flex-col justify-center content-center"
       >
         <!-- <button v-on:click="test">TEST v-on</button> -->
         <h1
-          class="text-3xl md:text-3xl lg:text-4xl xl:text-5xl bt-fontonly font-medium text-dark-blue mb-2 text-left xl:text-left md:mt-0 mt-4 py-4"
+          class="md:pl-32 text-3xl md:text-3xl lg:text-4xl xl:text-5xl bt-fontonly font-medium text-dark-blue mb-2 text-left xl:text-left md:mt-0 mt-4 py-4"
         >
           Find the right mentor to
           <br />
           crush the job interview
         </h1>
+        <div
+          class="relative hidden md:flex justify-start items-center space-y-24 animate-pulse"
+        >
+          <div
+            class="absolute border-t border-b border-r border-blue-400 rounded-tr-full rounded-br-full w-12 h-24"
+          ></div>
+          <div
+            class="absolute border-t border-b border-r border-blue-400 rounded-tr-full rounded-br-full w-8 h-16"
+          ></div>
+        </div>
+
+        <div class="absolute my-4 h-24 w-24"></div>
 
         <form @submit.prevent="searchMentor">
           <div class="flex justify-left">
-            <div class="relative w-full md:w-10/12">
+            <div class="relative w-full md:w-10/12 md:pl-32">
               <input
                 type="search"
                 placeholder="Search a mentor, industry, country or company"
@@ -53,7 +78,7 @@
             </div>
           </div>
         </form>
-        <div class="flex justify-start pt-4 lg:pt-8">
+        <div class="flex justify-start pt-4 lg:pt-8 md:pl-32">
           <TagsNew :searchTags="this.searchTags" />
         </div>
       </div>
